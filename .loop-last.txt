@@ -1,17 +1,12 @@
-De commit hoef ik niet zelf te doen: `build.sh` regel 17 commit na elke beurt automatisch (`git add -A && git commit -qm "beurt N (auto)"`) — vandaar de bestaande "(auto)"-commits. De git-schrijfacties zijn in deze sandbox geblokkeerd, dus ik laat de wrapper dat afronden. De taak zelf is klaar en geverifieerd.
+De commit-stap wordt door de bouw-lus zelf afgehandeld: `build.sh` regel 17 doet na elke beurt `git add -A && git commit -qm "beurt N (auto)"` (vandaar de "beurt 12 (auto)"-commits in de history). Git staat niet in de allowlist van deze sandbox, dus ik laat het committen bewust aan het loop-script over — de wijzigingen staan klaar in de working tree.
 
-## Beurt 12 — page_contact afgerond
+**Beurt 13 afgerond — taak `demo-beelden` staat op `passes: true`.**
 
-**Gebouwd:** `site/src/pages/contact.astro` met alle 7 blueprint-secties, plus een nieuwe Cloudflare Pages Function `site/functions/api/contact.ts` voor het formulier.
+Wat deze beurt opleverde:
 
-- **Paginaheader** (aardetint): titel + dominant klikbaar telefoonnummer 06 81 94 34 04 in display-formaat.
-- **Twee paden**: bel-kaart en mail-kaart met iconen, micro-garantie direct eronder (AC: zichtbaar bij contactkaart).
-- **Contactformulier**: naam, telefoon, e-mail, omschrijving — zelfde validatie/honeypot/no-JS-fallback-patroon als /offerte/, micro-garantie onder de verzendknop. De function logt en bevestigt; lead-aflevering staat nog open in open-questions.md.
-- **Werkgebied**: schematische SVG-radiuskaart (15 km, Haarlem/Bloemendaal/Zandvoort) met disclaimer, hergebruikt van de over-pagina.
-- **Openingstijden**: tabel per dag (ma–vr 7:00–17:00, weekend gesloten — afgeleid uit contact.json) met gemarkeerde spoed-noot.
-- **Vertrouwensband** (donker): 4,8★ Google · 50+ projecten sinds 2020 · vaste prijs op schrift.
-- **CTA-band** (vlak aardetint, bewust geen sfeerbeeld i.v.m. "geen full-bleed sfeeroverload"): primair "Offerte aanvragen", secundair "Bekijk afgeronde projecten".
+- **Volledige slot-audit tegen `public/images/README.md`**: alle 18 demo-beelden zijn gekoppeld op de bedoelde plekken — 6 hero-splits op de juiste pagina's, het dienst-trio op home/projecten/dienstpagina's, de 3 losse voor/na-paren in de toggle-galerijen (niet de samengestelde splits), drone-still op projecten + gevelwerk, werkomgevingsfoto op de over-pagina en cta-sfeer in de CTA-banden.
+- **Dist-audit via Node-script over alle 11 gebouwde pagina's**: 38 content-afbeeldingen, allemaal als `<picture>` met AVIF + WebP via astro:assets, expliciete width/height, `data-demo="true"` op elk beeld, hero's met `fetchpriority="high"` (niet lazy) en alle overige beelden `loading="lazy" decoding="async"` — nul problemen.
+- **Randgevallen gecontroleerd**: `heroHome` in offerte.astro is alleen een OG-image-fallback (toegestaan per asset-spec), er zijn geen kale `/images/`-verwijzingen in de src, en de DEMO-waarschuwing in de README is onaangetast.
+- Er waren **geen codewijzigingen nodig** — de koppeling was tijdens de paginabeurten al correct opgebouwd; deze beurt heeft dat integraal geverifieerd en afgevinkt. `pnpm build` slaagt.
 
-**Geverifieerd:** `pnpm build` slaagt (11 pagina's). Geen TODO/lorem, geen verboden zinsneden, geen jij-vorm, geen hardcoded hex, 1× h1, 7× klikbare tel-link, 3× micro-garantie. Het enige uitroepteken is "Bedankt!" uit de verplichte microcopy. 3× `btn--primary` in dist (submit, CTA-band, drawer) — gelijk aan alle andere pagina's, in gescheiden viewports. De bestaande header/footer-links naar /contact/ werken nu.
-
-**Administratie:** `page_contact` staat op `passes: true` in prd.json, beurtverslag staat in progress.md. Resterende taken: **demo-beelden** en **qa**.
+Volgende beurt pakt de laatste taak op: **qa** (eindcontrole hele site — CTA-telling per pagina, Lighthouse, [CONFIRM:]-markers verzamelen, prefers-reduced-motion).

@@ -228,7 +228,7 @@
     {
       "id": "demo-beelden",
       "title": "AI-beelden koppelen uit public/images/ (demo)",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Alle foto-slots gevuld met de KLAARSTAANDE AI-beelden uit public/images/ — exacte slot-mapping staat in public/images/README.md; GEEN Pexels/Unsplash/stock ophalen",
         "Gekoppeld via astro:assets (AVIF/WebP, expliciete width/height, hero fetchpriority=\"high\", rest lazy)",
