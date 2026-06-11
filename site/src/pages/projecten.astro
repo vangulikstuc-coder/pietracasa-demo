@@ -1,0 +1,1209 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import heroProjecten from '../assets/images/hero/hero-projecten.jpg';
+import droneGevelwerk from '../assets/images/sections/drone-gevelwerk.jpg';
+import dienstGevelwerk from '../assets/images/sections/dienst-gevelwerk.jpg';
+import dienstBinnenafwerking from '../assets/images/sections/dienst-binnenafwerking.jpg';
+import dienstMicrocement from '../assets/images/sections/dienst-microcement.jpg';
+import galerijGevelVoor from '../assets/images/sections/galerij-gevel-voor.jpg';
+import galerijGevelNa from '../assets/images/sections/galerij-gevel-na.jpg';
+import galerijBinnenVoor from '../assets/images/sections/galerij-binnen-voor.jpg';
+import galerijBinnenNa from '../assets/images/sections/galerij-binnen-na.jpg';
+import galerijVloerVoor from '../assets/images/sections/galerij-vloer-voor.jpg';
+import galerijVloerNa from '../assets/images/sections/galerij-vloer-na.jpg';
+import ctaSfeer from '../assets/images/sections/cta-sfeer.jpg';
+
+const heroWidths = [768, 1280, 1920];
+const heroSizes = '100vw';
+const heroAvif = await Promise.all(
+  heroWidths.map(async (width) => ({
+    width,
+    image: await getImage({ src: heroProjecten, width, format: 'avif' }),
+  }))
+);
+const heroPreloadSrcset = heroAvif.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
+
+const ogImage = await getImage({ src: heroProjecten, width: 1200, format: 'jpg' });
+
+const cardWidths = [420, 840];
+const cardSizes = '(min-width: 768px) 30vw, 100vw';
+
+const filters = [
+  { id: 'alle', label: 'Alle projecten' },
+  { id: 'gevel', label: 'Gevelwerk' },
+  { id: 'binnen', label: 'Binnenafwerking' },
+  { id: 'vloer', label: 'Microcement vloeren' },
+];
+
+const galerij = [
+  {
+    cat: 'gevel',
+    label: 'Gevelwerk · Haarlem',
+    voor: { src: galerijGevelVoor, alt: 'Voor: gevel met gescheurd en verweerd stucwerk' },
+    na: { src: galerijGevelNa, alt: 'Na: strak gestuukte, egaal afgewerkte gevel' },
+  },
+  {
+    cat: 'binnen',
+    label: 'Binnenafwerking · regio Haarlem',
+    voor: { src: galerijBinnenVoor, alt: 'Voor: woonkamer met beschadigde wanden' },
+    na: { src: galerijBinnenNa, alt: 'Na: woonkamer met strak gepleisterde wanden' },
+  },
+  {
+    cat: 'vloer',
+    label: 'Microcement vloer · Haarlem',
+    voor: { src: galerijVloerVoor, alt: 'Voor: verouderde vloer voor de renovatie' },
+    na: { src: galerijVloerNa, alt: 'Na: naadloze microcement vloer' },
+  },
+];
+
+const droneFeiten = [
+  { term: 'Dienst', detail: 'Gevelwerk & buitenafwerking' },
+  { term: 'Locatie', detail: 'Regio Haarlem' },
+  { term: 'Bewijsmateriaal', detail: 'Voor-na foto’s en drone-opnames' },
+];
+
+const diensten = [
+  {
+    href: '/gevelwerk/',
+    titel: 'Gevelwerk & buitenafwerking',
+    feit: 'Gevels gerenoveerd en strak afgewerkt in Haarlem en Bloemendaal.',
+    src: dienstGevelwerk,
+    alt: 'Vakman stukadoort een gevel vanaf een steiger',
+  },
+  {
+    href: '/binnenafwerking/',
+    titel: 'Binnenafwerking & renovatie',
+    feit: 'Wanden en plafonds gerenoveerd in Haarlem-Noord en omgeving.',
+    src: dienstBinnenafwerking,
+    alt: 'Vakman pleistert een binnenwand',
+  },
+  {
+    href: '/microcement/',
+    titel: 'Microcement vloeren',
+    feit: 'Naadloze vloeren aangebracht in Haarlem en Zandvoort.',
+    src: dienstMicrocement,
+    alt: 'Vakman brengt microcement aan op een vloer',
+  },
+];
+
+const starPath =
+  'M12 2.8l2.85 5.78 6.38.93-4.62 4.5 1.09 6.36L12 17.37l-5.7 3 1.09-6.36-4.62-4.5 6.38-.93L12 2.8z';
+
+const icons: Record<string, string> = {
+  star: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${starPath}"/></svg>`,
+  starPartial: `<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="star-partial-grad"><stop offset="0.8" stop-color="currentColor"/><stop offset="0.8" stop-color="transparent"/></linearGradient></defs><path d="${starPath}" fill="url(#star-partial-grad)" stroke="currentColor" stroke-width="1"/></svg>`,
+  check:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+  kalender:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/><path d="m9.5 16 2 2 3.5-4"/></svg>',
+  euro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 7a6.5 6.5 0 1 0 0 10"/><path d="M5 10.5h8M5 13.5h8"/></svg>',
+  shield:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="m9 11.5 2 2 4-4"/></svg>',
+};
+
+const feiten = [
+  { icon: 'star', kop: '4,8 sterren op Google', sub: 'Gemiddelde van 25+ geverifieerde reviews.' },
+  {
+    icon: 'check',
+    kop: '50+ projecten sinds 2020',
+    sub: 'Geen gemiste deadlines, geen meerwerk zonder overleg.',
+  },
+  {
+    icon: 'pin',
+    kop: 'Werkgebied regio Haarlem',
+    sub: 'Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km.',
+  },
+];
+---
+
+<BaseLayout
+  title="Afgeronde projecten in Haarlem | Stucq"
+  description="Bekijk 50+ afgeronde stucwerk-projecten in Haarlem en omgeving. Voor-na foto's van gevelwerk, binnenafwerking en microcement – op tijd en in budget."
+  ogImage={ogImage.src}
+>
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    type="image/avif"
+    imagesrcset={heroPreloadSrcset}
+    imagesizes={heroSizes}
+  />
+
+  <!-- 1. Paginahero – projectenoverzicht -->
+  <section class="project-hero" aria-labelledby="projecten-title">
+    <div class="project-hero__bg" aria-hidden="true">
+      <Picture
+        src={heroProjecten}
+        widths={heroWidths}
+        sizes={heroSizes}
+        formats={['avif', 'webp']}
+        alt=""
+        fetchpriority="high"
+        loading="eager"
+        data-demo="true"
+      />
+    </div>
+    <div class="container project-hero__inner">
+      <p class="eyebrow eyebrow--inverse">Projecten</p>
+      <h1 id="projecten-title">50+ projecten in Haarlem – op tijd en in budget opgeleverd</h1>
+      <p class="project-hero__sub">
+        Bekijk het werk zoals het is: voor, tijdens en na. Elk project sinds 2020 binnen budget en
+        planning afgerond.
+      </p>
+      <ul class="project-hero__feiten" role="list">
+        <li>
+          <span class="project-hero__star" set:html={icons.star} aria-hidden="true" />
+          4,8 Google-score
+        </li>
+        <li>50+ projecten sinds 2020</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. Bewijs-band – kerncijfers -->
+  <section class="feiten-band" aria-label="Kerncijfers">
+    <div class="container">
+      <ul class="feiten" role="list" data-reveal-group>
+        {
+          feiten.map((feit) => (
+            <li class="feit">
+              <span class="feit__icon" set:html={icons[feit.icon]} aria-hidden="true" />
+              <div>
+                <strong>{feit.kop}</strong>
+                <p>{feit.sub}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Filterbare projectgalerij – voor-na -->
+  <section class="section" aria-labelledby="galerij-title">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <p class="eyebrow">Voor en na</p>
+        <h2 id="galerij-title">Kies een categorie en zie het verschil</h2>
+        <p class="section-head__intro">
+          Een selectie uit 50+ afgeronde projecten. Elke kaart toont de locatie in Haarlem of
+          omgeving – wissel per project tussen de voor- en na-foto.
+        </p>
+      </header>
+      <div
+        class="filter"
+        role="group"
+        aria-label="Projecten filteren op dienst"
+        data-filter-group
+        data-reveal
+      >
+        {
+          filters.map((filter, i) => (
+            <button type="button" data-filter={filter.id} aria-pressed={String(i === 0)}>
+              {filter.label}
+            </button>
+          ))
+        }
+      </div>
+      <div class="galerij" data-reveal-group>
+        {
+          galerij.map((project) => (
+            <figure class="ba-card" data-ba data-cat={project.cat}>
+              <div class="ba-card__media">
+                <div class="ba-card__panel is-active" data-ba-panel="na">
+                  <Picture
+                    src={project.na.src}
+                    widths={cardWidths}
+                    sizes={cardSizes}
+                    formats={['avif', 'webp']}
+                    alt={project.na.alt}
+                    loading="lazy"
+                    decoding="async"
+                    data-demo="true"
+                  />
+                </div>
+                <div class="ba-card__panel" data-ba-panel="voor" aria-hidden="true">
+                  <Picture
+                    src={project.voor.src}
+                    widths={cardWidths}
+                    sizes={cardSizes}
+                    formats={['avif', 'webp']}
+                    alt={project.voor.alt}
+                    loading="lazy"
+                    decoding="async"
+                    data-demo="true"
+                  />
+                </div>
+              </div>
+              <div class="ba-card__bar">
+                <figcaption>{project.label}</figcaption>
+                <div
+                  class="ba-toggle"
+                  role="group"
+                  aria-label={`Voor- of na-foto tonen van ${project.label}`}
+                >
+                  <button type="button" data-ba-show="voor" aria-pressed="false">Voor</button>
+                  <button type="button" data-ba-show="na" aria-pressed="true">Na</button>
+                </div>
+              </div>
+            </figure>
+          ))
+        }
+      </div>
+      <p class="galerij__note" data-reveal>
+        Dit is een selectie. Meer voor-na materiaal uit Haarlem, Bloemendaal en Zandvoort tonen wij
+        u bij de offerte-afspraak op locatie.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. Uitgelicht project – dronebeelden -->
+  <section class="section section--alt" aria-labelledby="drone-title">
+    <div class="container drone" data-reveal-group>
+      <figure class="drone__media">
+        <Picture
+          src={droneGevelwerk}
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 900px) 55vw, 100vw"
+          formats={['avif', 'webp']}
+          alt="Drone-opname van een gevelproject in de regio Haarlem"
+          loading="lazy"
+          decoding="async"
+          data-demo="true"
+        />
+        <figcaption class="drone__chip">Still uit drone-opname · gevelproject</figcaption>
+      </figure>
+      <div class="drone__text">
+        <p class="eyebrow">Uitgelicht project</p>
+        <h2 id="drone-title">Gevelwerk, van fundering tot nok</h2>
+        <p>
+          Dronebeelden geven u een volledig beeld van het uitgevoerde gevelwerk. Zo ziet u precies
+          wat Stucq oplevert – ook op plekken die u vanaf de straat niet ziet.
+        </p>
+        <dl class="drone__feiten">
+          {
+            droneFeiten.map((feit) => (
+              <div class="drone__feit">
+                <dt>{feit.term}</dt>
+                <dd>{feit.detail}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Projectkaarten per dienst -->
+  <section class="section" aria-labelledby="diensten-title">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <p class="eyebrow">Per dienst</p>
+        <h2 id="diensten-title">Projecten per type werk</h2>
+        <p class="section-head__intro">
+          Gevelwerk in Bloemendaal, binnenafwerking in Haarlem-Noord, microcement vloeren in
+          Zandvoort – elk type werk gedocumenteerd met voor-na foto's.
+        </p>
+      </header>
+      <div class="diensten" data-reveal-group>
+        {
+          diensten.map((dienst) => (
+            <a href={dienst.href} class="dienst-card">
+              <div class="dienst-card__media">
+                <Picture
+                  src={dienst.src}
+                  widths={cardWidths}
+                  sizes={cardSizes}
+                  formats={['avif', 'webp']}
+                  alt={dienst.alt}
+                  loading="lazy"
+                  decoding="async"
+                  data-demo="true"
+                />
+              </div>
+              <div class="dienst-card__body">
+                <h3>{dienst.titel}</h3>
+                <p>{dienst.feit}</p>
+                <span class="dienst-card__more">
+                  Meer informatie
+                  <span class="dienst-card__arrow" aria-hidden="true">&rarr;</span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Google-reviews selectie -->
+  <section class="section section--alt" aria-labelledby="reviews-title">
+    <div class="container reviews" data-reveal-group>
+      <div class="review-score">
+        <p class="review-score__num tabular">4,8</p>
+        <p class="review-score__stars" aria-hidden="true">
+          <span set:html={icons.star} />
+          <span set:html={icons.star} />
+          <span set:html={icons.star} />
+          <span set:html={icons.star} />
+          <span set:html={icons.starPartial} />
+        </p>
+        <p class="visually-hidden">4,8 van 5 sterren</p>
+        <p class="review-score__sub">
+          Gemiddelde score op Google, op basis van 25+ geverifieerde reviews.
+        </p>
+      </div>
+      <div class="reviews__text">
+        <p class="eyebrow">Reviews</p>
+        <h2 id="reviews-title">Beoordeeld door 25+ opdrachtgevers</h2>
+        <p>
+          4,8 sterren op Google, beoordeeld door bouwbedrijven en huiseigenaren in Haarlem en
+          omgeving.
+        </p>
+        <p>
+          De beoordelingen gaan over planning, prijs en afwerking – bij gevelwerk, binnenafwerking
+          en microcement vloeren.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Op tijd en in budget – trackrecord -->
+  <section class="trackrecord" aria-labelledby="trackrecord-title">
+    <div class="container trackrecord__inner" data-reveal>
+      <p class="eyebrow eyebrow--inverse">Trackrecord</p>
+      <h2 id="trackrecord-title">
+        Elk project sinds 2020 is binnen budget en op de afgesproken datum opgeleverd
+      </h2>
+      <p class="trackrecord__sub">
+        Dat is geen claim – dat zijn de feiten in de galerij hierboven.
+      </p>
+      <ul class="trackrecord__marks" role="list">
+        <li>
+          <span class="trackrecord__icon" set:html={icons.kalender} aria-hidden="true" />
+          Op de afgesproken datum
+        </li>
+        <li>
+          <span class="trackrecord__icon" set:html={icons.euro} aria-hidden="true" />
+          Binnen het afgesproken budget
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8. Keurmerken en branchelidmaatschap -->
+  <section class="keurmerken" aria-labelledby="keurmerken-title">
+    <div class="container keurmerken__inner" data-reveal>
+      <span class="keurmerken__icon" set:html={icons.shield} aria-hidden="true" />
+      <div>
+        <h2 id="keurmerken-title">Keurmerken en branchelidmaatschap</h2>
+        <p>
+          Stucq werkt conform de eisen van de branche, KvK-geregistreerd en verzekerd. Keurmerken
+          en branchevereniging-lidmaatschappen tonen wij hier zodra ze geverifieerd zijn.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CTA-band – offerte aanvragen -->
+  <section class="cta-band" aria-labelledby="cta-title">
+    <div class="cta-band__bg" aria-hidden="true">
+      <Picture
+        src={ctaSfeer}
+        widths={[820, 1280, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        data-demo="true"
+      />
+    </div>
+    <div class="container cta-band__inner" data-reveal>
+      <h2 id="cta-title">Heeft u een project in Haarlem of omgeving?</h2>
+      <p class="cta-band__sub">
+        Vraag een vrijblijvende offerte aan – vaste prijs, reactie binnen 48 uur.
+      </p>
+      <div class="cta-band__actions">
+        <a href="/offerte/" class="btn btn--primary">
+          Offerte aanvragen
+          <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="tel:0681943404" class="cta-band__tel">Bel direct: 06 81 94 34 04</a>
+      </div>
+      <p class="cta-band__micro">
+        Vrijblijvend – vaste prijs, reactie binnen 48 uur. Bereikbaar ma–vr 7:00–17:00.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* --- Gedeelde sectie-koppen --- */
+  .eyebrow {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .eyebrow--inverse {
+    color: var(--color-neutral-300);
+  }
+
+  .section-head {
+    max-width: 68ch;
+    margin-block-end: clamp(var(--spacing-xl), 6vw, var(--spacing-2xl));
+  }
+
+  .section-head h2 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .section-head__intro {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+  }
+
+  /* --- 1. Paginahero --- */
+  .project-hero {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    align-items: end;
+    min-height: clamp(420px, 58vh, 620px);
+    padding-block: clamp(var(--spacing-2xl), 10vw, var(--spacing-section));
+    color: var(--color-text-inverse);
+  }
+
+  .project-hero__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .project-hero__bg :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .project-hero__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: hero-settle 1200ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both;
+  }
+
+  /* Signature: gladstrijkende laag trekt van links naar rechts over het beeld */
+  .project-hero__bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(100deg, var(--color-neutral-100), var(--color-neutral-300));
+    transform-origin: right center;
+    animation: hero-sweep 1000ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both;
+  }
+
+  .project-hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-neutral-900) 85%, transparent),
+      color-mix(in srgb, var(--color-neutral-900) 35%, transparent) 60%,
+      color-mix(in srgb, var(--color-neutral-900) 20%, transparent)
+    );
+  }
+
+  @keyframes hero-sweep {
+    from {
+      transform: scaleX(1);
+    }
+    to {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes hero-settle {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .project-hero__inner {
+    position: relative;
+    z-index: 3;
+  }
+
+  .project-hero h1 {
+    margin-block-start: var(--spacing-md);
+    max-width: 24ch;
+  }
+
+  .project-hero__sub {
+    margin-block-start: var(--spacing-md);
+    font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-md));
+    color: var(--color-neutral-100);
+    max-width: 54ch;
+  }
+
+  .project-hero__feiten {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-block-start: var(--spacing-lg);
+  }
+
+  .project-hero__feiten li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: 1px solid color-mix(in srgb, var(--color-text-inverse) 30%, transparent);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-neutral-900) 50%, transparent);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .project-hero__star {
+    display: inline-flex;
+    color: var(--color-text-inverse);
+  }
+
+  .project-hero__star :global(svg) {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* --- 2. Bewijs-band --- */
+  .feiten-band {
+    border-block-end: 1px solid var(--color-border-default);
+    padding-block: clamp(var(--spacing-xl), 6vw, var(--spacing-2xl));
+  }
+
+  .feiten {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--spacing-lg);
+  }
+
+  .feit {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .feit strong {
+    display: block;
+  }
+
+  .feit p {
+    margin-block-start: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .feit__icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-primary-default) 10%, transparent);
+    color: var(--color-primary-default);
+  }
+
+  .feit__icon :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (min-width: 768px) {
+    .feiten {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-xl);
+    }
+  }
+
+  /* --- 3. Filterbare galerij --- */
+  .filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-block-end: var(--spacing-xl);
+  }
+
+  .filter button {
+    min-height: 44px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--motion-easing),
+      border-color var(--motion-fast) var(--motion-easing),
+      color var(--motion-fast) var(--motion-easing);
+  }
+
+  .filter button:hover {
+    border-color: var(--color-primary-default);
+    color: var(--color-text-primary);
+  }
+
+  .filter button:focus-visible {
+    outline: 3px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  .filter button[aria-pressed='true'] {
+    background: var(--color-neutral-900);
+    border-color: var(--color-neutral-900);
+    color: var(--color-text-inverse);
+  }
+
+  .galerij {
+    display: grid;
+    gap: var(--spacing-lg);
+  }
+
+  .ba-card {
+    margin: 0;
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .ba-card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+  }
+
+  .ba-card__panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--motion-base) var(--motion-easing);
+  }
+
+  .ba-card__panel.is-active {
+    opacity: 1;
+  }
+
+  .ba-card__panel :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .ba-card__panel :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ba-card__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .ba-card__bar figcaption {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .ba-toggle {
+    display: inline-flex;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    padding: var(--spacing-xs);
+    gap: var(--spacing-xs);
+  }
+
+  .ba-toggle button {
+    min-height: 36px;
+    min-width: 56px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--motion-easing),
+      color var(--motion-fast) var(--motion-easing);
+  }
+
+  .ba-toggle button:hover {
+    color: var(--color-text-primary);
+  }
+
+  .ba-toggle button:focus-visible {
+    outline: 3px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  .ba-toggle button[aria-pressed='true'] {
+    background: var(--color-neutral-900);
+    color: var(--color-text-inverse);
+  }
+
+  .galerij__note {
+    margin-block-start: var(--spacing-xl);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    max-width: 60ch;
+  }
+
+  @media (min-width: 768px) {
+    .galerij {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* --- 4. Drone-blok --- */
+  .drone {
+    display: grid;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .drone__media {
+    margin: 0;
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .drone__media :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .drone__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .drone__chip {
+    position: absolute;
+    z-index: 1;
+    inset-block-end: var(--spacing-md);
+    inset-inline-start: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-neutral-900) 70%, transparent);
+    color: var(--color-text-inverse);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .drone__text h2 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .drone__text > p:not(.eyebrow) {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+  }
+
+  .drone__feiten {
+    margin: var(--spacing-lg) 0 0;
+  }
+
+  .drone__feit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs) var(--spacing-md);
+    justify-content: space-between;
+    padding-block: var(--spacing-md);
+    border-top: 1px solid var(--color-border-default);
+  }
+
+  .drone__feit dt {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .drone__feit dd {
+    margin: 0;
+    font-weight: var(--font-weight-medium);
+  }
+
+  @media (min-width: 900px) {
+    .drone {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  /* --- 5. Dienstkaarten --- */
+  .diensten {
+    display: grid;
+    gap: var(--spacing-lg);
+  }
+
+  .dienst-card {
+    display: block;
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .dienst-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: inherit;
+  }
+
+  .dienst-card:focus-visible {
+    outline: 3px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  .dienst-card__media {
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+  }
+
+  .dienst-card__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms var(--motion-easing);
+  }
+
+  .dienst-card:hover .dienst-card__media :global(img) {
+    transform: scale(1.05);
+  }
+
+  .dienst-card__body {
+    padding: var(--spacing-lg);
+  }
+
+  .dienst-card__body p {
+    margin-block-start: var(--spacing-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .dienst-card__more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-block-start: var(--spacing-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-default);
+  }
+
+  .dienst-card__arrow {
+    transition: transform 180ms ease;
+  }
+
+  .dienst-card:hover .dienst-card__arrow {
+    transform: translateX(4px);
+  }
+
+  @media (min-width: 768px) {
+    .diensten {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* --- 6. Reviews --- */
+  .reviews {
+    display: grid;
+    gap: var(--spacing-xl);
+  }
+
+  .review-score {
+    background: var(--color-neutral-900);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    padding: clamp(var(--spacing-lg), 5vw, var(--spacing-2xl));
+  }
+
+  .review-score__num {
+    font-family: var(--font-display);
+    font-size: clamp(var(--font-size-display), 10vw, 80px);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .review-score__stars {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-inverse);
+  }
+
+  .review-score__stars :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  .review-score__sub {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-300);
+    max-width: 28ch;
+  }
+
+  .reviews__text h2 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .reviews__text p:not(.eyebrow) {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 900px) {
+    .reviews {
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: var(--spacing-2xl);
+      align-items: center;
+    }
+  }
+
+  /* --- 7. Trackrecord statement-band --- */
+  .trackrecord {
+    background: var(--color-neutral-900);
+    color: var(--color-text-inverse);
+    padding-block: clamp(var(--spacing-section), 12vw, 140px);
+  }
+
+  .trackrecord h2 {
+    margin-block-start: var(--spacing-md);
+    max-width: 26ch;
+    font-size: clamp(var(--font-size-lg), 4.5vw, var(--font-size-display));
+  }
+
+  .trackrecord__sub {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-neutral-300);
+    max-width: 46ch;
+  }
+
+  .trackrecord__marks {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .trackrecord__marks li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 1px solid color-mix(in srgb, var(--color-text-inverse) 25%, transparent);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .trackrecord__icon {
+    display: inline-flex;
+    color: var(--color-text-inverse);
+  }
+
+  .trackrecord__icon :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* --- 8. Keurmerken --- */
+  .keurmerken {
+    border-block-end: 1px solid var(--color-border-default);
+    padding-block: clamp(var(--spacing-xl), 6vw, var(--spacing-2xl));
+  }
+
+  .keurmerken__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .keurmerken h2 {
+    font-size: var(--font-size-md);
+  }
+
+  .keurmerken p {
+    margin-block-start: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    max-width: 60ch;
+  }
+
+  .keurmerken__icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-primary-default) 10%, transparent);
+    color: var(--color-primary-default);
+  }
+
+  .keurmerken__icon :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* --- 9. CTA-band --- */
+  .cta-band {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(var(--spacing-section), 14vw, 160px);
+    color: var(--color-text-inverse);
+  }
+
+  .cta-band__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .cta-band__bg :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .cta-band__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cta-band__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--color-neutral-900) 85%, transparent),
+      color-mix(in srgb, var(--color-neutral-900) 55%, transparent)
+    );
+  }
+
+  .cta-band__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-band__sub {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-md);
+    color: var(--color-neutral-100);
+    max-width: 46ch;
+  }
+
+  .cta-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .cta-band__tel {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-text-inverse);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .cta-band__tel:hover {
+    color: var(--color-neutral-200);
+  }
+
+  .cta-band__micro {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-300);
+  }
+</style>
+
+<script>
+  // Galerij filteren op dienst-categorie.
+  const filterGroup = document.querySelector<HTMLElement>('[data-filter-group]');
+  if (filterGroup) {
+    const buttons = Array.from(filterGroup.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+    const kaarten = Array.from(document.querySelectorAll<HTMLElement>('[data-cat]'));
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.filter;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        kaarten.forEach((kaart) => {
+          kaart.hidden = cat !== 'alle' && kaart.dataset.cat !== cat;
+        });
+      });
+    });
+  }
+
+  // Voor-na toggles in de projectgalerij.
+  document.querySelectorAll<HTMLElement>('[data-ba]').forEach((card) => {
+    const buttons = Array.from(card.querySelectorAll<HTMLButtonElement>('[data-ba-show]'));
+    const panels = Array.from(card.querySelectorAll<HTMLElement>('[data-ba-panel]'));
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.baShow;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        panels.forEach((panel) => {
+          const active = panel.dataset.baPanel === target;
+          panel.classList.toggle('is-active', active);
+          panel.setAttribute('aria-hidden', String(!active));
+        });
+      });
+    });
+  });
+</script>

@@ -74,7 +74,7 @@
       "page": "projecten",
       "prompt": "prompts/build-projecten.md",
       "blueprint": "pages/projecten.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Gebruik uitsluitend bewezen feiten: 25+ Google-reviews, 4,8 sterren, 50+ projecten in Haarlem sinds 2020",
         "Geen verzonnen reviews, namen, cijfers of klantlogo's",

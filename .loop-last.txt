@@ -1,13 +1,15 @@
-De lus commit zelf: `build.sh` regel 17 draait na elke beurt `git add -A && git commit -m "beurt N (auto)"`. Mijn handmatige commit is dus niet nodig (en de sandbox blokkeert hem toch) — alle wijzigingen worden automatisch gecommit zodra deze beurt eindigt.
+**Beurt 5 klaar: de Projecten-pagina is gebouwd, geverifieerd en geadministreerd.** Het committen gebeurt door `build.sh` zelf (die draait na elke beurt `git add -A && git commit -m "beurt N (auto)"`); directe git-commando's vereisen in deze sandbox goedkeuring, dus dat laat ik — net als vorige beurten — aan de lus-runner over.
 
-**Beurt 4 afgerond: de Offerte-pagina (taak `page_offerte`) is gebouwd en op `passes: true` gezet.**
+Wat er staat in `site/src/pages/projecten.astro` (alle 9 blueprint-secties):
 
-Wat er is gemaakt:
+1. **Paginahero** — full-bleed voor-na splitfoto (hero-projecten.jpg, preload + `fetchpriority="high"`) met scrim, sweep-signature, H1 "50+ projecten in Haarlem – op tijd en in budget opgeleverd" en twee feitenchips (4,8 Google-score · 50+ projecten).
+2. **Bewijs-band** — drie icoonblokken (sterren / vinkje / kaartpin) met de bevestigde cijfers en het werkgebied.
+3. **Filterbare voor-na galerij** — filterpills per dienst (Alle / Gevelwerk / Binnenafwerking / Microcement) plus de Voor/Na-toggle per kaart; zonder JS blijven alle kaarten gewoon zichtbaar.
+4. **Uitgelicht project** — drone-still met chip "Still uit drone-opname" naast een feitenlijst (dienst, locatie, bewijsmateriaal).
+5. **Projectkaarten per dienst** — beeld-gedreven kaarten die doorlinken naar de drie dienstpagina's.
+6. **Reviews** — het bestaande 4,8-scoreblok, zonder verzonnen citaten of namen.
+7. **Trackrecord** — donkere full-bleed statement-band met kalender- en budget-marks.
+8. **Keurmerken** — tekstband ("tonen wij zodra geverifieerd"), geen nep-logo's.
+9. **CTA-band** — sfeerbeeld + scrim, de enige primaire CTA "Offerte aanvragen", bel-link en micro-garantie.
 
-- **`site/src/pages/offerte.astro`** — alle 9 secties uit de blueprint: pagina-kop met drie garantie-chips (vrijblijvend / vaste prijs / 48u), bewijs-strip vóór het formulier (4,8★ · 25+ reviews · 50+ projecten), formulier-card met sticky garantieblok ernaast, "Of bel direct"-band met groot klikbaar telefoonnummer, dienst-icoonkaarten, 4-stappen traject (aanvraag → afspraak op locatie → vaste-prijs offerte → uitvoering & oplevering), twee voor-na fotoduo's met Voor/Na-chips, review-scoreblok zonder verzonnen citaten, en een donkere CTA-band die terug ankert naar het formulier.
-- **`site/functions/api/offerte.ts`** — Cloudflare Pages Function die het formulier afhandelt: honeypot-spamfilter, JSON-antwoord voor het fetch-pad, en een 303-redirect naar `#aanvraag-ontvangen`/`#aanvraag-mislukt` als no-JS-fallback (die panelen worden via CSS `:target` zichtbaar, dus het formulier werkt ook zonder JavaScript).
-- Formulier heeft exact de zes blueprint-velden, validatie/laad/succes/fout-teksten letterlijk uit `microcopy.md`, foutmeldingen via `aria-describedby` met focus naar het eerste foutveld, en de micro-garantie bij elke CTA.
-
-Verificatie: `pnpm build` slaagt (3 pagina's), geen TODO/PLACEHOLDER/lorem, geen verboden zinsneden, consequent "u", precies één primaire CTA per viewport, alle demo-beelden via astro:assets met `data-demo="true"`.
-
-Twee bewuste keuzes vastgelegd in `progress.md` en `open-questions.md`: formulierlabels zijn neutraal-formeel ("Naam" i.p.v. het jij-vormige "Jouw naam" uit de microcopy-bibliotheek, omdat de pagina-AC "uitsluitend u" vereist), en e-mail/CRM-aflevering van aanvragen plus de Google-profiel-URL staan als open vragen — die feiten zijn niet bevestigd, dus niets verzonnen. Volgende beurt pakt `page_projecten` op.
+Verificatie: `pnpm build` slaagt (4 pagina's), geen TODO/PLACEHOLDER/lorem, geen verboden zinsneden, geen uitroeptekens in zichtbare copy, consequent u-vorm, precies 1× `btn--primary`, alle beelden via astro:assets met `data-demo="true"`. Bewuste afwijking van de blueprint: geen jaartallen/oppervlak/oplevermaand op kaarten — de demo-beelden-README verbiedt verzonnen opleverdata, dus alleen generieke locatielabels. `prd.json` staat op `passes: true` voor page_projecten en progress.md bevat de overdracht voor de volgende beurt (page_gevelwerk).
