@@ -1,15 +1,13 @@
-**Beurt 5 klaar: de Projecten-pagina is gebouwd, geverifieerd en geadministreerd.** Het committen gebeurt door `build.sh` zelf (die draait na elke beurt `git add -A && git commit -m "beurt N (auto)"`); directe git-commando's vereisen in deze sandbox goedkeuring, dus dat laat ik — net als vorige beurten — aan de lus-runner over.
+De git-schrijfcommando's (`git add`/`git commit`) worden in deze sessie door de permission-instellingen geblokkeerd — alle wijzigingen staan wel klaar in de working tree. De taak zelf is volledig afgerond en geverifieerd.
 
-Wat er staat in `site/src/pages/projecten.astro` (alle 9 blueprint-secties):
+**Beurt 6 — page_gevelwerk afgerond:**
 
-1. **Paginahero** — full-bleed voor-na splitfoto (hero-projecten.jpg, preload + `fetchpriority="high"`) met scrim, sweep-signature, H1 "50+ projecten in Haarlem – op tijd en in budget opgeleverd" en twee feitenchips (4,8 Google-score · 50+ projecten).
-2. **Bewijs-band** — drie icoonblokken (sterren / vinkje / kaartpin) met de bevestigde cijfers en het werkgebied.
-3. **Filterbare voor-na galerij** — filterpills per dienst (Alle / Gevelwerk / Binnenafwerking / Microcement) plus de Voor/Na-toggle per kaart; zonder JS blijven alle kaarten gewoon zichtbaar.
-4. **Uitgelicht project** — drone-still met chip "Still uit drone-opname" naast een feitenlijst (dienst, locatie, bewijsmateriaal).
-5. **Projectkaarten per dienst** — beeld-gedreven kaarten die doorlinken naar de drie dienstpagina's.
-6. **Reviews** — het bestaande 4,8-scoreblok, zonder verzonnen citaten of namen.
-7. **Trackrecord** — donkere full-bleed statement-band met kalender- en budget-marks.
-8. **Keurmerken** — tekstband ("tonen wij zodra geverifieerd"), geen nep-logo's.
-9. **CTA-band** — sfeerbeeld + scrim, de enige primaire CTA "Offerte aanvragen", bel-link en micro-garantie.
+- **Gebouwd:** `site/src/pages/gevelwerk.astro` volgens de blueprint (hero → kern-inhoud → bewijs → CTA):
+  1. Compacte full-bleed beeld-hero met de voor-na split `hero-gevelwerk.jpg`, sweep-signature, H1 "Gevelwerk in Haarlem – vaste prijs, op tijd opgeleverd", primaire CTA + micro-garantie boven de vouw op 375px.
+  2. Kern-inhoud: genummerde werklijst (gevelstuc, herstel/renovatie, buitenafwerking) naast het steiger-beeld, plus een 3-stappenrij "Vóór de start op papier" met iconen.
+  3. Bewijs: voor-na toggle van het gevelproject, feitenlijst (4,8 sterren / 25+ reviews / 50+ projecten / KvK & verzekerd), secundaire link naar /projecten/ en de drone-still met chip.
+  4. CTA-band met sfeerbeeld, scrim, primaire knop, belnummer en micro-garantie.
+- **Geverifieerd:** `pnpm build` slaagt (5 pagina's), geen TODO/PLACEHOLDER/lorem, geen verboden zinsneden, consequent u-vorm, geen uitroeptekens, 2× primaire CTA in gescheiden viewports (zelfde patroon als home), alle beelden via astro:assets met `data-demo="true"`, hero gepreload als AVIF.
+- **Administratie:** `page_gevelwerk` staat op `passes: true` in prd.json; progress.md heeft een beurt-6-notitie met aandachtspunten voor de volgende beurt (binnenafwerking: 9 secties vereist, hero-beeld nog kopiëren).
 
-Verificatie: `pnpm build` slaagt (4 pagina's), geen TODO/PLACEHOLDER/lorem, geen verboden zinsneden, geen uitroeptekens in zichtbare copy, consequent u-vorm, precies 1× `btn--primary`, alle beelden via astro:assets met `data-demo="true"`. Bewuste afwijking van de blueprint: geen jaartallen/oppervlak/oplevermaand op kaarten — de demo-beelden-README verbiedt verzonnen opleverdata, dus alleen generieke locatielabels. `prd.json` staat op `passes: true` voor page_projecten en progress.md bevat de overdracht voor de volgende beurt (page_gevelwerk).
+**Actie nodig:** de commit kon niet uitgevoerd worden omdat git-commando's nu goedkeuring vragen. Commit handmatig met `git add -A && git commit -m "beurt 6 (auto): gevelwerk-pagina"`, of geef git-permissies vrij voor de volgende lus-beurt — dan neemt die beurt deze wijzigingen mee.
