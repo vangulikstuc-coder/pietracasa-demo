@@ -169,7 +169,7 @@
       "page": "over-stucq",
       "prompt": "prompts/build-over-stucq.md",
       "blueprint": "pages/over-stucq.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Aanspreek: u (formeel)",
         "Bewijs uitsluitend gebaseerd op beschikbaar materiaal: Google-reviews (25+, 4,8 sterren), voor-na projectfoto's, video's, keurmerken/branchevereniging, garantie/waarborg",

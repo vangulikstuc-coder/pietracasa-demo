@@ -1,0 +1,1352 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import heroOverStucq from '../assets/images/hero/hero-over-stucq.jpg';
+import overWerkomgeving from '../assets/images/sections/over-werkomgeving.jpg';
+import galerijGevelVoor from '../assets/images/sections/galerij-gevel-voor.jpg';
+import galerijGevelNa from '../assets/images/sections/galerij-gevel-na.jpg';
+import galerijBinnenVoor from '../assets/images/sections/galerij-binnen-voor.jpg';
+import galerijBinnenNa from '../assets/images/sections/galerij-binnen-na.jpg';
+import ctaSfeer from '../assets/images/sections/cta-sfeer.jpg';
+
+const heroWidths = [768, 1280, 1920];
+const heroSizes = '(min-width: 1024px) 50vw, 100vw';
+const heroAvif = await Promise.all(
+  heroWidths.map(async (width) => ({
+    width,
+    image: await getImage({ src: heroOverStucq, width, format: 'avif' }),
+  }))
+);
+const heroPreloadSrcset = heroAvif.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
+
+const ogImage = await getImage({ src: heroOverStucq, width: 1200, format: 'jpg' });
+
+const cardWidths = [420, 840];
+const cardSizes = '(min-width: 768px) 45vw, 100vw';
+
+const kerngegevens = [
+  { label: 'Bedrijf', waarde: 'Stucq, stucadoorsbedrijf' },
+  { label: 'Gevestigd', waarde: 'Noord-Holland' },
+  { label: 'Actief sinds', waarde: '2020' },
+  { label: 'Werkgebied', waarde: 'Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km' },
+];
+
+const waarborgen = [
+  {
+    titel: 'Vaste prijs op schrift',
+    tekst: 'De offerteprijs is de eindprijs. Meerwerk alleen na uw schriftelijk akkoord.',
+    icon: 'euro',
+  },
+  {
+    titel: 'Schriftelijke opleveringsafspraak',
+    tekst: 'Planning en opleverdatum staan vóór de start vast in de offerte.',
+    icon: 'contract',
+  },
+  {
+    titel: 'Garantie op het werk',
+    tekst: 'Stucq levert op met garantie, vastgelegd in de opleveringsafspraak.',
+    icon: 'shield',
+  },
+];
+
+const plaatsen = ['Haarlem', 'Bloemendaal', 'Zandvoort', 'Omgeving tot 15 km'];
+
+const starPath =
+  'M12 2.8l2.85 5.78 6.38.93-4.62 4.5 1.09 6.36L12 17.37l-5.7 3 1.09-6.36-4.62-4.5 6.38-.93L12 2.8z';
+
+const icons: Record<string, string> = {
+  star: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${starPath}"/></svg>`,
+  starPartial: `<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="star-partial-grad"><stop offset="0.8" stop-color="currentColor"/><stop offset="0.8" stop-color="transparent"/></linearGradient></defs><path d="${starPath}" fill="url(#star-partial-grad)" stroke="currentColor" stroke-width="1"/></svg>`,
+  euro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 7a6.5 6.5 0 1 0 0 10"/><path d="M5 10.5h8M5 13.5h8"/></svg>',
+  clock:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+  badge:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m9.5 9 1.8 1.8L15 7.2"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg>',
+  shield:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="m9 11.5 2 2 4-4"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+  contract:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>',
+  phone:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
+};
+---
+
+<BaseLayout
+  title="Over Stucq – stucadoor in Haarlem | Stucq"
+  description="Stucq is een stucadoorsbedrijf in Noord-Holland, sinds 2020 actief in Haarlem en omgeving. 50+ projecten, 4,8 sterren op Google. Vraag een offerte aan."
+  ogImage={ogImage.src}
+>
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    type="image/avif"
+    imagesrcset={heroPreloadSrcset}
+    imagesizes={heroSizes}
+  />
+
+  <!-- 1. Pagina-hero: Wie is Stucq -->
+  <section class="hero" aria-labelledby="over-title">
+    <div class="container hero__grid">
+      <div class="hero__content" data-reveal>
+        <p class="eyebrow">Over Stucq</p>
+        <h1 id="over-title">Stucadoorsbedrijf in Haarlem – sinds 2020 op vaste prijs</h1>
+        <p class="hero__sub">
+          Stucq is gevestigd in Noord-Holland en werkt in Haarlem, Bloemendaal, Zandvoort en
+          omgeving. Sinds 2020 zijn 50+ projecten afgerond – allemaal op tijd en in budget.
+        </p>
+        <dl class="hero__feiten">
+          {
+            kerngegevens.map((feit) => (
+              <div class="hero__feit">
+                <dt>{feit.label}</dt>
+                <dd>{feit.waarde}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="hero__actions">
+          <a href="/offerte/" class="btn btn--primary">
+            Offerte aanvragen
+            <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="tel:0681943404" class="hero__tel">Bel voor advies: 06 81 94 34 04</a>
+        </div>
+        <p class="micro">Vrijblijvend – vaste prijs, reactie binnen 48 uur.</p>
+      </div>
+      <div class="hero__media">
+        <Picture
+          src={heroOverStucq}
+          widths={heroWidths}
+          sizes={heroSizes}
+          formats={['avif', 'webp']}
+          alt="Vakman van Stucq bij een strak afgewerkte wand"
+          fetchpriority="high"
+          loading="eager"
+          data-demo="true"
+        />
+        <p class="hero__chip">Vakman van Stucq · regio Haarlem</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Kerncijfers-band -->
+  <section class="stats-band" aria-labelledby="stats-title">
+    <div class="container">
+      <h2 class="visually-hidden" id="stats-title">Kerncijfers</h2>
+      <dl class="stats" data-reveal-group>
+        <div class="stats__item">
+          <dt>Projecten sinds 2020</dt>
+          <dd><span class="stats__num tabular" data-count-to="50" data-count-suffix="+">50+</span></dd>
+        </div>
+        <div class="stats__item">
+          <dt>Sterren op Google</dt>
+          <dd>
+            <span class="stats__num tabular" data-count-to="4.8" data-count-decimals="1">4,8</span>
+            <span class="stats__star" set:html={icons.star} aria-hidden="true" />
+          </dd>
+        </div>
+        <div class="stats__item">
+          <dt>Geverifieerde reviews</dt>
+          <dd><span class="stats__num tabular" data-count-to="25" data-count-suffix="+">25+</span></dd>
+        </div>
+        <div class="stats__item">
+          <dt>Werkgebied rond Haarlem</dt>
+          <dd>
+            <span class="stats__num tabular" data-count-to="15" data-count-suffix=" km">15 km</span>
+          </dd>
+        </div>
+      </dl>
+      <p class="stats__caption" data-reveal>
+        Alle projecten zijn op tijd en binnen het afgesproken budget opgeleverd.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. Achtergrond en werkwijze -->
+  <section class="section section--alt" aria-labelledby="achtergrond-title">
+    <div class="container achtergrond" data-reveal-group>
+      <div class="achtergrond__text">
+        <p class="eyebrow">Achtergrond</p>
+        <h2 id="achtergrond-title">Opgericht in 2020, met één uitgangspunt</h2>
+        <p>
+          Gevelwerk, binnenafwerking en microcement vloeren uitvoeren op vaste prijs, volgens
+          planning. Dat uitgangspunt staat sinds de oprichting in elke offerte.
+        </p>
+        <p>
+          Elke opdracht wordt vooraf vastgelegd in een heldere prijsafspraak. Geen verrassingen
+          achteraf, geen meerwerk zonder uw schriftelijk akkoord.
+        </p>
+        <p>
+          U werkt van offerte tot oplevering met dezelfde vakman. Eén aanspreekpunt, korte lijnen
+          en afspraken die op papier staan.
+        </p>
+        <a href="/werkwijze/" class="achtergrond__link">Bekijk de volledige werkwijze</a>
+      </div>
+      <figure class="achtergrond__media">
+        <Picture
+          src={overWerkomgeving}
+          widths={cardWidths}
+          sizes={cardSizes}
+          formats={['avif', 'webp']}
+          alt="Werkomgeving van Stucq: gereedschap en stucwerk in uitvoering"
+          loading="lazy"
+          decoding="async"
+          data-demo="true"
+        />
+        <figcaption class="achtergrond__bar">De werkomgeving · regio Haarlem</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 4. Werkgebied -->
+  <section class="section" aria-labelledby="werkgebied-title">
+    <div class="container werkgebied" data-reveal-group>
+      <div class="werkgebied__text">
+        <p class="eyebrow">Werkgebied</p>
+        <h2 id="werkgebied-title">Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km</h2>
+        <p>
+          Stucq voert werk uit in Haarlem, Bloemendaal, Zandvoort en de directe omgeving tot 15
+          kilometer. Buiten dit werkgebied worden geen opdrachten aangenomen.
+        </p>
+        <p>
+          Die begrenzing is bewust. Korte reistijden houden de planning haalbaar – en de planning
+          is onderdeel van de afspraak.
+        </p>
+        <ul class="werkgebied__plaatsen" role="list">
+          {plaatsen.map((plaats) => <li>{plaats}</li>)}
+        </ul>
+      </div>
+      <figure class="werkgebied__kaart">
+        <svg viewBox="0 0 320 320" role="img" aria-labelledby="kaart-title" class="kaart">
+          <title id="kaart-title"
+            >Schematische weergave van het werkgebied: 15 kilometer rondom Haarlem, met Bloemendaal
+            en Zandvoort</title
+          >
+          <circle cx="160" cy="160" r="140" class="kaart__ring" />
+          <circle cx="160" cy="160" r="90" class="kaart__ring kaart__ring--inner" />
+          <line x1="160" y1="160" x2="259" y2="61" class="kaart__radius" />
+          <text x="262" y="52" class="kaart__radius-label">15 km</text>
+          <g class="kaart__plaats kaart__plaats--center">
+            <circle cx="160" cy="160" r="7" />
+            <text x="160" y="186">Haarlem</text>
+          </g>
+          <g class="kaart__plaats">
+            <circle cx="120" cy="92" r="5" />
+            <text x="120" y="76">Bloemendaal</text>
+          </g>
+          <g class="kaart__plaats">
+            <circle cx="52" cy="196" r="5" />
+            <text x="52" y="222">Zandvoort</text>
+          </g>
+        </svg>
+        <figcaption class="kaart__caption">
+          Schematische weergave van het werkgebied – geen exacte kaart.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 5. Google-reviews bewijs -->
+  <section class="section section--alt" aria-labelledby="reviews-title">
+    <div class="container reviews" data-reveal-group>
+      <div class="review-score">
+        <p class="review-score__num tabular">4,8</p>
+        <p class="review-score__stars" aria-hidden="true">
+          <span set:html={icons.star} />
+          <span set:html={icons.star} />
+          <span set:html={icons.star} />
+          <span set:html={icons.star} />
+          <span set:html={icons.starPartial} />
+        </p>
+        <p class="visually-hidden">4,8 van 5 sterren</p>
+        <p class="review-score__sub">
+          Gemiddelde score op Google, op basis van 25+ geverifieerde reviews.
+        </p>
+      </div>
+      <div class="reviews__text">
+        <p class="eyebrow">Reviews</p>
+        <h2 id="reviews-title">25+ opdrachtgevers beoordeelden Stucq met 4,8 sterren</h2>
+        <p>
+          De reviews komen van bouwbedrijven en huiseigenaren in Haarlem en omgeving. Ze gaan over
+          planning, prijs en afwerking.
+        </p>
+        <p>
+          U leest alle beoordelingen op het Google-profiel van Stucq. Wij schrijven hier geen
+          citaten over – het bewijs staat bij Google.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Keurmerken en waarborg -->
+  <section class="section" aria-labelledby="waarborg-title">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <p class="eyebrow">Waarborg</p>
+        <h2 id="waarborg-title">Vastgelegd vóór de start, gecontroleerd bij oplevering</h2>
+        <p class="section-head__intro">
+          Stucq werkt volgens de normen van de branche en levert werk op met garantie. Elke
+          afspraak staat op papier.
+        </p>
+      </header>
+      <ul class="waarborgen" role="list" data-reveal-group>
+        {
+          waarborgen.map((item) => (
+            <li class="waarborgen__item">
+              <span class="waarborgen__icon" set:html={icons[item.icon]} aria-hidden="true" />
+              <h3>{item.titel}</h3>
+              <p>{item.tekst}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="waarborgen__note" data-reveal>
+        Keurmerken en branchevereniging-lidmaatschappen zijn op aanvraag beschikbaar en tonen wij
+        hier zodra ze geverifieerd zijn.
+      </p>
+    </div>
+  </section>
+
+  <!-- 7. Voor-na projectfoto's teaser -->
+  <section class="section section--alt" aria-labelledby="teaser-title">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <p class="eyebrow">Projectbewijs</p>
+        <h2 id="teaser-title">Het werk, vastgelegd in voor-na beelden</h2>
+        <p class="section-head__intro">
+          Een selectie van afgeronde projecten in Haarlem en omgeving – gevelwerk, binnenafwerking
+          en microcement vloeren. Wissel tussen de voor- en na-foto.
+        </p>
+      </header>
+      <div class="galerij" data-reveal-group>
+        <figure class="ba-card" data-ba>
+          <div class="ba-card__media">
+            <div class="ba-card__panel is-active" data-ba-panel="na">
+              <Picture
+                src={galerijGevelNa}
+                widths={cardWidths}
+                sizes={cardSizes}
+                formats={['avif', 'webp']}
+                alt="Na: strak gestuukte gevel van een woning"
+                loading="lazy"
+                decoding="async"
+                data-demo="true"
+              />
+            </div>
+            <div class="ba-card__panel" data-ba-panel="voor" aria-hidden="true">
+              <Picture
+                src={galerijGevelVoor}
+                widths={cardWidths}
+                sizes={cardSizes}
+                formats={['avif', 'webp']}
+                alt="Voor: verweerde gevel met beschadigd stucwerk"
+                loading="lazy"
+                decoding="async"
+                data-demo="true"
+              />
+            </div>
+          </div>
+          <div class="ba-card__bar">
+            <figcaption>Gevelwerk · Haarlem</figcaption>
+            <div class="ba-toggle" role="group" aria-label="Voor- of na-foto tonen">
+              <button type="button" data-ba-show="voor" aria-pressed="false">Voor</button>
+              <button type="button" data-ba-show="na" aria-pressed="true">Na</button>
+            </div>
+          </div>
+        </figure>
+        <figure class="ba-card" data-ba>
+          <div class="ba-card__media">
+            <div class="ba-card__panel is-active" data-ba-panel="na">
+              <Picture
+                src={galerijBinnenNa}
+                widths={cardWidths}
+                sizes={cardSizes}
+                formats={['avif', 'webp']}
+                alt="Na: strak gestuukte wand en plafond in een woonkamer"
+                loading="lazy"
+                decoding="async"
+                data-demo="true"
+              />
+            </div>
+            <div class="ba-card__panel" data-ba-panel="voor" aria-hidden="true">
+              <Picture
+                src={galerijBinnenVoor}
+                widths={cardWidths}
+                sizes={cardSizes}
+                formats={['avif', 'webp']}
+                alt="Voor: beschadigde wand met oneffenheden en oude afwerklagen"
+                loading="lazy"
+                decoding="async"
+                data-demo="true"
+              />
+            </div>
+          </div>
+          <div class="ba-card__bar">
+            <figcaption>Binnenafwerking · regio Haarlem</figcaption>
+            <div class="ba-toggle" role="group" aria-label="Voor- of na-foto tonen">
+              <button type="button" data-ba-show="voor" aria-pressed="false">Voor</button>
+              <button type="button" data-ba-show="na" aria-pressed="true">Na</button>
+            </div>
+          </div>
+        </figure>
+      </div>
+      <div class="galerij__more" data-reveal>
+        <a href="/projecten/" class="btn btn--secondary">Bekijk afgeronde projecten</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Contactgegevens en openingstijden -->
+  <section class="section" aria-labelledby="contact-title">
+    <div class="container contact" data-reveal-group>
+      <div class="contact__text">
+        <p class="eyebrow">Bereikbaarheid</p>
+        <h2 id="contact-title">Direct contact, zonder tussenstap</h2>
+        <p>
+          Stucq is op werkdagen telefonisch en per e-mail bereikbaar. Spoed is mogelijk – u
+          ontvangt binnen 48 uur een reactie.
+        </p>
+      </div>
+      <ul class="contact__lijst" role="list">
+        <li>
+          <span class="contact__icon" set:html={icons.phone} aria-hidden="true" />
+          <div>
+            <h3>Telefoon</h3>
+            <a href="tel:0681943404">06 81 94 34 04</a>
+          </div>
+        </li>
+        <li>
+          <span class="contact__icon" set:html={icons.mail} aria-hidden="true" />
+          <div>
+            <h3>E-mail</h3>
+            <a href="mailto:info@stucqafbouw.nl">info@stucqafbouw.nl</a>
+          </div>
+        </li>
+        <li>
+          <span class="contact__icon" set:html={icons.clock} aria-hidden="true" />
+          <div>
+            <h3>Openingstijden</h3>
+            <p>Maandag t/m vrijdag, 7:00–17:00</p>
+          </div>
+        </li>
+        <li>
+          <span class="contact__icon" set:html={icons.pin} aria-hidden="true" />
+          <div>
+            <h3>Gevestigd</h3>
+            <p>Noord-Holland · werkgebied Haarlem en omgeving</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9. CTA-band -->
+  <section class="cta-band" aria-labelledby="cta-title">
+    <div class="cta-band__bg" aria-hidden="true">
+      <Picture
+        src={ctaSfeer}
+        widths={[820, 1280, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        data-demo="true"
+      />
+    </div>
+    <div class="container cta-band__inner" data-reveal>
+      <h2 id="cta-title">Een project in Haarlem of omgeving?</h2>
+      <p class="cta-band__sub">
+        Vraag direct een offerte aan of bel 06 81 94 34 04. U ontvangt binnen 48 uur een reactie
+        met vaste prijsopgave.
+      </p>
+      <div class="cta-band__actions">
+        <a href="/offerte/" class="btn btn--primary">
+          Offerte aanvragen
+          <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="tel:0681943404" class="cta-band__tel">Bel direct: 06 81 94 34 04</a>
+      </div>
+      <p class="cta-band__micro">
+        Vrijblijvend – vaste prijs, reactie binnen 48 uur. Bereikbaar ma–vr 7:00–17:00.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* --- Gedeelde sectie-koppen --- */
+  .eyebrow {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .section-head {
+    max-width: 68ch;
+    margin-block-end: clamp(var(--spacing-xl), 6vw, var(--spacing-2xl));
+  }
+
+  .section-head h2 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .section-head__intro {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+  }
+
+  .micro {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  /* --- 1. Hero --- */
+  .hero {
+    padding-block: clamp(var(--spacing-lg), 4vw, var(--spacing-2xl))
+      clamp(var(--spacing-2xl), 8vw, var(--spacing-section));
+  }
+
+  .hero__grid {
+    display: grid;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .hero__content h1 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .hero__sub {
+    margin-block-start: var(--spacing-lg);
+    font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-md));
+    color: var(--color-text-secondary);
+    max-width: 54ch;
+  }
+
+  .hero__feiten {
+    margin: var(--spacing-lg) 0 0;
+    display: grid;
+    gap: var(--spacing-sm);
+    border-block: 1px solid var(--color-border-default);
+    padding-block: var(--spacing-md);
+  }
+
+  .hero__feit {
+    display: grid;
+    grid-template-columns: minmax(96px, auto) 1fr;
+    gap: var(--spacing-md);
+    align-items: baseline;
+  }
+
+  .hero__feit dt {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .hero__feit dd {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-md) var(--spacing-lg);
+    margin-block-start: var(--spacing-lg);
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .hero__actions .btn {
+      width: auto;
+    }
+  }
+
+  .hero__tel {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    color: var(--color-text-primary);
+  }
+
+  .hero__tel:hover {
+    color: var(--color-primary-default);
+  }
+
+  .hero__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hero__media :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .hero__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: hero-settle 1200ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both;
+  }
+
+  /* Signature: gladstrijkende laag trekt van links naar rechts over het beeld */
+  .hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(100deg, var(--color-neutral-100), var(--color-neutral-300));
+    transform-origin: right center;
+    animation: hero-sweep 1000ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both;
+  }
+
+  @keyframes hero-sweep {
+    from {
+      transform: scaleX(1);
+    }
+    to {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes hero-settle {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .hero__chip {
+    position: absolute;
+    z-index: 1;
+    inset-block-end: var(--spacing-md);
+    inset-inline-start: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-neutral-900) 70%, transparent);
+    color: var(--color-text-inverse);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  @media (min-width: 1024px) {
+    .hero__grid {
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: var(--spacing-2xl);
+    }
+
+    /* Blueprint: foto links, kerngegevens rechts op desktop */
+    .hero__media {
+      order: -1;
+      aspect-ratio: auto;
+      align-self: stretch;
+      min-height: 100%;
+    }
+  }
+
+  /* --- 2. Kerncijfers-band --- */
+  .stats-band {
+    padding-block: clamp(var(--spacing-xl), 6vw, var(--spacing-2xl));
+    border-block: 1px solid var(--color-border-default);
+  }
+
+  .stats {
+    display: grid;
+    gap: var(--spacing-lg);
+    margin: 0;
+  }
+
+  .stats__item {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--spacing-xs);
+    padding-block-start: var(--spacing-md);
+    border-top: 1px solid var(--color-border-default);
+  }
+
+  .stats__item:first-child {
+    border-top: 0;
+    padding-block-start: 0;
+  }
+
+  .stats__item dt {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .stats__item dd {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+  }
+
+  .stats__num {
+    font-family: var(--font-display);
+    font-size: clamp(var(--font-size-xl), 5vw, var(--font-size-display));
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .stats__star {
+    display: inline-flex;
+    color: var(--color-primary-default);
+  }
+
+  .stats__star :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  .stats__caption {
+    margin-block-start: var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    max-width: 60ch;
+  }
+
+  @media (min-width: 640px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    .stats__item {
+      border-top: 0;
+      padding-block-start: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stats__item {
+      border-inline-start: 1px solid var(--color-border-default);
+      padding-inline-start: var(--spacing-xl);
+    }
+
+    .stats__item:first-child {
+      border-inline-start: 0;
+      padding-inline-start: 0;
+    }
+  }
+
+  /* --- 3. Achtergrond en werkwijze --- */
+  .achtergrond {
+    display: grid;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .achtergrond__text h2 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .achtergrond__text p:not(.eyebrow) {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+    max-width: 54ch;
+  }
+
+  .achtergrond__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-block-start: var(--spacing-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .achtergrond__link:hover {
+    color: var(--color-primary-default);
+  }
+
+  .achtergrond__media {
+    margin: 0;
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .achtergrond__media :global(picture) {
+    display: block;
+    aspect-ratio: 4 / 3;
+  }
+
+  .achtergrond__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .achtergrond__bar {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  @media (min-width: 900px) {
+    .achtergrond {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  /* --- 4. Werkgebied --- */
+  .werkgebied {
+    display: grid;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .werkgebied__text h2 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .werkgebied__text p {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+    max-width: 54ch;
+  }
+
+  .werkgebied__plaatsen {
+    list-style: none;
+    margin: var(--spacing-lg) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .werkgebied__plaatsen li {
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-default);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .werkgebied__kaart {
+    margin: 0;
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(var(--spacing-lg), 4vw, var(--spacing-xl));
+  }
+
+  .kaart {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+    height: auto;
+  }
+
+  .kaart__ring {
+    fill: color-mix(in srgb, var(--color-primary-default) 4%, transparent);
+    stroke: var(--color-border-strong);
+    stroke-dasharray: 5 6;
+    stroke-width: 1.5;
+  }
+
+  .kaart__ring--inner {
+    fill: none;
+    stroke: var(--color-border-default);
+  }
+
+  .kaart__radius {
+    stroke: var(--color-text-secondary);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+  }
+
+  .kaart__radius-label {
+    fill: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: var(--font-weight-semibold);
+    text-anchor: end;
+  }
+
+  .kaart__plaats circle {
+    fill: var(--color-text-secondary);
+  }
+
+  .kaart__plaats text {
+    fill: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    text-anchor: middle;
+  }
+
+  .kaart__plaats--center circle {
+    fill: var(--color-primary-default);
+  }
+
+  .kaart__plaats--center text {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .kaart__caption {
+    margin-block-start: var(--spacing-md);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 900px) {
+    .werkgebied {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  /* --- 5. Reviews --- */
+  .reviews {
+    display: grid;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .review-score {
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(var(--spacing-lg), 4vw, var(--spacing-xl));
+    text-align: center;
+  }
+
+  .review-score__num {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 9vw, 84px);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+  }
+
+  .review-score__stars {
+    display: inline-flex;
+    gap: var(--spacing-xs);
+    margin-block-start: var(--spacing-sm);
+    color: var(--color-primary-default);
+  }
+
+  .review-score__stars :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  .review-score__sub {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .reviews__text h2 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .reviews__text p:not(.eyebrow) {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+    max-width: 54ch;
+  }
+
+  @media (min-width: 900px) {
+    .reviews {
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  /* --- 6. Waarborg --- */
+  .waarborgen {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--spacing-lg);
+  }
+
+  .waarborgen__item {
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+  }
+
+  .waarborgen__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-primary-default) 10%, transparent);
+    color: var(--color-primary-default);
+  }
+
+  .waarborgen__icon :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  .waarborgen__item h3 {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-md);
+  }
+
+  .waarborgen__item p {
+    margin-block-start: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .waarborgen__note {
+    margin-block-start: clamp(var(--spacing-lg), 4vw, var(--spacing-xl));
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    max-width: 68ch;
+  }
+
+  @media (min-width: 768px) {
+    .waarborgen {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* --- 7. Voor-na teaser --- */
+  .galerij {
+    display: grid;
+    gap: var(--spacing-lg);
+    align-items: stretch;
+  }
+
+  .ba-card {
+    margin: 0;
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ba-card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    flex: 1;
+  }
+
+  .ba-card__panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--motion-base) var(--motion-easing);
+  }
+
+  .ba-card__panel.is-active {
+    opacity: 1;
+  }
+
+  .ba-card__panel :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .ba-card__panel :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ba-card__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .ba-card__bar figcaption {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .ba-toggle {
+    display: inline-flex;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    padding: var(--spacing-xs);
+    gap: var(--spacing-xs);
+  }
+
+  .ba-toggle button {
+    min-height: 36px;
+    min-width: 56px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--motion-easing),
+      color var(--motion-fast) var(--motion-easing);
+  }
+
+  .ba-toggle button:hover {
+    color: var(--color-text-primary);
+  }
+
+  .ba-toggle button:focus-visible {
+    outline: 3px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  .ba-toggle button[aria-pressed='true'] {
+    background: var(--color-neutral-900);
+    color: var(--color-text-inverse);
+  }
+
+  @media (min-width: 768px) {
+    .galerij {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .galerij__more {
+    margin-block-start: clamp(var(--spacing-lg), 4vw, var(--spacing-xl));
+  }
+
+  /* --- 8. Contact --- */
+  .contact {
+    display: grid;
+    gap: var(--spacing-xl);
+    align-items: start;
+  }
+
+  .contact__text h2 {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .contact__text p {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+    max-width: 54ch;
+  }
+
+  .contact__lijst {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--spacing-md);
+  }
+
+  .contact__lijst li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+  }
+
+  .contact__icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-primary-default) 10%, transparent);
+    color: var(--color-primary-default);
+  }
+
+  .contact__icon :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  .contact__lijst h3 {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .contact__lijst a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .contact__lijst a:hover {
+    color: var(--color-primary-default);
+  }
+
+  .contact__lijst p {
+    margin-block-start: var(--spacing-xs);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+  }
+
+  @media (min-width: 640px) {
+    .contact__lijst {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .contact {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  /* --- 9. CTA-band --- */
+  .cta-band {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(var(--spacing-section), 14vw, 160px);
+    color: var(--color-text-inverse);
+  }
+
+  .cta-band__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .cta-band__bg :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .cta-band__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cta-band__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--color-neutral-900) 85%, transparent),
+      color-mix(in srgb, var(--color-neutral-900) 55%, transparent)
+    );
+  }
+
+  .cta-band__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-band__sub {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-md);
+    color: var(--color-neutral-100);
+    max-width: 46ch;
+  }
+
+  .cta-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .cta-band__tel {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-text-inverse);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .cta-band__tel:hover {
+    color: var(--color-neutral-200);
+  }
+
+  .cta-band__micro {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-300);
+  }
+</style>
+
+<script>
+  // Voor-na toggle in de teaser-galerij.
+  document.querySelectorAll<HTMLElement>('[data-ba]').forEach((card) => {
+    const buttons = Array.from(card.querySelectorAll<HTMLButtonElement>('[data-ba-show]'));
+    const panels = Array.from(card.querySelectorAll<HTMLElement>('[data-ba-panel]'));
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.baShow;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        panels.forEach((panel) => {
+          const active = panel.dataset.baPanel === target;
+          panel.classList.toggle('is-active', active);
+          panel.setAttribute('aria-hidden', String(!active));
+        });
+      });
+    });
+  });
+</script>

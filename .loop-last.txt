@@ -1,11 +1,11 @@
-De commit hoeft niet handmatig: het buitenste loop-script (`build.sh`, regel 17) doet na elke beurt zelf `git add -A && git commit -m "beurt N (auto)"` — vandaar dat alle eerdere commits ook "(auto)" heten en mijn git-aanroepen geblokkeerd worden. Het werk staat klaar om automatisch gecommit te worden.
+De commit-stap wordt door de buitenste lus afgehandeld (alle eerdere commits heten "beurt N (auto)" en `git add/commit` vereist hier handmatige goedkeuring die in autonome modus niet beschikbaar is) — de wijzigingen staan klaar in de working tree.
 
-**Beurt 9 afgerond — taak `page_werkwijze` is klaar.**
+**Beurt 10 afgerond: de Over Stucq-pagina is gebouwd en goedgekeurd.**
 
-Wat er is gebouwd in `site/src/pages/werkwijze.astro`:
-- **Tekst-hero** met rustige primary-gloed en primaire CTA + micro-garantie boven de vouw. Er is geen werkwijze-beeld in `public/images/` en de huisregels staan een heldere tekstkop toe; `over-werkomgeving.jpg` blijft gereserveerd voor de over-pagina.
-- **5-stappen-tijdlijn** (opname → offerte → planning → uitvoering → oplevering) met verbindingslijn, icoon-badges en per stap een "Afspraak"-pill (reactie binnen 48 uur, vaste prijs op schrift, data op papier, meerwerk alleen na akkoord, oplevering op datum). Intro-kolom is sticky op desktop.
-- **Bewijsblok**: "vast op papier"-lijst met hairline-dividers + het donkere review-scoreblok (4,8 sterren, 25+ reviews) + secundaire link naar /projecten/.
-- **CTA-band** met sfeerbeeld + scrim, telefoonlink en micro-garantie.
+Wat er is gedaan:
+- **`site/src/pages/over-stucq.astro`** aangemaakt met alle 9 blueprint-secties: split-hero (portretfoto links, kerngegevens-lijst rechts, primaire CTA + micro-garantie boven de vouw), kerncijfers-band met vier count-up stats (50+ projecten, 4,8 sterren, 25+ reviews, 15 km werkgebied), achtergrond-verhaal met werkomgevingsfoto, werkgebied-sectie, review-scoreblok zonder verzonnen citaten, waarborg-kaarten met keurmerk-noot, voor-na teaser met twee toggle-koppels, contactblok en de afsluitende CTA-band.
+- **Werkgebied-kaart**: er is geen echte kaartdata beschikbaar, dus in plaats van een nep-kaart staat er een schematische SVG (15 km-ring rond Haarlem met Bloemendaal en Zandvoort) met expliciete caption "Schematische weergave – geen exacte kaart". Geen Google-profiel-link opgenomen omdat die URL onbevestigd is.
+- **Verificatie**: `pnpm build` slaagt (9 pagina's). Checks schoon: geen verboden zinsneden, consequent u-vorm, geen uitroeptekens, 1× h1, micro-garantie 2× ("Vrijblijvend – vaste prijs, reactie binnen 48 uur"), werkgebied-AC letterlijk aanwezig, alle 7 beelden gemarkeerd met `data-demo="true"`, zelfde aantal primaire CTA's als de andere pagina's.
+- **Administratie**: `page_over-stucq` staat op `passes: true` in prd.json; progress.md heeft een beurt 10-entry met aanwijzingen voor de volgende beurt (page_faq: tekstkop-patroon van werkwijze, alleen bevestigde feiten in antwoorden, FAQPage JSON-LD overwegen).
 
-Verificatie: `pnpm build` slaagt (8 pagina's), 1× h1, geen verboden zinsneden/jij-vorm/uitroeptekens/TODO, uitsluitend semantische tokens, geen verzonnen doorlooptijden of feiten, CTA-telling gelijk aan de andere pagina's. Screenshots blijven in deze sandbox onmogelijk (geen Playwright/Chrome-MCP) — statische responsive review gedaan, visuele check volgt in de qa-beurt. `prd.json` staat op `passes: true` en `progress.md` is bijgewerkt met aanwijzingen voor de volgende beurt (page_over-stucq: twee beelden kopiëren, werkgebied-AC).
+Nog open: page_faq, page_contact, demo-beelden en qa — de lus pakt page_faq volgende beurt op.
