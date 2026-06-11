@@ -12,6 +12,7 @@ import galerijBinnenNa from '../assets/images/sections/galerij-binnen-na.jpg';
 import galerijVloerVoor from '../assets/images/sections/galerij-vloer-voor.jpg';
 import galerijVloerNa from '../assets/images/sections/galerij-vloer-na.jpg';
 import ctaSfeer from '../assets/images/sections/cta-sfeer.jpg';
+import bgTroffelSweep from '../assets/images/backgrounds/bg-troffel-sweep.jpg';
 
 /* Hero als 50/50-split uit de losse voor/na-helften: de deellijn ligt daardoor
    op elk breakpoint exact op het midden (composiet hero-home.jpg is alleen nog OG-beeld) */
@@ -461,8 +462,20 @@ const icons: Record<string, string> = {
   </section>
 
   <!-- 7. Garanties & keurmerken -->
-  <section class="section section--alt" aria-labelledby="garanties-title">
-    <div class="container">
+  <section class="section section--alt garanties-sectie" aria-labelledby="garanties-title">
+    <div class="garanties-sectie__bg" aria-hidden="true">
+      <Picture
+        src={bgTroffelSweep}
+        widths={[768, 1280, 1536]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        data-demo="true"
+      />
+    </div>
+    <div class="container garanties-sectie__inner">
       <header class="section-head" data-reveal>
         <p class="eyebrow">Garanties</p>
         <h2 id="garanties-title">Afspraken die op papier staan</h2>
@@ -1152,6 +1165,52 @@ const icons: Record<string, string> = {
   }
 
   /* --- 7. Garanties --- */
+  /* Troffel-sweep als sectie-accent rechtsboven (demo-beeld bg-troffel-sweep).
+     Alleen vanaf 768px: op mobiel vult de tekst de volle breedte, daar is geen
+     lege hoek en zou de textuur onder de tekst komen. */
+  .garanties-sectie {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .garanties-sectie__bg {
+    display: none;
+    position: absolute;
+    inset: 0;
+  }
+
+  .garanties-sectie__bg :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .garanties-sectie__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.45;
+  }
+
+  /* Counter-scrim: dekt de textuur volledig af waar tekst staat; alleen de lege
+     hoek rechts van de sectiekop blijft zichtbaar, dus contrast blijft gelijk */
+  .garanties-sectie__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(50% 50% at 100% 0%, transparent, var(--color-surface-alt) 68%);
+  }
+
+  @media (min-width: 768px) {
+    .garanties-sectie__bg {
+      display: block;
+    }
+  }
+
+  .garanties-sectie__inner {
+    position: relative;
+  }
+
   .garanties {
     list-style: none;
     padding: 0;

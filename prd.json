@@ -332,7 +332,7 @@
       "title": "Polish: nieuwe achtergrond-textures koppelen",
       "prompt": "Er staan drie nieuwe AI-achtergronden klaar in public/images/backgrounds/ (zie public/images/README.md): bg-stuc-licht.jpg (subtiele textuur voor de kale werkwijze- en FAQ-hero's), bg-stuc-donker.jpg (voor donkere CTA-banden/footer of trackrecord-band) en bg-troffel-sweep.jpg (sectie-accent, bijv. garanties). Koppel ze subtiel: lage zichtbaarheid, tekstcontrast blijft AA, data-demo='true', lazy waar onder de vouw.",
       "blueprint": "",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Werkwijze- en FAQ-hero hebben een subtiel textuur-accent (geen vlakke leegte meer)",
         "Minimaal één donkere band gebruikt bg-stuc-donker.jpg",

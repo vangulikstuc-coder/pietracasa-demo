@@ -13,6 +13,7 @@ import galerijBinnenNa from '../assets/images/sections/galerij-binnen-na.jpg';
 import galerijVloerVoor from '../assets/images/sections/galerij-vloer-voor.jpg';
 import galerijVloerNa from '../assets/images/sections/galerij-vloer-na.jpg';
 import ctaSfeer from '../assets/images/sections/cta-sfeer.jpg';
+import bgStucDonker from '../assets/images/backgrounds/bg-stuc-donker.jpg';
 
 /* Hero-achtergrond als 50/50-split uit de losse voor/na-helften: de deellijn ligt daardoor
    op elk breakpoint exact op het midden (composiet hero-projecten.jpg is alleen nog OG-beeld) */
@@ -402,6 +403,18 @@ const feiten = [
 
   <!-- 7. Op tijd en in budget – trackrecord -->
   <section class="trackrecord" aria-labelledby="trackrecord-title">
+    <div class="trackrecord__bg" aria-hidden="true">
+      <Picture
+        src={bgStucDonker}
+        widths={[768, 1280, 1536]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        data-demo="true"
+      />
+    </div>
     <div class="container trackrecord__inner" data-reveal>
       <p class="eyebrow eyebrow--inverse">Trackrecord</p>
       <h2 id="trackrecord-title">
@@ -1085,9 +1098,35 @@ const feiten = [
 
   /* --- 7. Trackrecord statement-band --- */
   .trackrecord {
+    position: relative;
+    overflow: hidden;
     background: var(--color-neutral-900);
     color: var(--color-text-inverse);
     padding-block: clamp(var(--spacing-section), 12vw, 140px);
+  }
+
+  /* Donkere stucwerk-textuur op lage dekking over neutral-900 (demo-beeld
+     bg-stuc-donker): ondersteunend, witte tekst blijft ruim AA */
+  .trackrecord__bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.38;
+  }
+
+  .trackrecord__bg :global(picture) {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .trackrecord__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .trackrecord__inner {
+    position: relative;
   }
 
   .trackrecord h2 {

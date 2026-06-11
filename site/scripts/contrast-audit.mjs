@@ -191,5 +191,108 @@ const chipRatio = contrast(WHITE, chipBg);
 console.log(`\nchips 70%-scrim, worst case (wit beeldpixel): ${chipRatio >= 4.5 ? 'PASS' : 'FAIL'} ${chipRatio.toFixed(2)}:1 (eis 4.5:1)`);
 if (chipRatio < 4.5) failures++;
 
+// ============================================================================
+// Polish-achtergronden: textuur-scenario's (bg-stuc-licht / -donker / troffel-sweep)
+// Modelleert 1-op-1 de CSS: textuur-img + counter-scrim (dekt textuur af onder
+// tekst) + gloedlaag. Secundaire tekst (#8C7B6E op licht) haalt site-breed geen
+// 4,5:1 op de KALE achtergrond (bestaande token-keuze, buiten deze taak) — voor
+// die zones is de eis hier: GEEN regressie t.o.v. de kale achtergrond (delta<=0.01).
+// ============================================================================
+const BG_DEFAULT = [245, 242, 238]; // color.background.default
+const SURFACE_ALT = [236, 233, 229]; // color.surface.alt
+const ACCENT = [176, 90, 47]; // color.primary.default
+const INK = [28, 24, 20]; // color.text.primary
+const TEXT_SECONDARY = [140, 123, 110]; // color.text.secondary
+
+// genormaliseerde ellips-afstand voor radial-gradient(rx ry at cx cy, ...)
+const ellipseT = (cx, cy, rx, ry) => (xn, yn) => Math.hypot((xn - cx) / rx, (yn - cy) / ry);
+const coverAlpha = (t, stop) => Math.min(1, t / stop); // transparent in hoek -> dekkend vanaf stop
+const gloedAlpha = (t) => (t >= 0.6 ? 0 : 0.07 * (1 - t / 0.6)); // 7% accent -> 0 bij stop 60%
+
+// page-hero werkwijze/faq: counter-scrim radial 55% 45% at 100% 0% (stop 68%) + gloed
+const tHeroCover = ellipseT(1, 0, 0.55, 0.45);
+const tHeroGloed = ellipseT(0.85, 0, 0.8, 1.2);
+const heroLightComposite = (texPx, xn, yn) => {
+  const afgedekt = over(texPx, BG_DEFAULT, coverAlpha(tHeroCover(xn, yn), 0.68));
+  return over(afgedekt, ACCENT, gloedAlpha(tHeroGloed(xn, yn)));
+};
+const heroLightPlain = (xn, yn) => over(BG_DEFAULT, ACCENT, gloedAlpha(tHeroGloed(xn, yn)));
+
+// garanties (home, alleen >=768px): img-opacity 0.45 over surface-alt + counter-scrim 50% 50% at 100% 0%
+const tGarCover = ellipseT(1, 0, 0.5, 0.5);
+const garantiesComposite = (texPx, xn, yn) => {
+  const tex = over(SURFACE_ALT, texPx, 0.45);
+  return over(tex, SURFACE_ALT, coverAlpha(tGarCover(xn, yn), 0.68));
+};
+const garantiesPlain = () => SURFACE_ALT;
+
+// trackrecord (projecten): textuur op opacity 0.38 over neutral-900, geen mask
+const trackComposite = (texPx) => over(NEUTRAL_900, texPx, 0.38);
+
+const lightHeroZones375 = [
+  { naam: 'eyebrow', box: [0.04, 0.11, 0.6, 0.18], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+  { naam: 'h1', box: [0.04, 0.18, 0.98, 0.42], kleur: INK, eis: 3 },
+  { naam: 'subkop', box: [0.04, 0.42, 0.98, 0.58], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+  { naam: 'tel-link', box: [0.04, 0.7, 0.95, 0.82], kleur: INK, eis: 4.5 },
+  { naam: 'micro', box: [0.04, 0.82, 0.98, 0.92], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+];
+const lightHeroZones1280 = [
+  { naam: 'eyebrow', box: [0.025, 0.18, 0.2, 0.26], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+  { naam: 'h1', box: [0.025, 0.26, 0.6, 0.5], kleur: INK, eis: 3 },
+  { naam: 'subkop', box: [0.025, 0.5, 0.5, 0.64], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+  { naam: 'tel-link', box: [0.18, 0.66, 0.45, 0.76], kleur: INK, eis: 4.5 },
+  { naam: 'micro', box: [0.025, 0.78, 0.4, 0.86], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+];
+const garantiesZones1280 = [
+  { naam: 'eyebrow', box: [0.025, 0.1, 0.15, 0.15], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+  { naam: 'h2', box: [0.025, 0.15, 0.45, 0.24], kleur: INK, eis: 3 },
+  { naam: 'intro', box: [0.025, 0.24, 0.55, 0.3], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+  { naam: 'note', box: [0.025, 0.9, 0.6, 0.96], kleur: TEXT_SECONDARY, eis: 4.5, mode: 'no-regress' },
+];
+// trackrecord: hele band als zone (positie-onafhankelijk worst case), wit (h2/pills) + neutral-300 (sub)
+const trackZones = [
+  { naam: 'wit (h2/pills)', box: [0.02, 0.02, 0.98, 0.98], kleur: WHITE, eis: 4.5 },
+  { naam: 'neutral-300 sub', box: [0.02, 0.02, 0.98, 0.98], kleur: NEUTRAL_300, eis: 4.5 },
+];
+
+const textureScenarios = [
+  { titel: 'page-hero werkwijze/faq textuur 375', beeld: img('backgrounds/bg-stuc-licht.jpg'), W: 375, H: 520, composite: heroLightComposite, plain: heroLightPlain, zones: lightHeroZones375 },
+  { titel: 'page-hero werkwijze/faq textuur 1280', beeld: img('backgrounds/bg-stuc-licht.jpg'), W: 1280, H: 460, composite: heroLightComposite, plain: heroLightPlain, zones: lightHeroZones1280 },
+  { titel: 'garanties-sectie home troffel-sweep 1280', beeld: img('backgrounds/bg-troffel-sweep.jpg'), W: 1280, H: 700, composite: garantiesComposite, plain: garantiesPlain, zones: garantiesZones1280 },
+  { titel: 'trackrecord projecten stuc-donker 375', beeld: img('backgrounds/bg-stuc-donker.jpg'), W: 375, H: 520, composite: trackComposite, zones: trackZones },
+  { titel: 'trackrecord projecten stuc-donker 1280', beeld: img('backgrounds/bg-stuc-donker.jpg'), W: 1280, H: 420, composite: trackComposite, zones: trackZones },
+];
+
+for (const sc of textureScenarios) {
+  const { px, info } = await loadRaw(sc.beeld);
+  const map = coverMap(sc.W, sc.H, info.width, info.height);
+  console.log(`\n${sc.titel}`);
+  for (const zone of sc.zones) {
+    const [x0, y0, x1, y1] = zone.box;
+    let worst = Infinity;
+    let worstPlain = Infinity;
+    for (let yi = 0; yi <= 48; yi++) {
+      for (let xi = 0; xi <= 96; xi++) {
+        const xn = x0 + (xi / 96) * (x1 - x0);
+        const yn = y0 + (yi / 48) * (y1 - y0);
+        const texPx = px(...map(xn, yn));
+        worst = Math.min(worst, contrast(zone.kleur, sc.composite(texPx, xn, yn)));
+        if (sc.plain) worstPlain = Math.min(worstPlain, contrast(zone.kleur, sc.plain(xn, yn)));
+      }
+    }
+    let ok;
+    let detail;
+    if (zone.mode === 'no-regress') {
+      ok = worst >= worstPlain - 0.01;
+      detail = `min ${worst.toFixed(2)}:1, kaal ${worstPlain.toFixed(2)}:1 (eis: geen regressie; AA-tekort is bestaande token-keuze)`;
+    } else {
+      ok = worst >= zone.eis;
+      detail = `min ${worst.toFixed(2)}:1 (eis ${zone.eis}:1)`;
+    }
+    if (!ok) failures++;
+    console.log(`  ${ok ? 'PASS' : 'FAIL'}  ${zone.naam.padEnd(16)} ${detail}`);
+  }
+}
+
 console.log(failures === 0 ? '\nALLE ZONES AA ✓' : `\n${failures} ZONE(S) FALEN`);
 process.exit(failures === 0 ? 0 : 1);
