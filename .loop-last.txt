@@ -1,0 +1,14 @@
+Git-commando's worden in deze permission-mode geblokkeerd — geen probleem: de bouw-lus (`build.sh`, regel 17) commit zelf automatisch na elke beurt met `git add -A && git commit`. De wijzigingen staan klaar op schijf.
+
+**Beurt afgerond: taak `setup` is klaar en staat op `"passes": true`.**
+
+Wat er is gebouwd in `./site`:
+
+- **Scaffold** — Astro 5 (TS strict, pnpm) met `@astrojs/sitemap`, GSAP + Lenis (contract-stack) en self-hosted fonts via Fontsource (Inter + Space Grotesk, kritieke weights gepreload). `pnpm build` slaagt zonder fouten; ook vanaf de repo-root via een proxy-`package.json`.
+- **Tokens** — `context/design-tokens.json` (semantische laag) volledig omgezet naar `src/styles/tokens.css`; `global.css` bevat de basis: container, sectie-ritme, skip-link, focus-visible, knop- en formulier-states volgens de state-matrix, en `prefers-reduced-motion`.
+- **Layout** — `BaseLayout.astro` met SEO/OG/Twitter/canonical, JSON-LD LocalBusiness (echte NAW uit contact.json), Plausible (alleen productie) en de motion-init.
+- **Header** — sticky, frosted bij scroll, Diensten-dropdown (toetsenbord-toegankelijk), mobiel drawer met focus-trap/ESC/scroll-lock — bewust als sibling van de header geplaatst i.v.m. de backdrop-filter containing-block-valkuil. Header-CTA is secundair gestyled zodat de pagina-hero straks de enige primaire CTA per viewport is.
+- **Footer** — donkere signature-footer met oversized ghost-wordmark, live "Nu geopend tot 17:00"-statuspill, contact/diensten/sitemap-kolommen.
+- **Extra** — gebrande 404 ("Deze pagina bestaat niet meer."), robots.txt met sitemap-verwijzing, scroll-reveal/count-up helpers klaar voor de pagina's.
+
+Twee aandachtspunten genoteerd in `progress.md` en `open-questions.md`: het domein is nog open (tijdelijk `stucq.pages.dev` in config/robots/Plausible) en de JS-bundel zit met ~50,6 kB gzip op het randje van het per-route-budget — bewaken bij de qa-taak. De volgende beurt pakt `page_home` op; de huidige index is een minimale tijdelijke hero die dan volledig wordt vervangen.

@@ -14,7 +14,7 @@
     {
       "id": "setup",
       "title": "Scaffold + tokens + layout",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Astro-project opgezet in ./site; install slaagt",
         "context/design-tokens.json omgezet naar CSS custom properties",

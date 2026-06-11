@@ -1,0 +1,103 @@
+/* Design tokens — Stucq
+   Gegenereerd uit context/design-tokens.json (semantische laag, LAAG 2).
+   Gebruik in alle code uitsluitend deze custom properties — nooit hex of px hardcoden. */
+
+:root {
+  /* color.background */
+  --color-background-default: #f5f2ee;
+  --color-background-elevated: #ffffff;
+  --color-background-overlay: rgba(0, 0, 0, 0.5);
+
+  /* color.text */
+  --color-text-primary: #1c1814;
+  --color-text-secondary: #8c7b6e;
+  --color-text-disabled: rgba(28, 24, 20, 0.4);
+  --color-text-inverse: #ffffff;
+
+  /* color.border */
+  --color-border-default: rgba(28, 24, 20, 0.1);
+  --color-border-strong: rgba(28, 24, 20, 0.2);
+  --color-border-focus: #b05a2f;
+
+  /* color.primary */
+  --color-primary-default: #b05a2f;
+  --color-primary-hover: #9b512b;
+  --color-primary-active: #8a4928;
+  --color-primary-on: #ffffff;
+
+  /* color.surface */
+  --color-surface-default: #ffffff;
+  --color-surface-alt: #ece9e5;
+  --color-surface-elevated: #ffffff;
+
+  /* color.feedback */
+  --color-feedback-success: #16a34a;
+  --color-feedback-warning: #d97706;
+  --color-feedback-danger: #dc2626;
+  --color-feedback-info: #2563eb;
+  --color-feedback-success-bg: #dcfce7;
+  --color-feedback-warning-bg: #fef3c7;
+  --color-feedback-danger-bg: #fef2f2;
+  --color-feedback-info-bg: #eff6ff;
+
+  /* color.neutral */
+  --color-neutral-50: #f5f2ee;
+  --color-neutral-100: #ede8e2;
+  --color-neutral-200: #ddd5cc;
+  --color-neutral-300: #c9beb4;
+  --color-neutral-400: #b0a296;
+  --color-neutral-500: #8c7b6e;
+  --color-neutral-600: #6e5f54;
+  --color-neutral-700: #52453c;
+  --color-neutral-800: #352c25;
+  --color-neutral-900: #1c1814;
+
+  /* typography */
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-size-sm: 13.6px;
+  --font-size-base: 17px;
+  --font-size-md: 21.25px;
+  --font-size-lg: 26.56px;
+  --font-size-xl: 33.2px;
+  --font-size-display: 52px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.2;
+  --line-height-base: 1.55;
+  --line-height-relaxed: 1.75;
+
+  /* spacing (8pt-schaal) */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 64px;
+  --spacing-section: 96px;
+
+  /* radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* shadow */
+  --shadow-sm: 0 1px 2px rgba(20, 20, 30, 0.06);
+  --shadow-md: 0 4px 16px rgba(20, 20, 30, 0.08);
+  --shadow-lg: 0 12px 40px rgba(20, 20, 30, 0.12);
+  --shadow-focus: 0 0 0 3px #dfbdac;
+
+  /* motion */
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-slow: 360ms;
+  --motion-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Breakpoints (referentie — media queries kunnen geen custom properties gebruiken):
+   xs 375px · sm 640px · md 768px · tablet-portrait 834px · laptop-sidebar 900px
+   lg 1024px · xl 1280px · 2xl 1536px */

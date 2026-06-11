@@ -1,0 +1,108 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
+import interWoff2 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import groteskWoff2 from '@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2?url';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, ogImage, noindex = false } = Astro.props;
+
+const site = Astro.site ?? new URL('https://stucq.pages.dev');
+const canonical = new URL(Astro.url.pathname, site);
+const ogImageUrl = ogImage ? new URL(ogImage, site).href : undefined;
+const plausibleDomain = site.hostname;
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Stucq',
+  description:
+    'Stucadoor in Haarlem en omgeving. Gevelwerk, binnenafwerking en microcement vloeren op vaste prijs.',
+  url: site.href,
+  telephone: '+31681943404',
+  email: 'info@stucqafbouw.nl',
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: 'Noord-Holland',
+    addressCountry: 'NL',
+  },
+  areaServed: ['Haarlem', 'Bloemendaal', 'Zandvoort'],
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '07:00',
+      closes: '17:00',
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical.href} />
+
+    <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={groteskWoff2} crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} is:inline />
+
+    <script is:inline>
+      // Markeer dat JS draait, vóór first paint — reveals verbergen content
+      // alleen onder html.js (zie global.css).
+      document.documentElement.classList.add('js');
+    </script>
+
+    {
+      import.meta.env.PROD && (
+        <script
+          defer
+          data-domain={plausibleDomain}
+          src="https://plausible.io/js/script.js"
+          is:inline
+        />
+      )
+    }
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Ga naar inhoud</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import { initMotion } from '../scripts/motion';
+      initMotion();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Pagina niet gevonden | Stucq"
+  description="Deze pagina bestaat niet meer. Ga terug naar de homepagina of vraag vrijblijvend een offerte aan."
+  noindex
+>
+  <section class="section">
+    <div class="container not-found">
+      <p class="not-found__code tabular" aria-hidden="true">404</p>
+      <h1>Deze pagina bestaat niet meer.</h1>
+      <p class="not-found__text">
+        Het adres klopt niet of de pagina is verplaatst. Via onderstaande knoppen gaat u verder.
+      </p>
+      <div class="not-found__actions">
+        <a href="/offerte/" class="btn btn--primary">
+          Offerte aanvragen
+          <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/" class="btn btn--secondary">Naar de homepagina</a>
+      </div>
+      <p class="not-found__micro">Vrijblijvend – vaste prijs, reactie binnen 48 uur.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .not-found__code {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: clamp(80px, 20vw, 160px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-neutral-200);
+  }
+
+  .not-found__text {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .not-found__micro {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+</style>

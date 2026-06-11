@@ -1,0 +1,6 @@
+# Progress
+
+## Beurt 1 — setup (klaar)
+- Astro 5-scaffold in `./site` (pnpm, TS strict, @astrojs/sitemap, Fontsource Inter + Space Grotesk, GSAP + Lenis). Tokens uit `context/design-tokens.json` staan in `site/src/styles/tokens.css`; basis/knoppen/formulier-states in `global.css`. BaseLayout (SEO/OG/JSON-LD/Plausible/skip-link) + Header (frosted, Diensten-dropdown, mobiel drawer met focus-trap) + Footer (ghost-wordmark, live open-status-pill) + gebrande 404 + robots.txt. `pnpm build` slaagt (ook via root-package.json proxy).
+- Volgende beurt (page_home): `src/pages/index.astro` is een MINIMALE tijdelijke hero — volledig vervangen volgens `pages/home.md`. Reveals: zet `data-reveal` / `data-reveal-group` op secties (motion.ts pakt ze op); count-up via `data-count-to`/`data-count-decimals`/`data-count-suffix`. Header-CTA is bewust secundair gestyled zodat de pagina-hero de enige primaire CTA per viewport heeft.
+- Let op: systeem-Node is v24 (tech-stack zegt 22.x; nvm-switch kan niet in deze sandbox, Astro 5 draait prima op 24). pnpm 11: build-scripts esbuild/sharp goedgekeurd via `site/pnpm-workspace.yaml` (`allowBuilds`). Tijdelijk domein `stucq.pages.dev` — zie open-questions.md. JS-bundel ~50,6 kB gzip (GSAP+ScrollTrigger+Lenis), randje van 50 kB-per-route-budget — bewaken bij qa.

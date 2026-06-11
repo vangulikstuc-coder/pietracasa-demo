@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Stucadoor in Haarlem | Stucq"
+  description="Stucadoor in Haarlem voor gevelwerk, binnenafwerking en microcement. Vaste prijs, op tijd opgeleverd. Vraag vrijblijvend een offerte aan."
+>
+  <section class="section">
+    <div class="container">
+      <h1>Stucadoor in Haarlem – vaste prijs, aantoonbaar op tijd</h1>
+      <p class="intro">
+        U weet vooraf wat het kost – en Stucq houdt zich daaraan. 50+ afgeronde projecten in
+        Haarlem en omgeving sinds 2020, allemaal binnen budget en planning opgeleverd.
+      </p>
+      <div class="actions">
+        <a href="/offerte/" class="btn btn--primary">
+          Offerte aanvragen
+          <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/projecten/" class="btn btn--ghost">Bekijk afgeronde projecten</a>
+      </div>
+      <p class="micro-garantie">Vrijblijvend – vaste prijs, reactie binnen 48 uur.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-block-start: var(--spacing-lg);
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    max-width: 58ch;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .micro-garantie {
+    margin-block-start: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+</style>

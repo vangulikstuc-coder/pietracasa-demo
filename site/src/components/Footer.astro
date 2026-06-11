@@ -1,0 +1,228 @@
+---
+const year = new Date().getFullYear();
+
+const dienstenLinks = [
+  { href: '/gevelwerk/', label: 'Gevelwerk' },
+  { href: '/binnenafwerking/', label: 'Binnenafwerking' },
+  { href: '/microcement/', label: 'Microcement vloeren' },
+];
+
+const siteLinks = [
+  { href: '/projecten/', label: 'Projecten' },
+  { href: '/werkwijze/', label: 'Werkwijze' },
+  { href: '/over-stucq/', label: 'Over Stucq' },
+  { href: '/faq/', label: 'Veelgestelde vragen' },
+  { href: '/contact/', label: 'Contact' },
+  { href: '/offerte/', label: 'Offerte aanvragen' },
+];
+---
+
+<footer class="site-footer">
+  <div class="site-footer__ghost" aria-hidden="true">Stucq</div>
+  <div class="container site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__col site-footer__col--brand">
+        <p class="site-footer__brand">Stucq</p>
+        <p class="site-footer__tagline">
+          Stucadoor in Haarlem en omgeving. Vaste prijs, op tijd opgeleverd.
+        </p>
+        <p class="site-footer__status">
+          <span class="status-pill" data-open-status>
+            <span class="status-pill__dot" aria-hidden="true"></span>
+            Ma–vr 7:00–17:00
+          </span>
+        </p>
+      </div>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Contact</h2>
+        <ul class="site-footer__list">
+          <li><a href="tel:0681943404">06 81 94 34 04</a></li>
+          <li><a href="mailto:info@stucqafbouw.nl">info@stucqafbouw.nl</a></li>
+          <li>Noord-Holland</li>
+          <li>Werkgebied: Haarlem, Bloemendaal, Zandvoort en omgeving</li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Diensten</h2>
+        <ul class="site-footer__list">
+          {
+            dienstenLinks.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Sitemap</h2>
+        <ul class="site-footer__list">
+          {
+            siteLinks.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__legal">
+      <p>&copy; {year} Stucq · KvK-geregistreerd en verzekerd</p>
+      <p>Vrijblijvende offerte · Vaste prijs · Reactie binnen 48 uur</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    overflow: hidden;
+    margin-block-start: var(--spacing-section);
+    padding-block: var(--spacing-2xl) var(--spacing-lg);
+    background: var(--color-neutral-900);
+    color: var(--color-text-inverse);
+  }
+
+  .site-footer__ghost {
+    position: absolute;
+    inset-block-end: -0.18em;
+    inset-inline-start: -0.04em;
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: clamp(120px, 28vw, 360px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: color-mix(in srgb, var(--color-text-inverse) 4%, transparent);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .site-footer__inner {
+    position: relative;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    padding-block-end: var(--spacing-xl);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text-inverse) 12%, transparent);
+  }
+
+  .site-footer__brand {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+  }
+
+  .site-footer__tagline {
+    margin-block-start: var(--spacing-sm);
+    color: var(--color-neutral-300);
+    max-width: 32ch;
+  }
+
+  .site-footer__status {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: 1px solid color-mix(in srgb, var(--color-text-inverse) 16%, transparent);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-200);
+  }
+
+  .status-pill__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--color-neutral-400);
+  }
+
+  .status-pill.is-open .status-pill__dot {
+    background: var(--color-feedback-success);
+  }
+
+  .site-footer__heading {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-inverse);
+    margin-block-end: var(--spacing-md);
+  }
+
+  .site-footer__list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-sm);
+  }
+
+  .site-footer__list a {
+    color: var(--color-neutral-300);
+    text-decoration: none;
+    padding-block: var(--spacing-xs);
+  }
+
+  .site-footer__list a:hover {
+    color: var(--color-text-inverse);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--spacing-sm) var(--spacing-lg);
+    padding-block-start: var(--spacing-lg);
+    color: var(--color-neutral-400);
+    font-size: var(--font-size-sm);
+  }
+
+  @media (min-width: 768px) {
+    .site-footer__grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Live status-pill: open ma-vr 7:00-17:00 (Europe/Amsterdam).
+  const pill = document.querySelector<HTMLElement>('[data-open-status]');
+  if (pill) {
+    const fmt = new Intl.DateTimeFormat('nl-NL', {
+      timeZone: 'Europe/Amsterdam',
+      weekday: 'short',
+      hour: 'numeric',
+      hour12: false,
+    });
+    const parts = fmt.formatToParts(new Date());
+    const weekday = parts.find((p) => p.type === 'weekday')?.value ?? '';
+    const hour = Number(parts.find((p) => p.type === 'hour')?.value ?? '0');
+    const isWeekday = !['za', 'zo'].includes(weekday);
+    const isOpen = isWeekday && hour >= 7 && hour < 17;
+    const dot = '<span class="status-pill__dot" aria-hidden="true"></span>';
+    if (isOpen) {
+      pill.classList.add('is-open');
+      pill.innerHTML = `${dot} Nu geopend · vandaag tot 17:00`;
+    } else {
+      pill.innerHTML = `${dot} Nu gesloten · ma–vr 7:00–17:00`;
+    }
+  }
+</script>

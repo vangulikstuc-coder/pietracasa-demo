@@ -1,0 +1,9 @@
+{
+  "name": "stucq",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --dir site dev",
+    "build": "pnpm --dir site build",
+    "preview": "pnpm --dir site preview"
+  }
+}
