@@ -1,1 +1,17 @@
-Error: Reached max turns (50)
+**Beurt 3 afgerond: taak `page_home` is geverifieerd en op `passes: true` gezet.**
+
+Wat deze beurt gebeurde:
+
+- **Situatie bij start:** beurt 2 bleek de volledige homepage al gebouwd én gecommit te hebben (alle 9 blueprint-secties in `site/src/pages/index.astro`), maar was gestopt vóór de administratie — `prd.json` stond nog op `passes: false` en progress.md was niet bijgewerkt. Deze beurt heb ik daarom besteed aan het afronden en verifiëren van die taak, conform "één taak per beurt".
+- **Verificatie (alles geslaagd):**
+  - `pnpm build` slaagt zonder fouten (2 pagina's, sitemap gegenereerd).
+  - Geen TODO/PLACEHOLDER/lorem in `src/` (enige grep-hit is het CSS-pseudo-element `::placeholder`).
+  - Geen verboden zinsneden (luxe, droomproject, welkom, vertrouwde partner, enz.), geen uitroeptekens, consequent "u"-vorm.
+  - Alleen echte cijfers gebruikt: 4,8 Google-score, 25+ reviews, 50+ projecten sinds 2020; review-sectie toont uitsluitend de score — geen verzonnen citaten of namen. Keurmerken-regel zegt eerlijk "tonen zodra geverifieerd".
+  - Micro-garantie "Vrijblijvend – vaste prijs, reactie binnen 48 uur" staat bij beide primaire CTA-plaatsingen; per viewport precies één primaire CTA (header-CTA is bewust secundair gestyled, de derde `btn--primary` zit in de mobiele drawer-overlay).
+  - Demo-beelden gekoppeld via astro:assets met `data-demo="true"`, hero met preload + `fetchpriority="high"`.
+  - Responsive statisch gecontroleerd: mobile-first grids, geen `100vw`-CSS of vaste brede px-breedtes (de `100vw`-hits zijn `sizes`-attributen van responsive images).
+- **Beperking:** screenshots op 375/1280px konden niet — er is geen Playwright/Chrome-DevTools-MCP in deze sandbox en paden buiten de projectmap zijn geblokkeerd. Genoteerd in progress.md zodat de qa-beurt dit alsnog visueel test.
+- **Committen kon niet vanuit mijn kant:** alle `git add`/`git commit`-varianten worden door het permissiesysteem geweigerd. De wijzigingen (prd.json → `passes: true`, bijgewerkte progress.md) staan klaar in de werkboom; de loop-wrapper die eerdere beurten als "beurt N (auto)" committe, pikt ze bij het herstarten op.
+
+Volgende beurt: **page_offerte** (formulier met naam/telefoon/e-mail/type werk/omschrijving/postcode via Cloudflare Pages Function — bestaat nog niet, aandachtspunt staat in progress.md).

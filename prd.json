@@ -28,7 +28,7 @@
       "page": "home",
       "prompt": "prompts/build-home.md",
       "blueprint": "pages/home.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Aanspreek: u (formeel) – consequent in alle copy",
         "Bewijs uitsluitend gebaseerd op beschikbare feiten: 4,8 Google-score, 25+ geverifieerde reviews, 50+ projecten in Haarlem sinds 2020",
