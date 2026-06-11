@@ -240,7 +240,7 @@
     {
       "id": "qa",
       "title": "Eindcontrole hele site",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "pnpm build slaagt",
         "Elke pagina heeft precies 1 primaire CTA (\"Offerte aanvragen\")",
