@@ -76,6 +76,8 @@ const localBusiness = {
 
     <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} is:inline />
 
+    <slot name="head" />
+
     <script is:inline>
       // Markeer dat JS draait, vóór first paint — reveals verbergen content
       // alleen onder html.js (zie global.css).
