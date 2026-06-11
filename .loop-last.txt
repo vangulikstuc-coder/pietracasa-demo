@@ -1,17 +1,13 @@
-**Beurt 3 afgerond: taak `page_home` is geverifieerd en op `passes: true` gezet.**
+De lus commit zelf: `build.sh` regel 17 draait na elke beurt `git add -A && git commit -m "beurt N (auto)"`. Mijn handmatige commit is dus niet nodig (en de sandbox blokkeert hem toch) — alle wijzigingen worden automatisch gecommit zodra deze beurt eindigt.
 
-Wat deze beurt gebeurde:
+**Beurt 4 afgerond: de Offerte-pagina (taak `page_offerte`) is gebouwd en op `passes: true` gezet.**
 
-- **Situatie bij start:** beurt 2 bleek de volledige homepage al gebouwd én gecommit te hebben (alle 9 blueprint-secties in `site/src/pages/index.astro`), maar was gestopt vóór de administratie — `prd.json` stond nog op `passes: false` en progress.md was niet bijgewerkt. Deze beurt heb ik daarom besteed aan het afronden en verifiëren van die taak, conform "één taak per beurt".
-- **Verificatie (alles geslaagd):**
-  - `pnpm build` slaagt zonder fouten (2 pagina's, sitemap gegenereerd).
-  - Geen TODO/PLACEHOLDER/lorem in `src/` (enige grep-hit is het CSS-pseudo-element `::placeholder`).
-  - Geen verboden zinsneden (luxe, droomproject, welkom, vertrouwde partner, enz.), geen uitroeptekens, consequent "u"-vorm.
-  - Alleen echte cijfers gebruikt: 4,8 Google-score, 25+ reviews, 50+ projecten sinds 2020; review-sectie toont uitsluitend de score — geen verzonnen citaten of namen. Keurmerken-regel zegt eerlijk "tonen zodra geverifieerd".
-  - Micro-garantie "Vrijblijvend – vaste prijs, reactie binnen 48 uur" staat bij beide primaire CTA-plaatsingen; per viewport precies één primaire CTA (header-CTA is bewust secundair gestyled, de derde `btn--primary` zit in de mobiele drawer-overlay).
-  - Demo-beelden gekoppeld via astro:assets met `data-demo="true"`, hero met preload + `fetchpriority="high"`.
-  - Responsive statisch gecontroleerd: mobile-first grids, geen `100vw`-CSS of vaste brede px-breedtes (de `100vw`-hits zijn `sizes`-attributen van responsive images).
-- **Beperking:** screenshots op 375/1280px konden niet — er is geen Playwright/Chrome-DevTools-MCP in deze sandbox en paden buiten de projectmap zijn geblokkeerd. Genoteerd in progress.md zodat de qa-beurt dit alsnog visueel test.
-- **Committen kon niet vanuit mijn kant:** alle `git add`/`git commit`-varianten worden door het permissiesysteem geweigerd. De wijzigingen (prd.json → `passes: true`, bijgewerkte progress.md) staan klaar in de werkboom; de loop-wrapper die eerdere beurten als "beurt N (auto)" committe, pikt ze bij het herstarten op.
+Wat er is gemaakt:
 
-Volgende beurt: **page_offerte** (formulier met naam/telefoon/e-mail/type werk/omschrijving/postcode via Cloudflare Pages Function — bestaat nog niet, aandachtspunt staat in progress.md).
+- **`site/src/pages/offerte.astro`** — alle 9 secties uit de blueprint: pagina-kop met drie garantie-chips (vrijblijvend / vaste prijs / 48u), bewijs-strip vóór het formulier (4,8★ · 25+ reviews · 50+ projecten), formulier-card met sticky garantieblok ernaast, "Of bel direct"-band met groot klikbaar telefoonnummer, dienst-icoonkaarten, 4-stappen traject (aanvraag → afspraak op locatie → vaste-prijs offerte → uitvoering & oplevering), twee voor-na fotoduo's met Voor/Na-chips, review-scoreblok zonder verzonnen citaten, en een donkere CTA-band die terug ankert naar het formulier.
+- **`site/functions/api/offerte.ts`** — Cloudflare Pages Function die het formulier afhandelt: honeypot-spamfilter, JSON-antwoord voor het fetch-pad, en een 303-redirect naar `#aanvraag-ontvangen`/`#aanvraag-mislukt` als no-JS-fallback (die panelen worden via CSS `:target` zichtbaar, dus het formulier werkt ook zonder JavaScript).
+- Formulier heeft exact de zes blueprint-velden, validatie/laad/succes/fout-teksten letterlijk uit `microcopy.md`, foutmeldingen via `aria-describedby` met focus naar het eerste foutveld, en de micro-garantie bij elke CTA.
+
+Verificatie: `pnpm build` slaagt (3 pagina's), geen TODO/PLACEHOLDER/lorem, geen verboden zinsneden, consequent "u", precies één primaire CTA per viewport, alle demo-beelden via astro:assets met `data-demo="true"`.
+
+Twee bewuste keuzes vastgelegd in `progress.md` en `open-questions.md`: formulierlabels zijn neutraal-formeel ("Naam" i.p.v. het jij-vormige "Jouw naam" uit de microcopy-bibliotheek, omdat de pagina-AC "uitsluitend u" vereist), en e-mail/CRM-aflevering van aanvragen plus de Google-profiel-URL staan als open vragen — die feiten zijn niet bevestigd, dus niets verzonnen. Volgende beurt pakt `page_projecten` op.

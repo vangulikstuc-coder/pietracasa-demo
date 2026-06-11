@@ -51,7 +51,7 @@
       "page": "offerte",
       "prompt": "prompts/build-offerte.md",
       "blueprint": "pages/offerte.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Aanspreking uitsluitend met 'u' (formeel) door de gehele pagina",
         "Micro-garantie (vrijblijvend / vaste prijs / 48u reactie) zichtbaar in header én naast het formulier",
