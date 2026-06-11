@@ -320,7 +320,7 @@
       "title": "Polish: dienstkaart-beeldcrop",
       "prompt": "De dienstkaart-foto's croppen het hoofd van de vakman af. Zet object-position zo dat gezicht/bovenkant behouden blijft op alle breakpoints (drie kaarten op home en de kaart-varianten op projecten).",
       "blueprint": "",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Geen afgesneden hoofden meer op 375px en 1280px",
         "pnpm build slaagt zonder fouten",

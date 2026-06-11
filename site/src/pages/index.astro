@@ -41,6 +41,7 @@ const diensten = [
     belofte: 'Strakke gevels op vaste prijs, binnen de afgesproken bouwtermijn.',
     src: dienstGevelwerk,
     alt: 'Vakman stukadoort een gevel vanaf een steiger',
+    foto: 'gevelwerk',
   },
   {
     href: '/diensten/binnenafwerking-renovatie/',
@@ -48,6 +49,7 @@ const diensten = [
     belofte: 'Wanden en plafonds strak opgeleverd – klaar voor verf of behang.',
     src: dienstBinnenafwerking,
     alt: 'Vakman pleistert een binnenwand',
+    foto: 'binnen',
   },
   {
     href: '/diensten/microcement-vloeren/',
@@ -55,6 +57,7 @@ const diensten = [
     belofte: 'Naadloze vloeren met een vaste prijsopgave vooraf.',
     src: dienstMicrocement,
     alt: 'Vakman brengt microcement aan op een vloer',
+    foto: 'vloer',
   },
 ];
 
@@ -340,7 +343,7 @@ const icons: Record<string, string> = {
         {
           diensten.map((dienst) => (
             <a href={dienst.href} class="dienst-card">
-              <div class="dienst-card__media">
+              <div class={`dienst-card__media dienst-card__media--${dienst.foto}`}>
                 <Picture
                   src={dienst.src}
                   widths={cardWidths}
@@ -928,7 +931,22 @@ const icons: Record<string, string> = {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform-origin: 50% 30%;
     transition: transform 400ms var(--motion-easing);
+  }
+
+  /* Crop-anker = gezichtspositie van de vakman in elk demo-beeld:
+     bij elke cover-crop of hover-zoom blijft het hoofd in beeld */
+  .dienst-card__media--gevelwerk :global(img) {
+    object-position: 49% 30%;
+  }
+
+  .dienst-card__media--binnen :global(img) {
+    object-position: 38% 24%;
+  }
+
+  .dienst-card__media--vloer :global(img) {
+    object-position: 54% 21%;
   }
 
   .dienst-card:hover .dienst-card__media :global(img) {
