@@ -1,14 +1,11 @@
-Bevestigd: `build.sh` (regel 17) commit zelf na elke beurt met `git add -A && git commit -qm "beurt N (auto)"` — daarom vereisen mijn git-commando's hier goedkeuring en is zelf committen niet nodig. De lus-administratie is verder compleet.
+De commit hoeft niet handmatig: het buitenste loop-script (`build.sh`, regel 17) doet na elke beurt zelf `git add -A && git commit -m "beurt N (auto)"` — vandaar dat alle eerdere commits ook "(auto)" heten en mijn git-aanroepen geblokkeerd worden. Het werk staat klaar om automatisch gecommit te worden.
 
-## Beurt 8 afgerond — Microcement-pagina
+**Beurt 9 afgerond — taak `page_werkwijze` is klaar.**
 
-**Wat is gebouwd:** `site/src/pages/microcement.astro` volgens het 4-secties-blueprint:
+Wat er is gebouwd in `site/src/pages/werkwijze.astro`:
+- **Tekst-hero** met rustige primary-gloed en primaire CTA + micro-garantie boven de vouw. Er is geen werkwijze-beeld in `public/images/` en de huisregels staan een heldere tekstkop toe; `over-werkomgeving.jpg` blijft gereserveerd voor de over-pagina.
+- **5-stappen-tijdlijn** (opname → offerte → planning → uitvoering → oplevering) met verbindingslijn, icoon-badges en per stap een "Afspraak"-pill (reactie binnen 48 uur, vaste prijs op schrift, data op papier, meerwerk alleen na akkoord, oplevering op datum). Intro-kolom is sticky op desktop.
+- **Bewijsblok**: "vast op papier"-lijst met hairline-dividers + het donkere review-scoreblok (4,8 sterren, 25+ reviews) + secundaire link naar /projecten/.
+- **CTA-band** met sfeerbeeld + scrim, telefoonlink en micro-garantie.
 
-1. **Pagina-hero** — full-bleed resultaat-shot (`hero-microcement.jpg`, preload + fetchpriority high), sweep-signature, primaire CTA "Offerte aanvragen" + belnummer + micro-garantie boven de vouw.
-2. **Kern-inhoud** — genummerde toepassingen-lijst (naadloze vloeren, badkamers, renovatie over bestaande ondergrond) naast `dienst-microcement.jpg`.
-3. **Kosten & doorlooptijd** — vier Q&A-icoonkaarten, omdat het blueprint expliciet vroeg om veelgestelde vragen over kosten en doorlooptijd. Géén bedragen of doorlooptijden verzonnen: vaste prijs na inspectie op locatie is het enige prijspad, planning staat in de offerte.
-4. **Bewijs + CTA** — voor-na toggle met het vloer-paar, feitenlijst (4,8 sterren, 50+ projecten, KvK & verzekerd), secundaire link naar /projecten/, en de CTA-band met sfeerbeeld.
-
-**Verificatie:** `pnpm build` slaagt (7 pagina's). Checks schoon: geen TODO/lorem, geen verboden zinsneden, consequent u-vorm, geen uitroeptekens, 1× h1, alle 5 beelden via astro:assets met `data-demo="true"`. Het aantal primaire CTA's in de dist-HTML (3, incl. mobiele drawer) is identiek aan alle bestaande pagina's.
-
-**Administratie:** `page_microcement` staat op `passes: true` in prd.json; progress.md heeft notities voor de volgende beurt (page_werkwijze — geen eigen hero-beeld beschikbaar, tekstkop aanbevolen). De commit volgt automatisch via build.sh zodra deze beurt eindigt.
+Verificatie: `pnpm build` slaagt (8 pagina's), 1× h1, geen verboden zinsneden/jij-vorm/uitroeptekens/TODO, uitsluitend semantische tokens, geen verzonnen doorlooptijden of feiten, CTA-telling gelijk aan de andere pagina's. Screenshots blijven in deze sandbox onmogelijk (geen Playwright/Chrome-MCP) — statische responsive review gedaan, visuele check volgt in de qa-beurt. `prd.json` staat op `passes: true` en `progress.md` is bijgewerkt met aanwijzingen voor de volgende beurt (page_over-stucq: twee beelden kopiëren, werkgebied-AC).

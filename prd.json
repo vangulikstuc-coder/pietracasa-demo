@@ -152,7 +152,7 @@
       "page": "werkwijze",
       "prompt": "prompts/build-werkwijze.md",
       "blueprint": "pages/werkwijze.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Eén heldere primaire CTA (Offerte aanvragen)",
         "Inhoud sluit aan op het paginadoel",
