@@ -1,11 +1,16 @@
-De commit-stap wordt door de buitenste lus afgehandeld (alle eerdere commits heten "beurt N (auto)" en `git add/commit` vereist hier handmatige goedkeuring die in autonome modus niet beschikbaar is) — de wijzigingen staan klaar in de working tree.
+Commit-rechten zijn in deze sessie geblokkeerd — en dat verklaart ook de git-historie: elke eerdere commit heet "beurt N (auto)", dus de loop-wrapper commit zelf na afloop van de beurt (vandaar ook de `.loop-last.txt`-mutatie). Het werk staat klaar in de working tree; de auto-commit pakt het op.
 
-**Beurt 10 afgerond: de Over Stucq-pagina is gebouwd en goedgekeurd.**
+**Beurt 11 afgerond: taak `page_faq` is gebouwd en op `passes: true` gezet.**
 
-Wat er is gedaan:
-- **`site/src/pages/over-stucq.astro`** aangemaakt met alle 9 blueprint-secties: split-hero (portretfoto links, kerngegevens-lijst rechts, primaire CTA + micro-garantie boven de vouw), kerncijfers-band met vier count-up stats (50+ projecten, 4,8 sterren, 25+ reviews, 15 km werkgebied), achtergrond-verhaal met werkomgevingsfoto, werkgebied-sectie, review-scoreblok zonder verzonnen citaten, waarborg-kaarten met keurmerk-noot, voor-na teaser met twee toggle-koppels, contactblok en de afsluitende CTA-band.
-- **Werkgebied-kaart**: er is geen echte kaartdata beschikbaar, dus in plaats van een nep-kaart staat er een schematische SVG (15 km-ring rond Haarlem met Bloemendaal en Zandvoort) met expliciete caption "Schematische weergave – geen exacte kaart". Geen Google-profiel-link opgenomen omdat die URL onbevestigd is.
-- **Verificatie**: `pnpm build` slaagt (9 pagina's). Checks schoon: geen verboden zinsneden, consequent u-vorm, geen uitroeptekens, 1× h1, micro-garantie 2× ("Vrijblijvend – vaste prijs, reactie binnen 48 uur"), werkgebied-AC letterlijk aanwezig, alle 7 beelden gemarkeerd met `data-demo="true"`, zelfde aantal primaire CTA's als de andere pagina's.
-- **Administratie**: `page_over-stucq` staat op `passes: true` in prd.json; progress.md heeft een beurt 10-entry met aanwijzingen voor de volgende beurt (page_faq: tekstkop-patroon van werkwijze, alleen bevestigde feiten in antwoorden, FAQPage JSON-LD overwegen).
+Wat er staat:
 
-Nog open: page_faq, page_contact, demo-beelden en qa — de lus pakt page_faq volgende beurt op.
+- **`site/src/pages/faq.astro`** — drie blueprint-secties:
+  1. **Tekst-hero** (werkwijze-patroon met rustige primary-gloed): H1 "Antwoord op uw vragen over kosten, planning en werkwijze", primaire CTA + telefoonlink + micro-garantie boven de vouw.
+  2. **FAQ gegroepeerd, bezwaren eerst** — 4 thema's (kosten en vaste prijs → planning en doorlooptijd → werkgebied en diensten → garantie en afspraken) met in totaal 14 vragen als native `<details name="…">`-accordion: exclusief-open per groep, 44px touch targets, focus-visible outline, roterend plus-icoon. Sticky intro-kolom met thema-ankerlinks op desktop.
+  3. **CTA-band "Nog een vraag?"** met cta-sfeerbeeld + scrim, primaire CTA, klikbare telefoon- en maillink. Bewust géén link naar `/contact/` — die pagina bestaat nog niet (volgende taak).
+- **FAQPage JSON-LD** (14 Questions) in de `<head>` via de head-slot, naast de bestaande LocalBusiness-data.
+- **Feiten-discipline**: alleen bevestigde feiten in de antwoorden (vaste prijs, 48u reactie, 50+ projecten sinds 2020, 4,8★/25+ reviews, werkgebied tot 15 km, KvK-geregistreerd en verzekerd). Geen doorlooptijden of tarieven verzonnen — "verschilt per type werk; standaardtermijnen noemen wij niet".
+- **Verificatie**: `pnpm build` slaagt (10 pagina's). Checks schoon: geen verboden zinsneden, geen jij-vorm, geen uitroeptekens in copy, geen TODO/lorem, geen hardcoded hex, 1× h1, 2× micro-garantie, 3× `btn--primary` in dist (gelijk aan alle andere pagina's). Screenshots blijven in deze sandbox niet mogelijk (genoteerd voor de qa-beurt); responsive geverifieerd via statische CSS-review van de hergebruikte, eerder geteste patronen.
+- **Administratie**: `prd.json` → `page_faq: passes: true`; beurt-log + aanwijzingen voor de volgende beurt (page_contact) in `progress.md`.
+
+Volgende beurt: **page_contact** — formulier-patroon hergebruiken uit `offerte.astro` + Pages Function, en daarna de faq-CTA-band eventueel naar `/contact/` laten linken.

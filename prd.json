@@ -191,7 +191,7 @@
       "page": "faq",
       "prompt": "prompts/build-faq.md",
       "blueprint": "pages/faq.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Eén heldere primaire CTA (Offerte aanvragen)",
         "Inhoud sluit aan op het paginadoel",
