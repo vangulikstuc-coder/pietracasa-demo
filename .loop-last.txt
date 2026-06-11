@@ -1,1 +1,14 @@
-<promise>BUILD-COMPLEET</promise>
+De taak **polish-leesbaarheid** is afgerond en geverifieerd. Een directe `git commit` wordt in deze sandbox geweigerd, maar de bouw-lus commit elke beurt automatisch ("beurt N (auto)" — zo zijn ook beurten 11–15 vastgelegd), dus alle wijzigingen gaan mee bij het afsluiten van deze beurt.
+
+## Wat er is gedaan
+
+**Probleem bevestigd:** de drie full-bleed hero-beelden (microcement, gevelwerk, projecten) zijn licht, en de oude scrim zakte naar 20–35% precies waar de witte kop en subkop staan — ver onder WCAG AA.
+
+**Oplossing per plek (alleen CSS, copy/markup onaangetast):**
+1. **Page-hero's microcement & gevelwerk + project-hero projecten** — mobiel een vlakkere, sterke scrim (92% onder → 66% boven, want de tekst beslaat daar bijna de hele hero); desktop een gelaagde scrim: verticaal van onderen (92→18%) plus een horizontale laag van links (60→0%), omdat de tekst linksonder staat. De rechterbovenhoek blijft vrijwel vrij — beeldimpact behouden, geen volvlak-blok.
+2. **CTA-banden op 8 pagina's** (home, gevelwerk, binnenafwerking, microcement, projecten, werkwijze, faq, over-stucq) — rechterkant van de 100deg-gradient van 55% naar 72% op mobiel (de tekst loopt daar tot de rand, over het heldere raam in het sfeerbeeld) en 60% op desktop; micro-garantietekst van neutral-300 naar neutral-100.
+3. **Eyebrows op beeld** — neutral-300 → neutral-100. Voor/Na-chips (70%) en feiten-pills (50% bovenop de scrim) gecontroleerd: die haalden AA al.
+
+**Aantoonbaar gemaakt** met een nieuw audit-script (`site/scripts/contrast-audit.mjs`): het composit echte beeldpixels (via sharp) met exact dezelfde CSS-gradients en berekent per tekstzone het slechtste contrast op 375px én 1280px. Resultaat: **alle 35 zones PASS** — slechtste waarden zijn de mobiele eyebrow (5,07:1 bij eis 4,5) en de projecten-h1 op desktop (4,05:1 bij eis 3). `pnpm build` slaagt met 11 pagina's; geen oude scrim-waarden achtergebleven, geen hardcoded hex, geen wijziging aan CTA's of copy. prd.json staat op `passes: true` en progress.md beschrijft de oplossing per hero, zoals de acceptatie vroeg.
+
+Volgende beurt pakt **polish-stappen** op (4 vs. 5 stappen harmoniseren tussen home en werkwijze).

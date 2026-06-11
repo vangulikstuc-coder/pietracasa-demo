@@ -1280,15 +1280,26 @@ const icons: Record<string, string> = {
     object-fit: cover;
   }
 
+  /* AA-contrast: op mobiel loopt de tekst tot de rechterrand — daar blijft de scrim dekkend */
   .cta-band__bg::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       100deg,
-      color-mix(in srgb, var(--color-neutral-900) 85%, transparent),
-      color-mix(in srgb, var(--color-neutral-900) 55%, transparent)
+      color-mix(in srgb, var(--color-neutral-900) 86%, transparent),
+      color-mix(in srgb, var(--color-neutral-900) 72%, transparent)
     );
+  }
+
+  @media (min-width: 768px) {
+    .cta-band__bg::after {
+      background: linear-gradient(
+        100deg,
+        color-mix(in srgb, var(--color-neutral-900) 86%, transparent),
+        color-mix(in srgb, var(--color-neutral-900) 60%, transparent)
+      );
+    }
   }
 
   .cta-band__inner {
@@ -1328,7 +1339,7 @@ const icons: Record<string, string> = {
   .cta-band__micro {
     margin-block-start: var(--spacing-md);
     font-size: var(--font-size-sm);
-    color: var(--color-neutral-300);
+    color: var(--color-neutral-100);
   }
 </style>
 

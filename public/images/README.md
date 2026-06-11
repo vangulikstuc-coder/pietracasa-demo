@@ -26,6 +26,11 @@ Markeer elk beeld in de site met `data-demo="true"`.
 - `over-werkomgeving.jpg` — werkomgevingsfoto (over-pagina, tekst-beeld-blok)
 - `cta-sfeer.jpg` — CTA-band achtergrond (opgeleverd interieur)
 
+### backgrounds/ (polish-ronde)
+- `bg-stuc-licht.jpg` — subtiele lichte stucwerk-textuur: achtergrond-accent voor de werkwijze- en FAQ-hero
+- `bg-stuc-donker.jpg` — donkere stucwerk-textuur: voor donkere CTA-banden / footer / trackrecord-band (witte tekst, AA-contrast)
+- `bg-troffel-sweep.jpg` — abstracte troffel-sweep: sectie-accent (bijv. garanties), subtiel gebruiken
+
 ## Koppeling
 Via astro:assets (`<Image>`/`<Picture>`): AVIF/WebP, expliciete width/height,
 hero's `fetchpriority="high"` (niet lazy), de rest `loading="lazy"`.

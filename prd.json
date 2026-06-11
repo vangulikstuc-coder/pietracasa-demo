@@ -248,6 +248,112 @@
         "Alle [CONFIRM:]-markers verzameld in open-questions.md",
         "prefers-reduced-motion gerespecteerd"
       ]
+    },
+    {
+      "id": "polish-leesbaarheid",
+      "title": "Polish: contrast/leesbaarheid hero's",
+      "prompt": "Fix de microcement-hero: de witte subkop staat op een licht beeld en is nauwelijks leesbaar. Voeg een voldoende donkere scrim/overlay toe of verplaats tekst naar een vlak. Controleer ALLE hero's en banden met tekst-op-beeld op WCAG AA (4,5:1 voor lopende tekst, 3:1 voor grote koppen) op 375px en 1280px.",
+      "blueprint": "",
+      "passes": true,
+      "acceptance": [
+        "Alle tekst-op-beeld haalt aantoonbaar AA-contrast (benoem per hero de oplossing in progress.md)",
+        "Geen verlies van beeldimpact: scrim subtiel houden, geen volvlak-blok",
+        "pnpm build slaagt zonder fouten",
+        "Geen regressie: bestaande AC's van de geraakte pagina's blijven gehaald"
+      ]
+    },
+    {
+      "id": "polish-stappen",
+      "title": "Polish: stappen-aantal harmoniseren",
+      "prompt": "Home zegt 'vier vaste stappen' (Aanvraag-Offerte-Uitvoering-Oplevering), de werkwijze-pagina 'vijf vaste stappen'. De werkwijze-pagina is leidend (5 stappen incl. opname/afspraak op locatie). Maak home consistent: voeg de vijfde stap toe of formuleer zonder getal, en check alle overige verwijzingen (offerte-pagina traject, FAQ).",
+      "blueprint": "",
+      "passes": false,
+      "acceptance": [
+        "Nergens op de site staan tegenstrijdige stappen-aantallen",
+        "Werkwijze-pagina en home vertellen exact hetzelfde proces",
+        "pnpm build slaagt zonder fouten",
+        "Geen regressie: bestaande AC's van de geraakte pagina's blijven gehaald"
+      ]
+    },
+    {
+      "id": "polish-slugs",
+      "title": "Polish: routes naar SEO-spec (sitemap.md)",
+      "prompt": "Hernoem de routes naar de slugs uit context/sitemap.md: /offerte -> /offerte-aanvragen, /faq -> /veelgestelde-vragen, /gevelwerk -> /diensten/gevelwerk-buitenafwerking, /binnenafwerking -> /diensten/binnenafwerking-renovatie, /microcement -> /diensten/microcement-vloeren. Werk ALLE interne links, sitemap, canonicals en de Pages Function-verwijzingen bij. Zet redirects van de oude paden naar de nieuwe (Astro redirects-config).",
+      "blueprint": "",
+      "passes": false,
+      "acceptance": [
+        "Alle 5 routes matchen de sitemap-spec; oude paden geven een redirect, geen 404",
+        "Nul kapotte interne links (controleer programmatisch in dist/)",
+        "Canonical-URLs en sitemap-0.xml tonen de nieuwe paden",
+        "pnpm build slaagt zonder fouten",
+        "Geen regressie: bestaande AC's van de geraakte pagina's blijven gehaald"
+      ]
+    },
+    {
+      "id": "polish-koppen",
+      "title": "Polish: heading-afbreking",
+      "prompt": "Koppen breken lelijk af ('Haar-lem', 'vas-te prijs', 'opge-leverd'). Zet hyphenation uit op alle headings (hyphens: manual + geen overflow-wrap die woorden splitst) en gebruik text-wrap: balance. Controleer alle paginakoppen op 375px en 1280px.",
+      "blueprint": "",
+      "passes": false,
+      "acceptance": [
+        "Geen enkel afgebroken woord meer in h1/h2/h3 op 375px en 1280px",
+        "Geen overflow of horizontale scroll ontstaan door de fix",
+        "pnpm build slaagt zonder fouten",
+        "Geen regressie: bestaande AC's van de geraakte pagina's blijven gehaald"
+      ]
+    },
+    {
+      "id": "polish-hero-crop",
+      "title": "Polish: voor-na split altijd gecentreerd",
+      "prompt": "Op desktop ligt de deellijn van hero-home.jpg/hero-gevelwerk.jpg links van het midden door object-fit crop. Zorg dat de voor-na deellijn altijd zichtbaar en visueel gecentreerd is: gebruik twee aparte beeldhelften (galerij-*-voor/na) naast elkaar in een 50/50 grid met dunne witte deellijn, of een aspect-bewuste object-position. Geldt voor home, gevelwerk, binnenafwerking en projecten-hero.",
+      "blueprint": "",
+      "passes": false,
+      "acceptance": [
+        "Deellijn zichtbaar op 375px, 768px en 1280px, visueel op het midden",
+        "Voor- en na-kant tonen beide herkenbaar (niet 90/10 gecropt)",
+        "pnpm build slaagt zonder fouten",
+        "Geen regressie: bestaande AC's van de geraakte pagina's blijven gehaald"
+      ]
+    },
+    {
+      "id": "polish-kaart-crop",
+      "title": "Polish: dienstkaart-beeldcrop",
+      "prompt": "De dienstkaart-foto's croppen het hoofd van de vakman af. Zet object-position zo dat gezicht/bovenkant behouden blijft op alle breakpoints (drie kaarten op home en de kaart-varianten op projecten).",
+      "blueprint": "",
+      "passes": false,
+      "acceptance": [
+        "Geen afgesneden hoofden meer op 375px en 1280px",
+        "pnpm build slaagt zonder fouten",
+        "Geen regressie: bestaande AC's van de geraakte pagina's blijven gehaald"
+      ]
+    },
+    {
+      "id": "polish-achtergronden",
+      "title": "Polish: nieuwe achtergrond-textures koppelen",
+      "prompt": "Er staan drie nieuwe AI-achtergronden klaar in public/images/backgrounds/ (zie public/images/README.md): bg-stuc-licht.jpg (subtiele textuur voor de kale werkwijze- en FAQ-hero's), bg-stuc-donker.jpg (voor donkere CTA-banden/footer of trackrecord-band) en bg-troffel-sweep.jpg (sectie-accent, bijv. garanties). Koppel ze subtiel: lage zichtbaarheid, tekstcontrast blijft AA, data-demo='true', lazy waar onder de vouw.",
+      "blueprint": "",
+      "passes": false,
+      "acceptance": [
+        "Werkwijze- en FAQ-hero hebben een subtiel textuur-accent (geen vlakke leegte meer)",
+        "Minimaal één donkere band gebruikt bg-stuc-donker.jpg",
+        "Contrast blijft overal AA; achtergronden zijn ondersteunend, niet dominant",
+        "Alle drie de bestanden via geoptimaliseerde weg geladen (astro:assets of gecomprimeerde CSS-background) met data-demo-markering",
+        "pnpm build slaagt zonder fouten",
+        "Geen regressie: bestaande AC's van de geraakte pagina's blijven gehaald"
+      ]
+    },
+    {
+      "id": "polish-qa",
+      "title": "Polish-eindcontrole",
+      "prompt": "Eindcontrole van de polish-ronde: draai pnpm build, controleer programmatisch op kapotte links in dist/, afgebroken koppen, contrast-issues en horizontale scroll op 375px. Werk open-questions.md en progress.md bij met wat de polish-ronde veranderde.",
+      "blueprint": "",
+      "passes": false,
+      "acceptance": [
+        "Alle polish-taken aantoonbaar geverifieerd (rapport in progress.md)",
+        "Redirects van oude slugs werken in pnpm preview",
+        "pnpm build slaagt zonder fouten",
+        "Geen regressie: bestaande AC's van de geraakte pagina's blijven gehaald"
+      ]
     }
   ]
 }
