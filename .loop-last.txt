@@ -1,13 +1,1 @@
-De commit hoeft (en kan) ik niet zelf te doen: `build.sh` regel 17 doet na elke beurt zelf `git add -A && git commit -m "beurt N (auto)"` — vandaar de "(auto)"-commits van alle vorige beurten, en de sandbox blokkeert `git add` voor mij. Alle wijzigingen staan klaar in de working tree; de lus commit ze zodra deze beurt eindigt.
-
-**Beurt 18 — polish-koppen is klaar.** Wat er gebeurd is:
-
-**De fix** (alleen CSS, `site/src/styles/global.css:43`): op h1–h4 is `hyphens: auto` vervangen door `hyphens: manual` en `overflow-wrap: break-word` door `overflow-wrap: normal`. Daarmee verdwijnen de lelijke afbrekingen ("Haar-lem", "vas-te prijs", "opge-leverd") — woorden wrappen nu altijd heel. `text-wrap: balance` stond er al en blijft.
-
-**Het bewijs** (nieuw `site/scripts/heading-audit.mjs`): omdat screenshots in deze sandbox niet kunnen, parset het script de echte Space Grotesk-fontbestanden (WOFF via zlib, cmap/hmtx-tabellen) en rekent voor álle 175 koppen in dist na of elk woord op één regel past — op 320, 375 én 1280px, inclusief de letter-spacing van −0.02em. Resultaat: alles past. Het krapste geval is de h1 "Stucadoorsbedrijf" op /over-stucq/ met 282 van 288px beschikbaar op 320px; de keurmerken-h2 op /projecten/ (smallere kolom naast een 44px-icoon) is apart doorgerekend: 217 van 228px. Er kan dus geen overflow ontstaan door het weghalen van het break-word-vangnet.
-
-**Verificatie**: `pnpm build` slaagt (11 pagina's), link-audit 0 kapotte links, en de dist-CSS bevat op koppen alleen nog `hyphens:manual`/`overflow-wrap:normal` — de ene `overflow-wrap:anywhere` die overblijft is de e-maillink op de contactpagina, geen kop. Geen markup of copy geraakt, dus de bestaande AC's van alle pagina's blijven staan.
-
-Eén bewuste afwijking, genoteerd in progress.md: `context/tech-constraints.md` schrijft nog "overflow-wrap:break-word + hyphens:auto" voor koppen voor — deze polish-taak overrulet dat expliciet; het audit-script blijft staan als vangnet voor toekomstige kopteksten.
-
-`prd.json` staat op `passes: true` voor polish-koppen; volgende beurt pakt **polish-hero-crop** op (voor-na deellijn centreren).
+Error: Reached max turns (50)

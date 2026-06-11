@@ -105,13 +105,18 @@ const ctaBoxes1280 = [
   { naam: 'micro', box: [0.025, 0.7, 0.46, 0.78], kleur: NEUTRAL_100, eis: 4.5 },
 ];
 
+// Sinds polish-hero-crop zijn de gevelwerk- en projecten-hero's 50/50-splits uit
+// losse voor/na-helften met een witte deellijn (4px, spacing-xs) op het midden.
+const splitGevel = [img('sections/galerij-gevel-voor.jpg'), img('sections/galerij-gevel-na.jpg')];
+const splitVloer = [img('sections/galerij-vloer-voor.jpg'), img('sections/galerij-vloer-na.jpg')];
+
 const scenarios = [
   { titel: 'page-hero microcement 375', beeld: img('hero/hero-microcement.jpg'), W: 375, H: 600, scrim: heroMobile, zones: heroBoxes375 },
   { titel: 'page-hero microcement 1280', beeld: img('hero/hero-microcement.jpg'), W: 1280, H: 620, scrim: heroDesktop, zones: heroBoxes1280 },
-  { titel: 'page-hero gevelwerk 375', beeld: img('hero/hero-gevelwerk.jpg'), W: 375, H: 600, scrim: heroMobile, zones: heroBoxes375 },
-  { titel: 'page-hero gevelwerk 1280', beeld: img('hero/hero-gevelwerk.jpg'), W: 1280, H: 620, scrim: heroDesktop, zones: heroBoxes1280 },
-  { titel: 'project-hero projecten 375', beeld: img('hero/hero-projecten.jpg'), W: 375, H: 600, scrim: heroMobile, zones: [...heroBoxes375.slice(0, 3), pill375] },
-  { titel: 'project-hero projecten 1280', beeld: img('hero/hero-projecten.jpg'), W: 1280, H: 620, scrim: heroDesktop, zones: [...heroBoxes1280.slice(0, 3), pill1280] },
+  { titel: 'page-hero gevelwerk 375 (split)', beeld: splitGevel, W: 375, H: 600, scrim: heroMobile, zones: heroBoxes375 },
+  { titel: 'page-hero gevelwerk 1280 (split)', beeld: splitGevel, W: 1280, H: 620, scrim: heroDesktop, zones: heroBoxes1280 },
+  { titel: 'project-hero projecten 375 (split)', beeld: splitVloer, W: 375, H: 600, scrim: heroMobile, zones: [...heroBoxes375.slice(0, 3), pill375] },
+  { titel: 'project-hero projecten 1280 (split)', beeld: splitVloer, W: 1280, H: 620, scrim: heroDesktop, zones: [...heroBoxes1280.slice(0, 3), pill1280] },
   { titel: 'cta-band (8 pagina’s) 375', beeld: img('sections/cta-sfeer.jpg'), W: 375, H: 500, scrim: ctaMobile(375, 500), zones: ctaBoxes375 },
   { titel: 'cta-band (8 pagina’s) 1280', beeld: img('sections/cta-sfeer.jpg'), W: 1280, H: 560, scrim: ctaDesktop(1280, 560), zones: ctaBoxes1280 },
 ];
@@ -127,14 +132,39 @@ const coverMap = (W, H, iw, ih) => {
   ];
 };
 
-let failures = 0;
-for (const sc of scenarios) {
-  const { data, info } = await sharp(sc.beeld).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+const GAP = 4; // deellijn-breedte (var(--spacing-xs)) in de split-hero's
+const loadRaw = async (p) => {
+  const { data, info } = await sharp(p).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   const px = (x, y) => {
     const i = (y * info.width + x) * 3;
     return [data[i], data[i + 1], data[i + 2]];
   };
-  const map = coverMap(sc.W, sc.H, info.width, info.height);
+  return { px, info };
+};
+
+let failures = 0;
+for (const sc of scenarios) {
+  let sample; // (xn, yn) -> beeldpixel vóór de scrim-lagen
+  if (Array.isArray(sc.beeld)) {
+    // 50/50-split: linkerhelft voor, rechterhelft na, witte deellijn op het midden (worst case)
+    const [voor, na] = await Promise.all(sc.beeld.map(loadRaw));
+    const halfW = (sc.W - GAP) / 2;
+    const mapVoor = coverMap(halfW, sc.H, voor.info.width, voor.info.height);
+    const mapNa = coverMap(halfW, sc.H, na.info.width, na.info.height);
+    // band rondom de deellijn bewust breder dan 4px zodat het samplegrid hem nooit mist (conservatief: wit)
+    const band = GAP / 2 + sc.W * 0.01;
+    sample = (xn, yn) => {
+      const x = xn * sc.W;
+      if (Math.abs(x - (halfW + GAP / 2)) <= band) return WHITE;
+      return x < halfW
+        ? voor.px(...mapVoor(x / halfW, yn))
+        : na.px(...mapNa((x - halfW - GAP) / halfW, yn));
+    };
+  } else {
+    const { px, info } = await loadRaw(sc.beeld);
+    const map = coverMap(sc.W, sc.H, info.width, info.height);
+    sample = (xn, yn) => px(...map(xn, yn));
+  }
   console.log(`\n${sc.titel}`);
   for (const zone of sc.zones) {
     const [x0, y0, x1, y1] = zone.box;
@@ -144,7 +174,7 @@ for (const sc of scenarios) {
       for (let xi = 0; xi <= 48; xi++) {
         const xn = x0 + (xi / 48) * (x1 - x0);
         const yn = y0 + (yi / 24) * (y1 - y0);
-        let bg = px(...map(xn, yn));
+        let bg = sample(xn, yn);
         for (const layer of layers) bg = over(bg, NEUTRAL_900, layer(xn, yn));
         worst = Math.min(worst, contrast(zone.kleur, bg));
       }

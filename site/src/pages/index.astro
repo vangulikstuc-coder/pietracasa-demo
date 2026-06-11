@@ -13,15 +13,21 @@ import galerijVloerVoor from '../assets/images/sections/galerij-vloer-voor.jpg';
 import galerijVloerNa from '../assets/images/sections/galerij-vloer-na.jpg';
 import ctaSfeer from '../assets/images/sections/cta-sfeer.jpg';
 
-const heroWidths = [480, 800, 1200, 1600];
-const heroSizes = '(min-width: 1024px) 50vw, 100vw';
-const heroAvif = await Promise.all(
-  heroWidths.map(async (width) => ({
-    width,
-    image: await getImage({ src: heroHome, width, format: 'avif' }),
-  }))
+/* Hero als 50/50-split uit de losse voor/na-helften: de deellijn ligt daardoor
+   op elk breakpoint exact op het midden (composiet hero-home.jpg is alleen nog OG-beeld) */
+const heroHalfWidths = [320, 640, 960, 1248];
+const heroHalfSizes = '(min-width: 1024px) 25vw, 50vw';
+const heroPreloadSrcsets = await Promise.all(
+  [galerijGevelVoor, galerijGevelNa].map(async (src) => {
+    const images = await Promise.all(
+      heroHalfWidths.map(async (width) => ({
+        width,
+        image: await getImage({ src, width, format: 'avif' }),
+      }))
+    );
+    return images.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
+  })
 );
-const heroPreloadSrcset = heroAvif.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
 
 const ogImage = await getImage({ src: heroHome, width: 1200, format: 'jpg' });
 
@@ -182,24 +188,44 @@ const icons: Record<string, string> = {
     rel="preload"
     as="image"
     type="image/avif"
-    imagesrcset={heroPreloadSrcset}
-    imagesizes={heroSizes}
+    imagesrcset={heroPreloadSrcsets[0]}
+    imagesizes={heroHalfSizes}
+  />
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    type="image/avif"
+    imagesrcset={heroPreloadSrcsets[1]}
+    imagesizes={heroHalfSizes}
   />
 
   <!-- 1. Hero -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero__grid">
       <div class="hero__media">
-        <Picture
-          src={heroHome}
-          widths={heroWidths}
-          sizes={heroSizes}
-          formats={['avif', 'webp']}
-          alt="Voor en na: gevelrenovatie van een woonhuis in Haarlem"
-          fetchpriority="high"
-          loading="eager"
-          data-demo="true"
-        />
+        <div class="hero__split">
+          <Picture
+            src={galerijGevelVoor}
+            widths={heroHalfWidths}
+            sizes={heroHalfSizes}
+            formats={['avif', 'webp']}
+            alt="Vóór: gevel met gescheurd en afgebladderd stucwerk in Haarlem"
+            fetchpriority="high"
+            loading="eager"
+            data-demo="true"
+          />
+          <Picture
+            src={galerijGevelNa}
+            widths={heroHalfWidths}
+            sizes={heroHalfSizes}
+            formats={['avif', 'webp']}
+            alt="Na: dezelfde gevel strak gestuukt en geschilderd"
+            fetchpriority="high"
+            loading="eager"
+            data-demo="true"
+          />
+        </div>
         <p class="hero__chip">Voor en na · gevelproject Haarlem</p>
       </div>
       <div class="hero__content" data-reveal>
@@ -573,10 +599,20 @@ const icons: Record<string, string> = {
     box-shadow: var(--shadow-lg);
   }
 
-  .hero__media :global(picture) {
+  /* 50/50-grid van losse voor/na-helften: deellijn (gap op witte ondergrond)
+     ligt altijd visueel op het midden, ongeacht crop of breakpoint */
+  .hero__split {
     position: absolute;
     inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xs);
+    background: var(--color-surface-default);
+  }
+
+  .hero__split :global(picture) {
     display: block;
+    overflow: hidden;
   }
 
   .hero__media :global(img) {

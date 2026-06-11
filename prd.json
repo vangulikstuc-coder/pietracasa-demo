@@ -307,7 +307,7 @@
       "title": "Polish: voor-na split altijd gecentreerd",
       "prompt": "Op desktop ligt de deellijn van hero-home.jpg/hero-gevelwerk.jpg links van het midden door object-fit crop. Zorg dat de voor-na deellijn altijd zichtbaar en visueel gecentreerd is: gebruik twee aparte beeldhelften (galerij-*-voor/na) naast elkaar in een 50/50 grid met dunne witte deellijn, of een aspect-bewuste object-position. Geldt voor home, gevelwerk, binnenafwerking en projecten-hero.",
       "blueprint": "",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Deellijn zichtbaar op 375px, 768px en 1280px, visueel op het midden",
         "Voor- en na-kant tonen beide herkenbaar (niet 90/10 gecropt)",

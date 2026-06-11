@@ -14,15 +14,21 @@ import galerijVloerVoor from '../assets/images/sections/galerij-vloer-voor.jpg';
 import galerijVloerNa from '../assets/images/sections/galerij-vloer-na.jpg';
 import ctaSfeer from '../assets/images/sections/cta-sfeer.jpg';
 
-const heroWidths = [768, 1280, 1920];
-const heroSizes = '100vw';
-const heroAvif = await Promise.all(
-  heroWidths.map(async (width) => ({
-    width,
-    image: await getImage({ src: heroProjecten, width, format: 'avif' }),
-  }))
+/* Hero-achtergrond als 50/50-split uit de losse voor/na-helften: de deellijn ligt daardoor
+   op elk breakpoint exact op het midden (composiet hero-projecten.jpg is alleen nog OG-beeld) */
+const heroHalfWidths = [480, 800, 1248];
+const heroHalfSizes = '50vw';
+const heroPreloadSrcsets = await Promise.all(
+  [galerijVloerVoor, galerijVloerNa].map(async (src) => {
+    const images = await Promise.all(
+      heroHalfWidths.map(async (width) => ({
+        width,
+        image: await getImage({ src, width, format: 'avif' }),
+      }))
+    );
+    return images.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
+  })
 );
-const heroPreloadSrcset = heroAvif.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
 
 const ogImage = await getImage({ src: heroProjecten, width: 1200, format: 'jpg' });
 
@@ -128,23 +134,43 @@ const feiten = [
     rel="preload"
     as="image"
     type="image/avif"
-    imagesrcset={heroPreloadSrcset}
-    imagesizes={heroSizes}
+    imagesrcset={heroPreloadSrcsets[0]}
+    imagesizes={heroHalfSizes}
+  />
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    type="image/avif"
+    imagesrcset={heroPreloadSrcsets[1]}
+    imagesizes={heroHalfSizes}
   />
 
   <!-- 1. Paginahero – projectenoverzicht -->
   <section class="project-hero" aria-labelledby="projecten-title">
     <div class="project-hero__bg" aria-hidden="true">
-      <Picture
-        src={heroProjecten}
-        widths={heroWidths}
-        sizes={heroSizes}
-        formats={['avif', 'webp']}
-        alt=""
-        fetchpriority="high"
-        loading="eager"
-        data-demo="true"
-      />
+      <div class="project-hero__split">
+        <Picture
+          src={galerijVloerVoor}
+          widths={heroHalfWidths}
+          sizes={heroHalfSizes}
+          formats={['avif', 'webp']}
+          alt=""
+          fetchpriority="high"
+          loading="eager"
+          data-demo="true"
+        />
+        <Picture
+          src={galerijVloerNa}
+          widths={heroHalfWidths}
+          sizes={heroHalfSizes}
+          formats={['avif', 'webp']}
+          alt=""
+          fetchpriority="high"
+          loading="eager"
+          data-demo="true"
+        />
+      </div>
     </div>
     <div class="container project-hero__inner">
       <p class="eyebrow eyebrow--inverse">Projecten</p>
@@ -485,10 +511,20 @@ const feiten = [
     inset: 0;
   }
 
-  .project-hero__bg :global(picture) {
+  /* 50/50-grid van losse voor/na-helften: deellijn (gap op witte ondergrond)
+     ligt altijd visueel op het midden, ongeacht crop of breakpoint */
+  .project-hero__split {
     position: absolute;
     inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xs);
+    background: var(--color-surface-default);
+  }
+
+  .project-hero__split :global(picture) {
     display: block;
+    overflow: hidden;
   }
 
   .project-hero__bg :global(img) {
