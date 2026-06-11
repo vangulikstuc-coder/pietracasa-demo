@@ -1,0 +1,1140 @@
+{
+  "version": "1.0",
+  "generated": "2026-06-11T16:39:44.794Z",
+  "build_mode": "premium",
+  "confidence_score": 100,
+  "niche": {
+    "id": "trades-plasterer",
+    "label": "Stucadoor",
+    "category": "Bouwambachten",
+    "subcategory": "Afwerking & Decoratie"
+  },
+  "archetype": {
+    "primary_goal": "quote_request",
+    "page_defaults": [
+      "home",
+      "over-ons",
+      "diensten",
+      "plafonafwerking",
+      "muurafwerking",
+      "decoratieve-stucwerk",
+      "referenties",
+      "faq",
+      "contact"
+    ],
+    "cta_defaults": [
+      "Offerte aanvragen",
+      "Bel voor advies"
+    ],
+    "trust_elements": [
+      "Vakkundig afgewerkt",
+      "Jarenlange ervaring",
+      "Referenties beschikbaar",
+      "Werkgarantie"
+    ]
+  },
+  "intake": {
+    "business": {
+      "name": "Stucq",
+      "region": "Haarlem",
+      "age": "1-5 jaar",
+      "type": "Nieuw bouwen",
+      "deadline": "Binnen 1 maand",
+      "existing_url": "",
+      "keep_from_existing": ""
+    },
+    "goal": "📋 Offerte aanvragen",
+    "budget": "€1-3k",
+    "budget_type": "Eenmalig bouwbudget",
+    "budget_includes": [
+      "Teksten / content",
+      "SEO / vindbaarheid"
+    ],
+    "pain_points": [
+      "Slechte/geen website"
+    ],
+    "audience": {
+      "ideal": "Bouwbedrijven, vastgoedprojecten en particuliere huiseigenaren in de regio Haarlem en omgeving die gevelwerk, binnenafwerking of renovatiewerk nodig hebben. Ze zoeken nu een stucadoor omdat ze in een actieve bouwfase zitten (nieuwbouw of verbouwing), maar stuiten op twijfel: onbekende kwaliteit, onduidelijke prijzen of bangheid dat afspraken niet nagekomen worden. Hun grootste blokkade is geen duidelijk bewijs van betrouwbaarheid en transparante kosten.",
+      "core_fear": "Dat het duur wordt en dat we de deadline niet…",
+      "why_you": "Vaste prijsafspraak + voor-na foto's van afgeronde projecten in Haarlem"
+    },
+    "offer": {
+      "services": [
+        {
+          "name": "Gevelwerk & buitenafwerking",
+          "desc": "Professionele stuc- en afwerkingswerkzaamheden voor gevels, volgens planning en vaste prijs"
+        },
+        {
+          "name": "Binnenafwerking & renovatie",
+          "desc": "Muurwerk, wanden en plafonds netjes afgewerkt – op tijd en in budget"
+        },
+        {
+          "name": "Microcement vloeren",
+          "desc": "Complete vloerafwerking naadloos verbinden van woonkamer keuken en hal"
+        }
+      ],
+      "pricing": "Altijd op maat",
+      "top": "Microcement vloeren"
+    },
+    "trust": {
+      "level": "hoog",
+      "evidence": [
+        "Reviews / Google",
+        "Projectfoto’s / voor-na",
+        "Video’s",
+        "Keurmerken / branchevereniging",
+        "Garantie / waarborg"
+      ],
+      "clients": "10-50",
+      "before_after": "Ja"
+    },
+    "niche_specific": {
+      "specialisaties": [
+        "Plafondafwerking",
+        "Muurafwerking",
+        "Decoratief stucwerk",
+        "Gladstrijken",
+        "Herstelwerk",
+        "Spuitwerk"
+      ],
+      "werkgebied": "Haarlem, Bloemendaal, Zandvoort en omgeving (tot 15 km)",
+      "specialisatie-detail": "Perfecte afwerking, op tijd en in budget – 50+ projecten in Haarlem zonder uitstel"
+    },
+    "content": {
+      "available": [
+        "Professionele foto’s",
+        "Video",
+        "Social media-content"
+      ],
+      "languages": [
+        "NL"
+      ],
+      "competitors": "We werken op vaste prijs, halen deadlines na, en bewijzen het met 50+ voor-na projectfoto's en 4,8-sterren reviews in Haarlem – terwijl concurrenten vaag blijven over kosten en planning.",
+      "avoid": "Geen speelse animaties, vage beloftes zonder bewijs, of luxe-taal die niet aansluit bij de werkelijkheid",
+      "domain": "Nee"
+    },
+    "contact": {
+      "phone": "0681943404",
+      "email": "info@stucqafbouw.nl",
+      "address": "Noord-holland",
+      "hours": "Ma–vr 7:00–17:00 | Spoed mogelijk binnen 48u | Bel direct: 0681943404",
+      "booking_url": "",
+      "kvk": "",
+      "search_terms": "Stucadoor Haarlem, gevelwerk, binnenafwerking, microcement vloeren, renovatie op tijd en in budget",
+      "regions": "Haarlem, Bloemendaal, Zandvoort en omgeving (tot 15 km)"
+    },
+    "visual": {
+      "style": "Strak & Professioneel",
+      "color": "Aardetinten",
+      "photo": [
+        "Productfoto’s",
+        "Sfeer / lifestyle",
+        "Voor-na",
+        "Drone"
+      ]
+    },
+    "technical": {
+      "platform": "Maatwerk (custom code)",
+      "hosting": "Weet niet"
+    }
+  },
+  "positioning": {
+    "chosen": {
+      "title": "Vaste prijs, geen verrassing achteraf",
+      "tagline": "50+ projecten in Haarlem. Allemaal op tijd en in budget afgeleverd.",
+      "hero_copy": "U weet vooraf wat het kost – en Stucq houdt zich daaraan. Bekijk de voor-na resultaten en vraag vrijblijvend een offerte aan.",
+      "emotion": "Geruststelling"
+    },
+    "alternatives": [
+      {
+        "title": "Het stucwerk spreekt voor zich",
+        "tagline": "4,8 sterren op Google. 25+ geverifieerde beoordelingen. Zie het zelf in de projectfoto's."
+      },
+      {
+        "title": "Binnen 48 uur weet u waar u aan toe bent",
+        "tagline": "Offerte aanvragen duurt twee minuten. Reactie binnen 48 uur. Bereikbaar ma–vr 7:00–17:00."
+      }
+    ],
+    "accents": [
+      {
+        "title": "Vaste prijs. Aantoonbaar op tijd.",
+        "angle": "Terwijl concurrenten vage kostenramingen geven, zet Stucq elke offerte om in een schriftelijke vaste prijs – met 50+ voltooide Haarlemse projecten als bewijs dat die afspraak ook wordt nagekomen."
+      },
+      {
+        "title": "Bewijs vóór belofte.",
+        "angle": "Geen marketingtaal, maar voor-na beelden, drone-opnames en 25+ geverifieerde Google-reviews (4,8★) die uw twijfel wegnemen voordat u een handtekening zet."
+      },
+      {
+        "title": "Eén aanspreekpunt, geen verrassingen.",
+        "angle": "Van eerste offerte tot oplevering werkt u met dezelfde vakman – transparante werkwijze in heldere stappen, reactie binnen 48 uur gegarandeerd."
+      }
+    ]
+  },
+  "sitemap": [
+    {
+      "id": "home",
+      "title": "Stucadoor Haarlem – Gevelwerk, Binnenafwerking & Microcement | Stucq",
+      "slug": "/",
+      "intent": "Eerste indruk: bewijs vakmanschap en betrouwbaarheid direct, verlaag twijfel over kosten en planning, stuur naar offerte aanvragen of projecten bekijken",
+      "primary_cta": "Offerte aanvragen",
+      "priority": "must-have"
+    },
+    {
+      "id": "offerte",
+      "title": "Offerte Aanvragen – Vrijblijvend, Vaste Prijs, Reactie binnen 48 uur",
+      "slug": "/offerte-aanvragen",
+      "intent": "Primaire conversiepagina: laagdrempelig contactformulier met micro-garantie, vaste prijs belofte en 48-uurs reactietijd prominent zichtbaar – geen keuzestress",
+      "primary_cta": "Offerte aanvragen",
+      "priority": "must-have"
+    },
+    {
+      "id": "projecten",
+      "title": "Afgeronde Projecten in Haarlem – 50+ Voor-Na Foto's & Dronebeelden",
+      "slug": "/projecten",
+      "intent": "Bewijspagina: toon voor-na fotogalerij en drone-video's van 50+ afgeronde projecten in Haarlem en omgeving; bewijs dat elk project op tijd en in budget is opgeleverd",
+      "primary_cta": "Bekijk afgeronde projecten",
+      "priority": "must-have"
+    },
+    {
+      "id": "gevelwerk",
+      "title": "Gevelwerk & Buitenafwerking Haarlem – Vaste Prijs, Op Tijd Opgeleverd",
+      "slug": "/diensten/gevelwerk-buitenafwerking",
+      "intent": "Dienstdetailpagina gericht op bouwbedrijven en huiseigenaren: leg gevelstuc en buitenafwerking uit met concrete belofte, voor-na beelden en offerte-CTA",
+      "primary_cta": "Offerte aanvragen voor gevelwerk",
+      "priority": "must-have"
+    },
+    {
+      "id": "binnenafwerking",
+      "title": "Binnenafwerking & Renovatie Haarlem – Wanden en Plafonds Netjes Afgewerkt",
+      "slug": "/diensten/binnenafwerking-renovatie",
+      "intent": "Dienstdetailpagina voor muur-, wand- en plafondwerk bij renovatie en nieuwbouw: onderscheid van gevelwerk, eigen projectbeelden, vaste prijs belofte en offerte-CTA",
+      "primary_cta": "Offerte aanvragen voor binnenafwerking",
+      "priority": "must-have"
+    },
+    {
+      "id": "microcement",
+      "title": "Microcement Vloeren Haarlem – Naadloze Vloerafwerking op Vaste Prijs",
+      "slug": "/diensten/microcement-vloeren",
+      "intent": "Dienstdetailpagina voor topproduct microcement: leg proces en resultaat uit met voor-na foto's, beantwoord veelgestelde vragen over kosten en doorlooptijd, stuur naar offerte",
+      "primary_cta": "Offerte aanvragen voor microcement vloer",
+      "priority": "must-have"
+    },
+    {
+      "id": "werkwijze",
+      "title": "Onze Werkwijze – Van Offerte tot Oplevering in Heldere Stappen",
+      "slug": "/werkwijze",
+      "intent": "Vertrouwenspagina: neem de angst voor verrassingen weg door de werkwijze stap-voor-stap te tonen (opname, offerte, planning, uitvoering, oplevering) met nadruk op vaste prijs en deadlines",
+      "primary_cta": "Vraag direct een offerte aan",
+      "priority": "must-have"
+    },
+    {
+      "id": "over-stucq",
+      "title": "Over Stucq – Stucadoor in Haarlem Actief Sinds 2020",
+      "slug": "/over-stucq",
+      "intent": "Identiteitspagina: bouw persoonlijk vertrouwen op met achtergrond van het bedrijf, werkgebied, Google-score van 4,8 met 25+ reviews, keurmerken en nuchter vakmanschapsverhaal",
+      "primary_cta": "Bekijk onze projecten",
+      "priority": "must-have"
+    },
+    {
+      "id": "faq",
+      "title": "Veelgestelde Vragen – Kosten, Planning en Werkwijze bij Stucq",
+      "slug": "/veelgestelde-vragen",
+      "intent": "Bezwaarpagina: beantwoord de meest voorkomende vragen over vaste prijs, doorlooptijd, werkgebied en garantie – verlaag twijfels bij overwogen beslissers vlak voor de offertestap",
+      "primary_cta": "Offerte aanvragen",
+      "priority": "nice-to-have"
+    },
+    {
+      "id": "contact",
+      "title": "Contact – Bel Direct of Stuur een Bericht aan Stucq Haarlem",
+      "slug": "/contact",
+      "intent": "Servicepagina voor directe bereikbaarheid: telefoonnummer, e-mail, openingstijden en werkgebied overzichtelijk getoond; alternatief pad voor bezoekers die niet via het offerteformulier willen",
+      "primary_cta": "Bel direct: 0681943404",
+      "priority": "must-have"
+    }
+  ],
+  "blueprints": [
+    {
+      "page": "home",
+      "intent": "Eerste indruk: bewijs vakmanschap en betrouwbaarheid direct, verlaag twijfel over kosten en planning, stuur naar offerte aanvragen of projecten bekijken.",
+      "sections": [
+        {
+          "name": "Hero",
+          "job": "Direct vertrouwen wekken via bewijs en de primaire CTA activeren – benoem de pijn (kosten, deadlines) en lever meteen de tegenclaim.",
+          "component": "Hero full-bleed – splitlayout: links voor-na projectfoto Haarlem, rechts kopregel + subkop + CTA-knop 'Offerte aanvragen' + micro-garantie tekst 'Vrijblijvend – reactie binnen 48 uur'"
+        },
+        {
+          "name": "Bewijs-band",
+          "job": "Google-score en reviewaantal prominent tonen vóór de CTA om de vertrouwensdrempel te verlagen.",
+          "component": "Stat-band – drie cijferblokken naast elkaar (4,8 ★ Google, 25+ reviews, 50+ projecten) met keurmerk-/branchevereniging-logo's eronder"
+        },
+        {
+          "name": "Probleem naar oplossing",
+          "job": "Herken de concrete angst (onduidelijke kosten, gemiste deadlines) en koppel die direct aan de Stucq-aanpak als feitelijk antwoord.",
+          "component": "Twee-kolom contrast-blok – links probleemkolom (icoon + tekst), rechts oplossingskolom (icoon + tekst), aardetint achtergrond"
+        },
+        {
+          "name": "Diensten",
+          "job": "Drie kernservices helder en concreet presenteren, elk met een meetbare belofte – geen vage omschrijvingen.",
+          "component": "Beeld-gedreven dienstkaart-trio – drie kaarten naast elkaar, elke kaart met projectfoto, dienstnaam, één-zin belofte en secundaire CTA 'Meer informatie'"
+        },
+        {
+          "name": "Projectbewijs / Voor-na galerij",
+          "job": "Visueel bewijs leveren via voor-na projectfoto's en drone-beelden uit Haarlem om kwaliteit aantoonbaar te maken.",
+          "component": "Voor-na fotogalerij-grid – 2×3 kaarten met toggle voor/na, zachte CTA 'Bekijk alle afgeronde projecten' onderaan"
+        },
+        {
+          "name": "Werkwijze",
+          "job": "Het proces van offerte tot oplevering transparant maken in stappen, zodat de opdrachtgever weet wat te verwachten.",
+          "component": "Stappen-blok horizontaal – vier genummerde stappen met icoon en korte toelichting (Aanvraag → Offerte → Uitvoering → Oplevering)"
+        },
+        {
+          "name": "Garanties & Keurmerken",
+          "job": "Resterende twijfels wegnemen met concrete garantie-uitspraken en eventuele branchevereniging-aansluiting.",
+          "component": "Garantie-icon-rij – drie of vier icoonblokken (vaste prijs, op tijd, schriftelijke afspraak, keurmerk-placeholder) op lichte aardetint achtergrond"
+        },
+        {
+          "name": "Reviews",
+          "job": "Sociale bewijskracht concreet maken met echte Google-reviewcijfers en de 4,8-sterrenscore zichtbaar herhalen direct vóór de sluitende CTA.",
+          "component": "Review-kaart-carrousel – drie reviewkaarten zichtbaar tegelijk, Google-logo + sterrenscore, geen verzonnen namen of citaten"
+        },
+        {
+          "name": "CTA-band / Contactsectie",
+          "job": "Eén helder beslispad bieden: offerte aanvragen of direct bellen – geen keuzestress, micro-garantie herhalen.",
+          "component": "CTA-band full-bleed aardetint – kopregel, micro-garantie tekst, primaire knop 'Offerte aanvragen', secundair telefoonnummer als klikbaar link"
+        }
+      ],
+      "acceptance": [
+        "Aanspreek: u (formeel) – consequent in alle copy",
+        "Bewijs uitsluitend gebaseerd op beschikbare feiten: 4,8 Google-score, 25+ geverifieerde reviews, 50+ projecten in Haarlem sinds 2020",
+        "Geen verzonnen prijzen, reviews, namen of klantlogos – maatwerk-offerte is het enige prijspad",
+        "Verboden zinsneden nooit gebruiken: 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'uw vertrouwde partner', 'Welkom bij', 'Supercharge', 'Ontgrendel uw potentieel', 'In de snelle wereld van vandaag'",
+        "Visuele modus: gebalanceerd – aardetinten, voor-na projectfoto's en drone-beelden als primair bewijsmateriaal, iconen toegestaan voor werkwijze en garanties",
+        "Geen speelse animaties of luxe-abstracte stijlelementen",
+        "Micro-garantie 'Vrijblijvend – vaste prijs, reactie binnen 48 uur' herhalen bij elke CTA-plaatsing",
+        "Keurmerken en branchevereniging-logo's tonen indien beschikbaar – geen placeholders presenteren als echt bewijs",
+        "Primaire CTA 'Offerte aanvragen' geplaatst na eerste bewijs (bewijs-band); zachte stap 'Bekijk afgeronde projecten' als secundaire CTA in hero en galerij",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "offerte",
+      "intent": "Primaire conversiepagina: verwijder twijfel over kosten en planning vóórdat de bezoeker het formulier invult. Toon micro-garantie en bewijsmateriaal direct naast het contactformulier – één beslispad, geen keuzestress.",
+      "sections": [
+        {
+          "name": "Pagina-header met micro-garantie",
+          "job": "Stel direct de verwachting: vrijblijvend, vaste prijs, reactie binnen 48 uur – geen verrassingen achteraf.",
+          "component": "tekst-header met drie garantie-icoontjes (vrijblijvend / vaste prijs / 48u reactie) op één rij"
+        },
+        {
+          "name": "Bewijs-strip boven formulier",
+          "job": "Neem de vertrouwensdrempel weg met harde cijfers vóórdat de bezoeker het formulier ziet.",
+          "component": "smalle bewijsbalk – Google-sterren links, projectteller midden, keurmerk/branchevereniging rechts (tonen indien beschikbaar)"
+        },
+        {
+          "name": "Formulier met contextuele garantie",
+          "job": "Hoofddoel van de pagina: offerte aanvragen zo eenvoudig mogelijk maken met minimale velden en garantietekst direct naast de knop.",
+          "component": "tweekoloms-layout: formulier links (naam, telefoon, e-mail, type werk, omschrijving, postcode) – garantieblok rechts met drie icoontjes en micro-copy"
+        },
+        {
+          "name": "Of bel direct",
+          "job": "Geef een alternatief beslispad voor bezoekers die liever direct bellen – geen drempel, geen keuzestress.",
+          "component": "smalle cta-band met telefoonnummer groot en openingstijden klein, aardetint achtergrond"
+        },
+        {
+          "name": "Waarvoor vraagt u een offerte aan",
+          "job": "Help de bezoeker herkennen welk werk van toepassing is en benoem de concrete belofte per dienst – neemt onduidelijkheid weg.",
+          "component": "dienst-kaart-trio – drie kaarten naast elkaar, elk met dienstnaam, één-regel-belofte en icoon"
+        },
+        {
+          "name": "Zo verloopt het traject",
+          "job": "Verwijder de onzekerheid over het proces: laat stap voor stap zien wat er na het invullen van het formulier gebeurt.",
+          "component": "horizontale stappenrij – 4 stappen (aanvraag → afspraak op locatie → vaste-prijs offerte → uitvoering & oplevering), genummerd met icoontjes"
+        },
+        {
+          "name": "Bewijs: afgeronde projecten in Haarlem",
+          "job": "Versterk de beslissing met visueel bewijs: voor-na fotoparen uit de eigen regio bevestigen dat de belofte wordt nagekomen.",
+          "component": "voor-na foto-duo's – twee projectparen naast elkaar met locatielabel (Haarlem / omgeving), zachte zachte cta-link 'Bekijk alle afgeronde projecten'"
+        },
+        {
+          "name": "Google-reviews",
+          "job": "Laat 25+ geverifieerde klantbeoordelingen het vertrouwen completeren – kort voor de afsluitende CTA.",
+          "component": "review-kaarten-rij – drie kaarten zichtbaar (naam, beoordeling, stekker-citaat), link naar Google-profiel"
+        },
+        {
+          "name": "Afsluitende CTA-band",
+          "job": "Geef de bezoeker die de pagina heeft doorgelopen een laatste, directe uitnodiging om de aanvraag te voltooien.",
+          "component": "cta-band full-bleed aardetint – knop 'Offerte aanvragen' groot, telefoonnummer secundair eronder"
+        }
+      ],
+      "acceptance": [
+        "Aanspreking uitsluitend met 'u' (formeel) door de gehele pagina",
+        "Micro-garantie (vrijblijvend / vaste prijs / 48u reactie) zichtbaar in header én naast het formulier",
+        "Bewijs-strip met 4,8 Google-sterren en 25+ reviews geplaatst vóór het formulier",
+        "Formulier bevat minimale velden: naam, telefoon, e-mail, type werk, omschrijving, postcode",
+        "Geen prijzen of tarieven vermeld – maatwerk-offerte is het enige prijspad",
+        "Uitsluitend bewijs gebruikt dat in de input is bevestigd – geen verzonnen reviews, namen of cijfers",
+        "Visuele stijl: aardetinten, strak, professioneel – geen speelse animaties of luxe-abstracte elementen",
+        "Verboden zinsneden zijn niet gebruikt: geen 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'Uw vertrouwde partner', 'Welkom bij'",
+        "Één beslispad: formulier invullen of direct bellen – geen keuzestress",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "projecten",
+      "intent": "Bewijspagina: overtuig bouwbedrijven en huiseigenaren in Haarlem met voor-na fotogalerij, drone-video's en meetbare feiten dat Stucq elk project op tijd en in budget oplevert – en maak de stap naar een offerte aanvragen vanzelfsprekend.",
+      "sections": [
+        {
+          "name": "Paginahero – Projectenoverzicht",
+          "job": "Stel direct de bewijsbelofte vast: 50+ afgeronde projecten in Haarlem, allemaal op tijd en in budget. Geef de bezoeker vertrouwen dat er iets concreets te zien is.",
+          "component": "Hero-banner halve hoogte – achtergrond voor-na splitview projectfoto Haarlem, H1 + twee feitenlabels (50+ projecten · 4,8 Google-score)"
+        },
+        {
+          "name": "Bewijs-band – Kerncijfers",
+          "job": "Anker de betrouwbaarheid met drie controleerbare feiten voordat de bezoeker door de galerij scrolt.",
+          "component": "Stat-trio-band – drie iconblokken naast elkaar (sterren, vinkje, kaartpin) in aardetint achtergrond"
+        },
+        {
+          "name": "Filteerbare Projectgalerij – Voor-Na",
+          "job": "Lever het primaire bewijs: voor-na projectfoto's gefilterd op diensttype (gevelwerk, binnenafwerking, microcement vloeren). Elk project toont locatie en opleverjaar.",
+          "component": "Filterbare foto-galerij – voor-na kaarten in grid (tabbladen per dienst), locatie-label en jaar zichtbaar op kaart"
+        },
+        {
+          "name": "Uitgelicht Project – Dronebeelden",
+          "job": "Gebruik drone-video als aanvullend bewijsmiddel om schaalgrootte en kwaliteit van gevelwerk aantoonbaar te maken.",
+          "component": "Video-embed blok – ingeslikte drone-video naast feitenlabel (project, dienst, oppervlak, oplevermaand)"
+        },
+        {
+          "name": "Projectkaarten per Dienst",
+          "job": "Groepeer afgeronde projecten per dienstcategorie zodat bouwbedrijven en huiseigenaren direct herkennen wat voor hun situatie relevant is.",
+          "component": "Dienstkaart-trio – drie kaarten (gevelwerk, binnenafwerking, microcement) elk met voorbeeldfoto, projecttelling en korte feitenzin"
+        },
+        {
+          "name": "Google-Reviews Selectie",
+          "job": "Vertaal de 4,8-sterren Google-score naar herkenbare bewoording van echte opdrachtgevers, direct na het beeldmateriaal.",
+          "component": "Review-slider – drie reviewtegels naast elkaar, sterren zichtbaar, naam en maand van plaatsing, link naar Google-profiel"
+        },
+        {
+          "name": "Op Tijd en In Budget – Trackrecord",
+          "job": "Adresseer de kern-angst (kosten en deadlines) direct met een feitelijk trackrecord-blok; geen vage belofte maar een aantoonbaar resultaat.",
+          "component": "Statement-band full-bleed – donkere aardetint, centraal feitenstatement + twee iconen (kalender vinkje, budget vinkje)"
+        },
+        {
+          "name": "Keurmerken en Branchelidmaatschap",
+          "job": "Toon beschikbare keurmerken of branchevereniging-lidmaatschappen als extra verificatielaag naast de Google-score.",
+          "component": "Logo-rij – horizontale balk met keurmerklabels of tijdelijke plaatshouder tekst indien certificering nog niet bevestigd"
+        },
+        {
+          "name": "CTA-band – Offerte Aanvragen",
+          "job": "Sluit de pagina af met één duidelijk beslispad: offerte aanvragen of direct bellen. Herhaal de micro-garantie om de laatste aarzeling weg te nemen.",
+          "component": "CTA-band full-bleed – primaire knop 'Offerte aanvragen', secundaire tekst-link 'Bel direct', micro-garantieregel eronder in kleinere tekst"
+        }
+      ],
+      "acceptance": [
+        "Gebruik uitsluitend bewezen feiten: 25+ Google-reviews, 4,8 sterren, 50+ projecten in Haarlem sinds 2020",
+        "Geen verzonnen reviews, namen, cijfers of klantlogo's",
+        "Aanspreking consequent met 'u' (formeel)",
+        "Geen uitroeptekens",
+        "Verboden zinsneden nooit gebruiken: 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'we zorgen ervoor dat je gelukkig bent', 'Uw vertrouwde partner', 'In de snelle wereld van vandaag', 'Supercharge', 'Ontgrendel uw potentieel', 'Welkom bij'",
+        "Geen speelse animaties of luxe-abstracte stijlelementen",
+        "Prijzen altijd op maat – geen vaste tarieven publiceren",
+        "Keurmerken alleen tonen indien beschikbaar en geverifieerd",
+        "Visuele modus: gebalanceerd – aardetinten, voor-na fotogalerij en drone-beelden als primair bewijsmiddel",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "gevelwerk",
+      "intent": "Dienstdetailpagina gericht op bouwbedrijven en huiseigenaren: leg gevelstuc en buitenafwerking uit met concrete belofte, voor-na beelden en offerte-CTA voor Stucq.",
+      "sections": [
+        {
+          "name": "Pagina-hero",
+          "job": "Context + belofte",
+          "component": "Compacte hero"
+        },
+        {
+          "name": "Kern-inhoud",
+          "job": "De inhoud die deze pagina moet leveren",
+          "component": "Text / card-grid"
+        },
+        {
+          "name": "Bewijs of detail",
+          "job": "Twijfel wegnemen",
+          "component": "Testimonial / lijst"
+        },
+        {
+          "name": "CTA",
+          "job": "Doorzetten naar hoofdactie",
+          "component": "CTA-blok"
+        }
+      ],
+      "acceptance": [
+        "Eén heldere primaire CTA (Offerte aanvragen)",
+        "Inhoud sluit aan op het paginadoel",
+        "Mobiel getest op 375px",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "binnenafwerking",
+      "intent": "Dienstdetailpagina voor binnenafwerking en renovatie: onderscheid ten opzichte van gevelwerk, eigen voor-na projectbeelden, vaste prijsbelofte en een directe offerte-CTA voor bouwbedrijven en huiseigenaren in Haarlem.",
+      "sections": [
+        {
+          "name": "Hero – Binnenafwerking",
+          "job": "Pagina direct kwalificeren als binnenafwerking-specialisme en vertrouwensanker leggen met één feitelijk statement en primaire CTA.",
+          "component": "Hero split-screen – links voor-na projectfoto binnenwerk, rechts headline + micro-garantiebadge + primaire CTA-knop"
+        },
+        {
+          "name": "Probleemherkenning – Angst en oplossing",
+          "job": "De kernanxst van de bezoeker benoemen (onduidelijke kosten, gemiste deadlines) en direct koppelen aan de concrete oplossing van Stucq.",
+          "component": "Statement-band tweekoloms – links probleemtekst, rechts oplossingsopsomming met iconen (vaste prijs / deadline / bewijs)"
+        },
+        {
+          "name": "Dienstaanbod Binnenafwerking",
+          "job": "De specifieke binnenafwerkingsdiensten helder en concreet presenteren, elk met een meetbare belofte – geen vaag taalgebruik.",
+          "component": "Dienstkaart-grid 3-koloms – kaart per specialisatie (plafondafwerking, muurafwerking, gladstrijken, spuitwerk, herstelwerk, decoratief stucwerk) met icoon en één-regel belofte"
+        },
+        {
+          "name": "Voor-na Projectbeelden",
+          "job": "Vakmanschap bewijzen met eigen projectfoto's uit Haarlem; bewijs staat centraal, geen sfeeroverload.",
+          "component": "Voor-na fotogalerij – slider of raster met voor/na toggle per project, locatielabel (bijv. 'Haarlem-Noord, 2024')"
+        },
+        {
+          "name": "Sociaal bewijs – Google-reviews",
+          "job": "4,8-sterren Google-score en 25+ geverifieerde reviews prominent tonen vóór de eerste harde CTA om de vertrouwensdrempel te verlagen.",
+          "component": "Reviewband – sterrenscore groot centraal, drie reviewkaarten naast elkaar met geverifieerde tekst en datum, link naar volledig Google-profiel"
+        },
+        {
+          "name": "Werkwijze – Stap voor stap",
+          "job": "Transparantie bieden over het proces van offerte tot oplevering zodat de bezoeker precies weet wat hij kan verwachten.",
+          "component": "Stappenblok horizontaal 4-stappen – icoon + staptitel + één-regel omschrijving (1. Opname ter plaatse / 2. Vaste offerte binnen 48u / 3. Uitvoering op afgesproken datum / 4. Oplevering en controle)"
+        },
+        {
+          "name": "Werkgebied & Beschikbaarheid",
+          "job": "Geografische dekking en bereikbaarheid verduidelijken voor bouwbedrijven en huiseigenaren in de regio.",
+          "component": "Info-band tweeledig – links regiokaart of tekstblok met locaties, rechts contactgegevens en openingstijden"
+        },
+        {
+          "name": "Garanties & Keurmerken",
+          "job": "Resterende bezwaren wegnemen met concrete garantie-uitingen en beschikbare keurmerken of branchevereniging.",
+          "component": "Garantiebalk met iconen – drie garantie-iconen (vaste prijs / op tijd / vakgarantie) + keurmerk-logo's indien beschikbaar"
+        },
+        {
+          "name": "CTA – Offerte aanvragen",
+          "job": "Eén helder beslispad bieden: offerte aanvragen of direct bellen – geen keuzestress, micro-garantie herhaald.",
+          "component": "CTA-band full-bleed aardetint – prominente offerte-knop, telefoonnummer klikbaar, micro-garantietekst ('Vrijblijvend – vaste prijs, reactie binnen 48 uur') eronder"
+        }
+      ],
+      "acceptance": [
+        "Aanspreek: u (formeel) – consequent toegepast in alle copy",
+        "Visuele modus: gebalanceerd – aardetinten, voor-na fotografie centraal, geen full-bleed sfeeroverload, geen speelse animaties",
+        "Bewijs: uitsluitend feitelijk bewijs gebruikt (25+ Google-reviews, 4,8 sterren, 50+ projecten, voor-na beelden, keurmerken indien beschikbaar)",
+        "CTA-strategie: primaire CTA na bewijssecties, micro-garantie 'Vrijblijvend – vaste prijs, reactie binnen 48 uur' herhaald bij elke CTA",
+        "Verboden zinsneden: geen van de verboden frasen gebruikt (geen 'luxe afwerking', 'droomproject', 'uw vertrouwde partner' e.d.)",
+        "Prijspad: geen vaste prijzen vermeld – maatwerk-offerte is het enige prijspad",
+        "Sectiecount: 9 secties met gedifferentieerde opbouw passend bij dienstdetailpagina",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "microcement",
+      "intent": "Dienstdetailpagina voor topproduct microcement: leg proces en resultaat uit met voor-na foto's, beantwoord veelgestelde vragen over kosten en doorlooptijd, stuur naar offerte voor Stucq.",
+      "sections": [
+        {
+          "name": "Pagina-hero",
+          "job": "Context + belofte",
+          "component": "Compacte hero"
+        },
+        {
+          "name": "Kern-inhoud",
+          "job": "De inhoud die deze pagina moet leveren",
+          "component": "Text / card-grid"
+        },
+        {
+          "name": "Bewijs of detail",
+          "job": "Twijfel wegnemen",
+          "component": "Testimonial / lijst"
+        },
+        {
+          "name": "CTA",
+          "job": "Doorzetten naar hoofdactie",
+          "component": "CTA-blok"
+        }
+      ],
+      "acceptance": [
+        "Eén heldere primaire CTA (Offerte aanvragen)",
+        "Inhoud sluit aan op het paginadoel",
+        "Mobiel getest op 375px",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "werkwijze",
+      "intent": "Vertrouwenspagina: neem de angst voor verrassingen weg door de werkwijze stap-voor-stap te tonen (opname, offerte, planning, uitvoering, oplevering) met nadruk op vaste prijs en deadlines voor Stucq.",
+      "sections": [
+        {
+          "name": "Pagina-hero",
+          "job": "Context + belofte",
+          "component": "Compacte hero"
+        },
+        {
+          "name": "Kern-inhoud",
+          "job": "De inhoud die deze pagina moet leveren",
+          "component": "Text / card-grid"
+        },
+        {
+          "name": "Bewijs of detail",
+          "job": "Twijfel wegnemen",
+          "component": "Testimonial / lijst"
+        },
+        {
+          "name": "CTA",
+          "job": "Doorzetten naar hoofdactie",
+          "component": "CTA-blok"
+        }
+      ],
+      "acceptance": [
+        "Eén heldere primaire CTA (Offerte aanvragen)",
+        "Inhoud sluit aan op het paginadoel",
+        "Mobiel getest op 375px",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "over-stucq",
+      "intent": "Identiteitspagina die persoonlijk vertrouwen opbouwt door het verhaal van Stucq te verankeren in aantoonbare feiten: werkgebied, Google-score, keurmerken en een nuchter vakmanschapsverhaal – zonder claims die niet bewezen worden.",
+      "sections": [
+        {
+          "name": "Pagina-hero: Wie is Stucq",
+          "job": "Bezoeker direct oriënteren: wie, wat, waar en sinds wanneer – geen ruimte voor twijfel over identiteit en bereik.",
+          "component": "Split-layout hero – portretfoto of werkfoto links, kerngegevens (naam, regio, actief sinds 2020, werkgebied) rechts op lichte achtergrond in aardetinten"
+        },
+        {
+          "name": "Kerncijfers-band",
+          "job": "In één oogopslag de feiten tonen die twijfel wegnemen: projecten, score, reviews en werkgebied.",
+          "component": "Statistieken-band – vier icoon-getal-combinaties op één rij, neutrale achtergrond in aardetint"
+        },
+        {
+          "name": "Achtergrond en werkwijze",
+          "job": "Het vakmanschapsverhaal vertellen met feiten en kwalificaties; laat zien waarom Stucq betrouwbaar is zonder vage claims.",
+          "component": "Tekst-beeld-blok – redactionele kolom links, werkomgevingsfoto rechts, geen decoratieve elementen"
+        },
+        {
+          "name": "Werkgebied",
+          "job": "Bezoeker bevestigen dat Stucq actief is in zijn regio en welke plaatsen binnen bereik vallen.",
+          "component": "Kaart-blok – statische kaart met werkgebied-markering en plaatsnamenlijst ernaast"
+        },
+        {
+          "name": "Google-reviews bewijs",
+          "job": "Sociale bewijskracht leveren met echte Google-score en reviewcount vóór elke CTA.",
+          "component": "Review-band – Google-logo, sterrenscore, reviewteller en externe link naar Google-profiel; geen zelfgeschreven citaten"
+        },
+        {
+          "name": "Keurmerken en waarborg",
+          "job": "Branchevereniging en garantie tonen als aanvullend kwaliteitsbewijs voor bouwbedrijven en particulieren.",
+          "component": "Logo-rij – horizontale rij keurmerk- en branchebadges op lichte achtergrond; lege placeholders indien logo nog niet beschikbaar"
+        },
+        {
+          "name": "Voor-na projectfoto's teaser",
+          "job": "Visueel bewijs leveren van uitgevoerd werk in Haarlem en omgeving; bezoeker doorgeleiden naar het volledige projectoverzicht.",
+          "component": "Foto-grid teaser – twee voor-na koppels naast elkaar, CTA-knop 'Bekijk afgeronde projecten' eronder"
+        },
+        {
+          "name": "Contactgegevens en openingstijden",
+          "job": "Directe bereikbaarheidsinfo bieden zodat bouwbedrijven en huiseigenaren zonder tussenstap contact kunnen opnemen.",
+          "component": "Contactblok – telefoon, e-mail en openingstijden in gestructureerde kolom, geen formulier"
+        },
+        {
+          "name": "CTA-band",
+          "job": "Eén helder beslispad aanbieden: offerte aanvragen of bellen – geen keuzestress.",
+          "component": "CTA-band full-bleed – donkere aardetint achtergrond, primaire knop 'Offerte aanvragen' en secondaire tekstlink 'Bel direct'"
+        }
+      ],
+      "acceptance": [
+        "Aanspreek: u (formeel)",
+        "Bewijs uitsluitend gebaseerd op beschikbaar materiaal: Google-reviews (25+, 4,8 sterren), voor-na projectfoto's, video's, keurmerken/branchevereniging, garantie/waarborg",
+        "Geen verzonnen reviews, klantcitaten, namen of extra cijfers",
+        "Geen speelse animaties, luxe-abstracte stijlelementen of full-bleed sfeeroverload",
+        "Verboden zinsneden zijn niet gebruikt: geen 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'Uw vertrouwde partner', 'Welkom bij', 'Supercharge', 'Ontgrendel uw potentieel' of vage beloftes zonder bewijs",
+        "Prijspad: uitsluitend maatwerk-offerte; geen vaste prijzen of pakketten vermeld",
+        "Micro-garantie opgenomen: 'Vrijblijvend – vaste prijs, reactie binnen 48 uur'",
+        "Werkgebied expliciet begrensd: Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "faq",
+      "intent": "Bezwaarpagina: beantwoord de meest voorkomende vragen over vaste prijs, doorlooptijd, werkgebied en garantie – verlaag twijfels bij overwogen beslissers vlak voor de offertestap voor Stucq.",
+      "sections": [
+        {
+          "name": "Pagina-hero",
+          "job": "Context",
+          "component": "Compacte hero"
+        },
+        {
+          "name": "FAQ (gegroepeerd)",
+          "job": "Vragen beantwoorden",
+          "component": "Accordion"
+        },
+        {
+          "name": "Nog een vraag?",
+          "job": "Route naar contact",
+          "component": "CTA-blok"
+        }
+      ],
+      "acceptance": [
+        "Eén heldere primaire CTA (Offerte aanvragen)",
+        "Inhoud sluit aan op het paginadoel",
+        "Mobiel getest op 375px",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    },
+    {
+      "page": "contact",
+      "intent": "Contactpagina voor directe bereikbaarheid: telefoonnummer, e-mail, openingstijden en werkgebied overzichtelijk gepresenteerd als alternatief pad voor bezoekers die niet via het offerteformulier willen — vertrouwen bevestigen tot op het laatste contactmoment.",
+      "sections": [
+        {
+          "name": "Paginaheader – Direct contact",
+          "job": "Oriënteer de bezoeker onmiddellijk: dit is de kortste weg naar Stucq. Toon het telefoonnummer dominant en stel verwachtingen over reactietijd.",
+          "component": "paginaheader — smal, aardetint achtergrond, telefoonnummer 0681943404 als prominent klikbaar element naast paginatitel"
+        },
+        {
+          "name": "Contactmiddelen – Twee paden",
+          "job": "Bied bel- en e-mailoptie naast elkaar aan zonder keuzestress; voeg openingstijden en spoedvermelding toe als feitelijke zekerheid.",
+          "component": "card-duo — twee kaarten naast elkaar: één bel-kaart met klikbaar nummer en icoon, één e-mailkaart met adres en icoon; openingstijden als tekstblok eronder"
+        },
+        {
+          "name": "Contactformulier – Alternatief pad",
+          "job": "Bied een laagdrempelig formulier voor bezoekers die liever schrijven dan bellen; micro-garantie reduceert drempel.",
+          "component": "contactformulier — velden naam, telefoon, e-mail, omschrijving werk, verzendknop; micro-garantietekst direct onder verzendknop"
+        },
+        {
+          "name": "Werkgebied – Regio overzicht",
+          "job": "Bevestig feitelijk in welke gemeenten Stucq actief is zodat de bezoeker geen twijfel heeft over beschikbaarheid in zijn regio.",
+          "component": "statische kaartband — visuele kaart van werkradius met gemeentenamen als labels, tekstblok ernaast"
+        },
+        {
+          "name": "Openingstijden & beschikbaarheid",
+          "job": "Geef feitelijke bereikbaarheidsinfo zodat de bezoeker precies weet wanneer hij een reactie kan verwachten.",
+          "component": "info-tabel — één kolom openingstijden per dag, spoedvermelding gemarkeerd, aardetint achtergrond"
+        },
+        {
+          "name": "Vertrouwensband – Bewijs voor het laatste moment",
+          "job": "Bevestig betrouwbaarheid vlak vóór het contactmoment met feitelijk bewijs: Google-score, projectcount en vaste-prijs-garantie.",
+          "component": "statement-band — donkere aardetint achtergrond, drie feitelijke badges naast elkaar: sterren-score, projectcount, vaste-prijs-icoon"
+        },
+        {
+          "name": "Secundaire CTA – Offerte of projecten",
+          "job": "Stuur bezoekers die nog niet klaar zijn voor contact naar het offerteformulier of de projectenpagina als zachte volgende stap.",
+          "component": "cta-band full-bleed — twee knoppen naast elkaar: primair 'Offerte aanvragen', secundair 'Bekijk afgeronde projecten'; aardetint achtergrond"
+        }
+      ],
+      "acceptance": [
+        "Aanspreek: u (formeel) — consequent door alle copy",
+        "Telefoonnummer 0681943404 als klikbaar element op mobiel en desktop",
+        "Micro-garantie 'Vrijblijvend – vaste prijs, reactie binnen 48 uur' zichtbaar bij formulier en contactkaart",
+        "Geen prijzen of reviews verzinnen — alleen de 25+ geverifieerde Google-reviews en 4,8-sterrenscore gebruiken",
+        "Werkgebied beperkt tot Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km",
+        "Verboden zinsneden nooit gebruiken: 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'Uw vertrouwde partner', 'Welkom bij', 'Supercharge', 'Ontgrendel uw potentieel'",
+        "Visuele stijl: aardetinten, strak en professioneel, geen speelse animaties of abstracte stijlelementen",
+        "Iconen toegestaan voor contactmiddelen, openingstijden en garantie-badges",
+        "Geen full-bleed sfeeroverload — bewijs en structuur staan centraal",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar"
+      ]
+    }
+  ],
+  "conversion": {
+    "primary_cta": "Offerte aanvragen",
+    "secondary_cta": "Bel voor advies",
+    "objections": [
+      "Wat gaat dit kosten?",
+      "Komen ze de afspraak na?",
+      "Leveren ze netjes en op tijd?"
+    ],
+    "trust_builders": [
+      "Reviews + Google-score",
+      "Voor-na projectfoto’s",
+      "Video-bewijs",
+      "Keurmerken / branchevereniging",
+      "Garantie / waarborg",
+      "tientallen tevreden klanten"
+    ],
+    "friction_reducers": [
+      "Vrijblijvende offerte",
+      "Snel telefonisch bereikbaar",
+      "Gratis inspectie"
+    ],
+    "logic": "Vertrouwen + duidelijke prijs zijn de hefboom. Eén pad: offerte/bellen. Bewijs (voor-na) dicht bij de CTA."
+  },
+  "seo_intent": [
+    {
+      "page": "home",
+      "intent": "commercial",
+      "role": "conversion"
+    },
+    {
+      "page": "offerte",
+      "intent": "transactional",
+      "role": "conversion"
+    },
+    {
+      "page": "projecten",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "gevelwerk",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "binnenafwerking",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "microcement",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "werkwijze",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "over-stucq",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "faq",
+      "intent": "informational",
+      "role": "discovery"
+    },
+    {
+      "page": "contact",
+      "intent": "transactional",
+      "role": "conversion"
+    }
+  ],
+  "design_constraints": {
+    "tone": "Robuust, nuchter, betrouwbaar",
+    "no_go": [
+      "Speelse of luxe-abstracte stijl",
+      "Geen speelse animaties, vage beloftes zonder bewijs, of luxe-taal die niet aansluit bij de werkelijkheid"
+    ],
+    "motion": "subtiel <200ms",
+    "density": "gebalanceerd"
+  },
+  "design_tokens": {
+    "$schema": "design-tokens/v3",
+    "_note": "3 lagen: primitives (LAAG 1, alleen referentie) -> semantics (LAAG 2, GEBRUIK DEZE) -> components (LAAG 3). Gebruik in code en prompts UITSLUITEND semantische namen (color.text.primary). Raak primitives of hardcoded hex nooit direct aan.",
+    "brand": {
+      "name": "Stucq",
+      "siteTitle": "Stucq",
+      "tagline": "50+ projecten in Haarlem. Allemaal op tijd en in budget afgeleverd."
+    },
+    "primitives": {
+      "color": {
+        "bg": "#F5F2EE",
+        "ink": "#1C1814",
+        "accent": "#B05A2F",
+        "muted": "#8C7B6E",
+        "white": "#FFFFFF",
+        "accentHover": "#9b512b",
+        "accentActive": "#8a4928",
+        "surface": "#FFFFFF",
+        "surfaceElevated": "#FFFFFF",
+        "green": "#16A34A",
+        "amber": "#D97706",
+        "red": "#DC2626",
+        "blue": "#2563EB"
+      },
+      "_note": "Bronlaag. Wijzig hier om het hele systeem te hertinten; verwijs in code naar de semantische laag hieronder."
+    },
+    "color": {
+      "background": {
+        "default": "#F5F2EE",
+        "elevated": "#FFFFFF",
+        "overlay": "rgba(0,0,0,.5)"
+      },
+      "text": {
+        "primary": "#1C1814",
+        "secondary": "#8C7B6E",
+        "disabled": "rgba(28,24,20,.4)",
+        "inverse": "#FFFFFF"
+      },
+      "border": {
+        "default": "rgba(28,24,20,.10)",
+        "strong": "rgba(28,24,20,.20)",
+        "focus": "#B05A2F"
+      },
+      "primary": {
+        "default": "#B05A2F",
+        "hover": "#9b512b",
+        "active": "#8a4928",
+        "on": "#FFFFFF"
+      },
+      "surface": {
+        "default": "#FFFFFF",
+        "alt": "#ece9e5",
+        "elevated": "#FFFFFF"
+      },
+      "feedback": {
+        "success": "#16A34A",
+        "warning": "#D97706",
+        "danger": "#DC2626",
+        "info": "#2563EB",
+        "successBg": "#DCFCE7",
+        "warningBg": "#FEF3C7",
+        "dangerBg": "#FEF2F2",
+        "infoBg": "#EFF6FF"
+      },
+      "neutral": {
+        "50": "#F5F2EE",
+        "100": "#EDE8E2",
+        "200": "#DDD5CC",
+        "300": "#C9BEB4",
+        "400": "#B0A296",
+        "500": "#8C7B6E",
+        "600": "#6E5F54",
+        "700": "#52453C",
+        "800": "#352C25",
+        "900": "#1C1814"
+      },
+      "states": {
+        "accentHover": "#8F4420",
+        "success": "#2E6B3E",
+        "warning": "#B07A2F",
+        "danger": "#A02B2B",
+        "info": "#2B5C8A",
+        "line": "#DDD5CC"
+      },
+      "accent": "#B05A2F"
+    },
+    "typography": {
+      "display": "'Space Grotesk','Inter',system-ui,sans-serif",
+      "displayLabel": "Grotesk, zakelijk",
+      "body": "'Inter',system-ui,sans-serif",
+      "googleFonts": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap",
+      "scale": {
+        "base": "17px",
+        "ratio": 1.25,
+        "steps": {
+          "sm": "13.6px",
+          "base": "17px",
+          "md": "21.25px",
+          "lg": "26.56px",
+          "xl": "33.2px",
+          "display": "52px"
+        }
+      },
+      "weight": {
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      },
+      "lineHeight": {
+        "tight": 1.2,
+        "base": 1.55,
+        "relaxed": 1.75
+      }
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "40px",
+      "2xl": "64px",
+      "section": "96px",
+      "_rule": "Never hardcode px values. Always reference spacing.sm, spacing.md etc."
+    },
+    "radius": {
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "24px",
+      "pill": "9999px"
+    },
+    "shadow": {
+      "sm": "0 1px 2px rgba(20,20,30,.06)",
+      "md": "0 4px 16px rgba(20,20,30,.08)",
+      "lg": "0 12px 40px rgba(20,20,30,.12)",
+      "focus": "0 0 0 3px #dfbdac"
+    },
+    "motion": {
+      "fast": "120ms",
+      "base": "200ms",
+      "slow": "360ms",
+      "easing": "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
+      "reduceMotion": "@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}",
+      "intensity": "subtle",
+      "accents": [
+        "fade-in op sectie-intredes (200ms, opacity 0→1)",
+        "scroll-reveal voor voor-na projectkaarten (300ms, translateY 16px→0)",
+        "CTA-knop border-pulse bij hover (outline 2px, 150ms)"
+      ]
+    },
+    "breakpoints": {
+      "xs": "375px",
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px",
+      "2xl": "1536px",
+      "_custom": {
+        "tablet_portrait": "834px",
+        "laptop_sidebar": "900px"
+      },
+      "_rule": "Always test 375px, 834px, 1024px, 1280px. 834px and 900px are common breakpoints."
+    },
+    "components": {
+      "button": {
+        "primary": {
+          "bg": "color.primary.default",
+          "bgHover": "color.primary.hover",
+          "bgActive": "color.primary.active",
+          "text": "color.primary.on",
+          "focusRing": "shadow.focus",
+          "disabledOpacity": "0.4",
+          "minHeight": "44px",
+          "padding": "12px 24px"
+        },
+        "secondary": {
+          "bg": "transparent",
+          "border": "color.border.default",
+          "borderHover": "color.primary.default",
+          "text": "color.text.primary"
+        },
+        "ghost": {
+          "bg": "transparent",
+          "textHover": "color.primary.default",
+          "text": "color.text.secondary"
+        }
+      },
+      "input": {
+        "default": {
+          "border": "color.border.default",
+          "borderFocus": "color.primary.default",
+          "bg": "color.surface.default",
+          "text": "color.text.primary",
+          "minFontSize": "16px"
+        },
+        "error": {
+          "border": "color.feedback.danger"
+        },
+        "disabled": {
+          "opacity": "0.5",
+          "cursor": "not-allowed"
+        }
+      },
+      "card": {
+        "default": {
+          "bg": "color.surface.default",
+          "border": "color.border.default",
+          "radius": "radius.lg",
+          "shadow": "shadow.sm"
+        },
+        "hover": {
+          "shadow": "shadow.md",
+          "transform": "translateY(-2px)",
+          "transition": "200ms ease"
+        }
+      },
+      "nav": {
+        "bg": "color.background.default",
+        "border": "color.border.default",
+        "item": {
+          "text": "color.text.secondary",
+          "textActive": "color.primary.default",
+          "bgActive": "color.surface.alt"
+        },
+        "minHeight": "64px"
+      }
+    },
+    "meta": {
+      "source": "live",
+      "generated_from": "design_dna"
+    }
+  },
+  "design_dna": {
+    "brand_energy": "Betrouwbaarheid, transparantie en vakmanschap – werk dat op tijd en in budget wordt afgeleverd",
+    "references": "Websites van lokale bouwbedrijven in Haarlem met duidelijke voor-na projectfoto's, transparante prijzen en Google-reviews (4.8+ sterren)",
+    "competitors": "We werken op vaste prijs, halen deadlines na, en bewijzen het met 50+ voor-na projectfoto's en 4,8-sterren reviews in Haarlem – terwijl concurrenten vaag blijven over kosten en planning.",
+    "proof": ""
+  },
+  "assumptions": {
+    "confirmed": [
+      "kern.naam",
+      "kern.regio",
+      "kern.leeftijd",
+      "kern.type",
+      "kern.deadline",
+      "doel.actie",
+      "doel.pijn",
+      "doel.succes",
+      "doel.budget",
+      "doel.budgettype",
+      "doel.inclusief",
+      "aanbod.diensten",
+      "aanbod.prijzen",
+      "vertrouwen.bewijs",
+      "vertrouwen.klanten",
+      "vertrouwen.voorna",
+      "vertrouwen.aantalreviews",
+      "niche.specialisaties",
+      "content.beschikbaar",
+      "content.talen",
+      "content.domein",
+      "contact.telefoon",
+      "contact.email",
+      "contact.adres",
+      "visual.stijl",
+      "visual.aanspreek",
+      "visual.kleur",
+      "visual.foto",
+      "technical.platform",
+      "technical.hosting"
+    ],
+    "assumed": [
+      "doelgroep.ideaal",
+      "doelgroep.angst",
+      "doelgroep.waarom",
+      "aanbod.top",
+      "vertrouwen.aantalprojecten",
+      "niche.werkgebied",
+      "niche.specialisatie-detail",
+      "content.niet",
+      "content.verbodenzinnen",
+      "contact.openingstijden",
+      "contact.zoektermen",
+      "contact.regios",
+      "designdna.energie",
+      "designdna.referenties",
+      "designdna.concurrentie"
+    ]
+  },
+  "open_questions": [
+    "Aanleveren of laten maken: logo",
+    "Aanleveren of laten maken: bestaande teksten",
+    "Domeinnaam kiezen/registreren"
+  ],
+  "readiness": {
+    "score": 87,
+    "tier": "go",
+    "blocking": []
+  },
+  "stack": {
+    "framework": "Astro 5.x",
+    "styling": "Vanilla CSS + custom properties",
+    "packageManager": "pnpm",
+    "deploymentTarget": "Cloudflare Pages",
+    "cms": "Geen (statisch)",
+    "forms": "Cloudflare Pages Functions",
+    "analytics": "Plausible",
+    "nodeVersion": "22.x",
+    "language": "TypeScript strict"
+  }
+}

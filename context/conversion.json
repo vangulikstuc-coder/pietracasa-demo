@@ -1,0 +1,27 @@
+{
+  "primary_cta": "Offerte aanvragen",
+  "secondary_cta": "Bel voor advies",
+  "cta_hierarchy": [
+    "Offerte aanvragen",
+    "Bel voor advies"
+  ],
+  "objections": [
+    "Wat gaat dit kosten?",
+    "Komen ze de afspraak na?",
+    "Leveren ze netjes en op tijd?"
+  ],
+  "trust_builders": [
+    "Reviews + Google-score",
+    "Voor-na projectfoto’s",
+    "Video-bewijs",
+    "Keurmerken / branchevereniging",
+    "Garantie / waarborg",
+    "tientallen tevreden klanten"
+  ],
+  "friction_reducers": [
+    "Vrijblijvende offerte",
+    "Snel telefonisch bereikbaar",
+    "Gratis inspectie"
+  ],
+  "logic": "Vertrouwen + duidelijke prijs zijn de hefboom. Eén pad: offerte/bellen. Bewijs (voor-na) dicht bij de CTA."
+}

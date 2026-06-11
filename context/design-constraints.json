@@ -1,0 +1,23 @@
+{
+  "tone": "Robuust, nuchter, betrouwbaar",
+  "style": "Strak & Professioneel",
+  "motion": "ingetogen — reveals, parallax, count-up",
+  "motionTier": "ingetogen",
+  "signature": "gladstrijkende laag die van links naar rechts over het beeld trekt en een strakke wand onthult",
+  "atmosphereIntensity": 1,
+  "livingBackground": false,
+  "filmgrain": false,
+  "density": "gebalanceerd",
+  "trust_signal_style": "Voor-na projectfoto’s",
+  "no_go": [
+    "Speelse of luxe-abstracte stijl",
+    "Geen speelse animaties, vage beloftes zonder bewijs, of luxe-taal die niet aansluit bij de werkelijkheid"
+  ],
+  "build_limits": [
+    "mobile-first 375px",
+    "WCAG AA contrast",
+    "geen carrousels voor kerninhoud",
+    "max 1 primaire CTA per viewport",
+    "gebalanceerd: hero/CTA beeld-gedreven, specs in tabel/icoon"
+  ]
+}

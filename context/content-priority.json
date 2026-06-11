@@ -1,0 +1,172 @@
+{
+  "home": {
+    "above_fold": [
+      "hero + uitkomst + primaire CTA"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "offerte": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "projecten": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "gevelwerk": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "binnenafwerking": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "microcement": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "werkwijze": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "over-stucq": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "faq": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  },
+  "contact": {
+    "above_fold": [
+      "pagina-hero + belofte"
+    ],
+    "early": [
+      "kerninhoud",
+      "bewijs/trust"
+    ],
+    "later": [
+      "detail",
+      "secundaire CTA"
+    ],
+    "omit": [
+      "nieuwsbrief-popup",
+      "carrousel voor kerninhoud"
+    ]
+  }
+}

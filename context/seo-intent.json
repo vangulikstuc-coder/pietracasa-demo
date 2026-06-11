@@ -1,0 +1,78 @@
+{
+  "keywords": [
+    "Stucadoor Haarlem",
+    "gevelwerk",
+    "binnenafwerking",
+    "microcement vloeren",
+    "renovatie op tijd en in budget"
+  ],
+  "regions": [
+    "Haarlem",
+    "Bloemendaal",
+    "Zandvoort en omgeving (tot 15 km)"
+  ],
+  "pages": [
+    {
+      "page": "home",
+      "intent": "commercial",
+      "role": "conversion"
+    },
+    {
+      "page": "offerte",
+      "intent": "transactional",
+      "role": "conversion"
+    },
+    {
+      "page": "projecten",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "gevelwerk",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "binnenafwerking",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "microcement",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "werkwijze",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "over-stucq",
+      "intent": "informational",
+      "role": "conversion"
+    },
+    {
+      "page": "faq",
+      "intent": "informational",
+      "role": "discovery"
+    },
+    {
+      "page": "contact",
+      "intent": "transactional",
+      "role": "conversion"
+    }
+  ],
+  "patterns": [
+    {
+      "q": "\"[dienst] [plaats]\"",
+      "page": "werkgebied/home",
+      "role": "discovery"
+    },
+    {
+      "q": "\"[dienst] kosten\"",
+      "page": "diensten",
+      "role": "conversion"
+    }
+  ]
+}

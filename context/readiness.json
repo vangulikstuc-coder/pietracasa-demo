@@ -1,0 +1,55 @@
+{
+  "score": 87,
+  "tier": "go",
+  "instruction": "Dossier is volledig genoeg — bouw direct; behandel [CONFIRM:]-markers als enige aannames.",
+  "blocking": [],
+  "breakdown": [
+    {
+      "label": "Aanbod helder",
+      "got": 18,
+      "max": 18
+    },
+    {
+      "label": "Doelgroep scherp",
+      "got": 7,
+      "max": 15
+    },
+    {
+      "label": "Kernangst & onderscheid",
+      "got": 8,
+      "max": 8
+    },
+    {
+      "label": "Primaire CTA",
+      "got": 10,
+      "max": 10
+    },
+    {
+      "label": "Bewijs / trust",
+      "got": 15,
+      "max": 15
+    },
+    {
+      "label": "Beeld/assets",
+      "got": 12,
+      "max": 12
+    },
+    {
+      "label": "Visuele richting",
+      "got": 8,
+      "max": 8
+    },
+    {
+      "label": "Open punten laag",
+      "got": 5,
+      "max": 10
+    },
+    {
+      "label": "Niche-kernvelden",
+      "got": 4,
+      "max": 4
+    }
+  ],
+  "contradictions": [],
+  "build_mode": "Premium build"
+}

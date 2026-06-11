@@ -1,0 +1,34 @@
+{
+  "project": "Stucq",
+  "niche": "Stucadoor",
+  "archetype": "trades-plasterer",
+  "positioning": {
+    "tagline": "50+ projecten in Haarlem. Allemaal op tijd en in budget afgeleverd.",
+    "hero": "U weet vooraf wat het kost – en Stucq houdt zich daaraan. Bekijk de voor-na resultaten en vraag vrijblijvend een offerte aan.",
+    "tone": "Vakkundig · Transparant · Betrouwbaar"
+  },
+  "palette": {
+    "primary": "#B05A2F",
+    "background": "#F5F2EE",
+    "text": "#1C1814",
+    "muted": "#8C7B6E",
+    "_note": "See design-tokens.json for exact hex values - this is visual reference only"
+  },
+  "typography": {
+    "displayFamily": "Space Grotesk",
+    "label": "Grotesk, zakelijk"
+  },
+  "toneDescriptors": [
+    "Vakkundig",
+    "Transparant",
+    "Betrouwbaar"
+  ],
+  "motion": {
+    "tier": "ingetogen",
+    "signature": "gladstrijkende laag die van links naar rechts over het beeld trekt en een strakke wand onthult",
+    "intensity": 1,
+    "livingBackground": false,
+    "filmgrain": false
+  },
+  "generatedAt": "2026-06-11T16:39:44.794Z"
+}

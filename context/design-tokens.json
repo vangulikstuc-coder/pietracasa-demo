@@ -1,0 +1,233 @@
+{
+  "$schema": "design-tokens/v3",
+  "_note": "3 lagen: primitives (LAAG 1, alleen referentie) -> semantics (LAAG 2, GEBRUIK DEZE) -> components (LAAG 3). Gebruik in code en prompts UITSLUITEND semantische namen (color.text.primary). Raak primitives of hardcoded hex nooit direct aan.",
+  "brand": {
+    "name": "Stucq",
+    "siteTitle": "Stucq",
+    "tagline": "50+ projecten in Haarlem. Allemaal op tijd en in budget afgeleverd."
+  },
+  "primitives": {
+    "color": {
+      "bg": "#F5F2EE",
+      "ink": "#1C1814",
+      "accent": "#B05A2F",
+      "muted": "#8C7B6E",
+      "white": "#FFFFFF",
+      "accentHover": "#9b512b",
+      "accentActive": "#8a4928",
+      "surface": "#FFFFFF",
+      "surfaceElevated": "#FFFFFF",
+      "green": "#16A34A",
+      "amber": "#D97706",
+      "red": "#DC2626",
+      "blue": "#2563EB"
+    },
+    "_note": "Bronlaag. Wijzig hier om het hele systeem te hertinten; verwijs in code naar de semantische laag hieronder."
+  },
+  "color": {
+    "background": {
+      "default": "#F5F2EE",
+      "elevated": "#FFFFFF",
+      "overlay": "rgba(0,0,0,.5)"
+    },
+    "text": {
+      "primary": "#1C1814",
+      "secondary": "#8C7B6E",
+      "disabled": "rgba(28,24,20,.4)",
+      "inverse": "#FFFFFF"
+    },
+    "border": {
+      "default": "rgba(28,24,20,.10)",
+      "strong": "rgba(28,24,20,.20)",
+      "focus": "#B05A2F"
+    },
+    "primary": {
+      "default": "#B05A2F",
+      "hover": "#9b512b",
+      "active": "#8a4928",
+      "on": "#FFFFFF"
+    },
+    "surface": {
+      "default": "#FFFFFF",
+      "alt": "#ece9e5",
+      "elevated": "#FFFFFF"
+    },
+    "feedback": {
+      "success": "#16A34A",
+      "warning": "#D97706",
+      "danger": "#DC2626",
+      "info": "#2563EB",
+      "successBg": "#DCFCE7",
+      "warningBg": "#FEF3C7",
+      "dangerBg": "#FEF2F2",
+      "infoBg": "#EFF6FF"
+    },
+    "neutral": {
+      "50": "#F5F2EE",
+      "100": "#EDE8E2",
+      "200": "#DDD5CC",
+      "300": "#C9BEB4",
+      "400": "#B0A296",
+      "500": "#8C7B6E",
+      "600": "#6E5F54",
+      "700": "#52453C",
+      "800": "#352C25",
+      "900": "#1C1814"
+    },
+    "states": {
+      "accentHover": "#8F4420",
+      "success": "#2E6B3E",
+      "warning": "#B07A2F",
+      "danger": "#A02B2B",
+      "info": "#2B5C8A",
+      "line": "#DDD5CC"
+    },
+    "accent": "#B05A2F"
+  },
+  "typography": {
+    "display": "'Space Grotesk','Inter',system-ui,sans-serif",
+    "displayLabel": "Grotesk, zakelijk",
+    "body": "'Inter',system-ui,sans-serif",
+    "googleFonts": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap",
+    "scale": {
+      "base": "17px",
+      "ratio": 1.25,
+      "steps": {
+        "sm": "13.6px",
+        "base": "17px",
+        "md": "21.25px",
+        "lg": "26.56px",
+        "xl": "33.2px",
+        "display": "52px"
+      }
+    },
+    "weight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "lineHeight": {
+      "tight": 1.2,
+      "base": 1.55,
+      "relaxed": 1.75
+    }
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "40px",
+    "2xl": "64px",
+    "section": "96px",
+    "_rule": "Never hardcode px values. Always reference spacing.sm, spacing.md etc."
+  },
+  "radius": {
+    "sm": "8px",
+    "md": "12px",
+    "lg": "16px",
+    "xl": "24px",
+    "pill": "9999px"
+  },
+  "shadow": {
+    "sm": "0 1px 2px rgba(20,20,30,.06)",
+    "md": "0 4px 16px rgba(20,20,30,.08)",
+    "lg": "0 12px 40px rgba(20,20,30,.12)",
+    "focus": "0 0 0 3px #dfbdac"
+  },
+  "motion": {
+    "fast": "120ms",
+    "base": "200ms",
+    "slow": "360ms",
+    "easing": "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
+    "reduceMotion": "@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}",
+    "intensity": "subtle",
+    "accents": [
+      "fade-in op sectie-intredes (200ms, opacity 0→1)",
+      "scroll-reveal voor voor-na projectkaarten (300ms, translateY 16px→0)",
+      "CTA-knop border-pulse bij hover (outline 2px, 150ms)"
+    ]
+  },
+  "breakpoints": {
+    "xs": "375px",
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px",
+    "2xl": "1536px",
+    "_custom": {
+      "tablet_portrait": "834px",
+      "laptop_sidebar": "900px"
+    },
+    "_rule": "Always test 375px, 834px, 1024px, 1280px. 834px and 900px are common breakpoints."
+  },
+  "components": {
+    "button": {
+      "primary": {
+        "bg": "color.primary.default",
+        "bgHover": "color.primary.hover",
+        "bgActive": "color.primary.active",
+        "text": "color.primary.on",
+        "focusRing": "shadow.focus",
+        "disabledOpacity": "0.4",
+        "minHeight": "44px",
+        "padding": "12px 24px"
+      },
+      "secondary": {
+        "bg": "transparent",
+        "border": "color.border.default",
+        "borderHover": "color.primary.default",
+        "text": "color.text.primary"
+      },
+      "ghost": {
+        "bg": "transparent",
+        "textHover": "color.primary.default",
+        "text": "color.text.secondary"
+      }
+    },
+    "input": {
+      "default": {
+        "border": "color.border.default",
+        "borderFocus": "color.primary.default",
+        "bg": "color.surface.default",
+        "text": "color.text.primary",
+        "minFontSize": "16px"
+      },
+      "error": {
+        "border": "color.feedback.danger"
+      },
+      "disabled": {
+        "opacity": "0.5",
+        "cursor": "not-allowed"
+      }
+    },
+    "card": {
+      "default": {
+        "bg": "color.surface.default",
+        "border": "color.border.default",
+        "radius": "radius.lg",
+        "shadow": "shadow.sm"
+      },
+      "hover": {
+        "shadow": "shadow.md",
+        "transform": "translateY(-2px)",
+        "transition": "200ms ease"
+      }
+    },
+    "nav": {
+      "bg": "color.background.default",
+      "border": "color.border.default",
+      "item": {
+        "text": "color.text.secondary",
+        "textActive": "color.primary.default",
+        "bgActive": "color.surface.alt"
+      },
+      "minHeight": "64px"
+    }
+  },
+  "meta": {
+    "source": "live",
+    "generated_from": "design_dna"
+  }
+}

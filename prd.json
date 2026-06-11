@@ -1,0 +1,253 @@
+{
+  "project": "Stucq",
+  "archetype": "trades-plasterer",
+  "platform": "Maatwerk (custom code)",
+  "target": "Astro + Cloudflare Pages",
+  "build_command": "pnpm build",
+  "rules": [
+    "Lees CLAUDE.md (het contract) voordat je begint.",
+    "Werk EEN taak per beurt af; daarna build/verify, commit, zet passes:true.",
+    "Verzin geen feiten: alles met [CONFIRM: ...] blijft staan.",
+    "Een taak is pas klaar als pnpm build slaagt."
+  ],
+  "tasks": [
+    {
+      "id": "setup",
+      "title": "Scaffold + tokens + layout",
+      "passes": false,
+      "acceptance": [
+        "Astro-project opgezet in ./site; install slaagt",
+        "context/design-tokens.json omgezet naar CSS custom properties",
+        "Globale layout + header + footer staan",
+        "pnpm build slaagt zonder fouten"
+      ]
+    },
+    {
+      "id": "page_home",
+      "title": "Home-pagina bouwen",
+      "page": "home",
+      "prompt": "prompts/build-home.md",
+      "blueprint": "pages/home.md",
+      "passes": false,
+      "acceptance": [
+        "Aanspreek: u (formeel) – consequent in alle copy",
+        "Bewijs uitsluitend gebaseerd op beschikbare feiten: 4,8 Google-score, 25+ geverifieerde reviews, 50+ projecten in Haarlem sinds 2020",
+        "Geen verzonnen prijzen, reviews, namen of klantlogos – maatwerk-offerte is het enige prijspad",
+        "Verboden zinsneden nooit gebruiken: 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'uw vertrouwde partner', 'Welkom bij', 'Supercharge', 'Ontgrendel uw potentieel', 'In de snelle wereld van vandaag'",
+        "Visuele modus: gebalanceerd – aardetinten, voor-na projectfoto's en drone-beelden als primair bewijsmateriaal, iconen toegestaan voor werkwijze en garanties",
+        "Geen speelse animaties of luxe-abstracte stijlelementen",
+        "Micro-garantie 'Vrijblijvend – vaste prijs, reactie binnen 48 uur' herhalen bij elke CTA-plaatsing",
+        "Keurmerken en branchevereniging-logo's tonen indien beschikbaar – geen placeholders presenteren als echt bewijs",
+        "Primaire CTA 'Offerte aanvragen' geplaatst na eerste bewijs (bewijs-band); zachte stap 'Bekijk afgeronde projecten' als secundaire CTA in hero en galerij",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_offerte",
+      "title": "Offerte-pagina bouwen",
+      "page": "offerte",
+      "prompt": "prompts/build-offerte.md",
+      "blueprint": "pages/offerte.md",
+      "passes": false,
+      "acceptance": [
+        "Aanspreking uitsluitend met 'u' (formeel) door de gehele pagina",
+        "Micro-garantie (vrijblijvend / vaste prijs / 48u reactie) zichtbaar in header én naast het formulier",
+        "Bewijs-strip met 4,8 Google-sterren en 25+ reviews geplaatst vóór het formulier",
+        "Formulier bevat minimale velden: naam, telefoon, e-mail, type werk, omschrijving, postcode",
+        "Geen prijzen of tarieven vermeld – maatwerk-offerte is het enige prijspad",
+        "Uitsluitend bewijs gebruikt dat in de input is bevestigd – geen verzonnen reviews, namen of cijfers",
+        "Visuele stijl: aardetinten, strak, professioneel – geen speelse animaties of luxe-abstracte elementen",
+        "Verboden zinsneden zijn niet gebruikt: geen 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'Uw vertrouwde partner', 'Welkom bij'",
+        "Één beslispad: formulier invullen of direct bellen – geen keuzestress",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_projecten",
+      "title": "Projecten-pagina bouwen",
+      "page": "projecten",
+      "prompt": "prompts/build-projecten.md",
+      "blueprint": "pages/projecten.md",
+      "passes": false,
+      "acceptance": [
+        "Gebruik uitsluitend bewezen feiten: 25+ Google-reviews, 4,8 sterren, 50+ projecten in Haarlem sinds 2020",
+        "Geen verzonnen reviews, namen, cijfers of klantlogo's",
+        "Aanspreking consequent met 'u' (formeel)",
+        "Geen uitroeptekens",
+        "Verboden zinsneden nooit gebruiken: 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'we zorgen ervoor dat je gelukkig bent', 'Uw vertrouwde partner', 'In de snelle wereld van vandaag', 'Supercharge', 'Ontgrendel uw potentieel', 'Welkom bij'",
+        "Geen speelse animaties of luxe-abstracte stijlelementen",
+        "Prijzen altijd op maat – geen vaste tarieven publiceren",
+        "Keurmerken alleen tonen indien beschikbaar en geverifieerd",
+        "Visuele modus: gebalanceerd – aardetinten, voor-na fotogalerij en drone-beelden als primair bewijsmiddel",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_gevelwerk",
+      "title": "Gevelwerk-pagina bouwen",
+      "page": "gevelwerk",
+      "prompt": "prompts/build-gevelwerk.md",
+      "blueprint": "pages/gevelwerk.md",
+      "passes": false,
+      "acceptance": [
+        "Eén heldere primaire CTA (Offerte aanvragen)",
+        "Inhoud sluit aan op het paginadoel",
+        "Mobiel getest op 375px",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_binnenafwerking",
+      "title": "Binnenafwerking-pagina bouwen",
+      "page": "binnenafwerking",
+      "prompt": "prompts/build-binnenafwerking.md",
+      "blueprint": "pages/binnenafwerking.md",
+      "passes": false,
+      "acceptance": [
+        "Aanspreek: u (formeel) – consequent toegepast in alle copy",
+        "Visuele modus: gebalanceerd – aardetinten, voor-na fotografie centraal, geen full-bleed sfeeroverload, geen speelse animaties",
+        "Bewijs: uitsluitend feitelijk bewijs gebruikt (25+ Google-reviews, 4,8 sterren, 50+ projecten, voor-na beelden, keurmerken indien beschikbaar)",
+        "CTA-strategie: primaire CTA na bewijssecties, micro-garantie 'Vrijblijvend – vaste prijs, reactie binnen 48 uur' herhaald bij elke CTA",
+        "Verboden zinsneden: geen van de verboden frasen gebruikt (geen 'luxe afwerking', 'droomproject', 'uw vertrouwde partner' e.d.)",
+        "Prijspad: geen vaste prijzen vermeld – maatwerk-offerte is het enige prijspad",
+        "Sectiecount: 9 secties met gedifferentieerde opbouw passend bij dienstdetailpagina",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_microcement",
+      "title": "Microcement-pagina bouwen",
+      "page": "microcement",
+      "prompt": "prompts/build-microcement.md",
+      "blueprint": "pages/microcement.md",
+      "passes": false,
+      "acceptance": [
+        "Eén heldere primaire CTA (Offerte aanvragen)",
+        "Inhoud sluit aan op het paginadoel",
+        "Mobiel getest op 375px",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_werkwijze",
+      "title": "Werkwijze-pagina bouwen",
+      "page": "werkwijze",
+      "prompt": "prompts/build-werkwijze.md",
+      "blueprint": "pages/werkwijze.md",
+      "passes": false,
+      "acceptance": [
+        "Eén heldere primaire CTA (Offerte aanvragen)",
+        "Inhoud sluit aan op het paginadoel",
+        "Mobiel getest op 375px",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_over-stucq",
+      "title": "Over stucq-pagina bouwen",
+      "page": "over-stucq",
+      "prompt": "prompts/build-over-stucq.md",
+      "blueprint": "pages/over-stucq.md",
+      "passes": false,
+      "acceptance": [
+        "Aanspreek: u (formeel)",
+        "Bewijs uitsluitend gebaseerd op beschikbaar materiaal: Google-reviews (25+, 4,8 sterren), voor-na projectfoto's, video's, keurmerken/branchevereniging, garantie/waarborg",
+        "Geen verzonnen reviews, klantcitaten, namen of extra cijfers",
+        "Geen speelse animaties, luxe-abstracte stijlelementen of full-bleed sfeeroverload",
+        "Verboden zinsneden zijn niet gebruikt: geen 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'Uw vertrouwde partner', 'Welkom bij', 'Supercharge', 'Ontgrendel uw potentieel' of vage beloftes zonder bewijs",
+        "Prijspad: uitsluitend maatwerk-offerte; geen vaste prijzen of pakketten vermeld",
+        "Micro-garantie opgenomen: 'Vrijblijvend – vaste prijs, reactie binnen 48 uur'",
+        "Werkgebied expliciet begrensd: Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_faq",
+      "title": "Faq-pagina bouwen",
+      "page": "faq",
+      "prompt": "prompts/build-faq.md",
+      "blueprint": "pages/faq.md",
+      "passes": false,
+      "acceptance": [
+        "Eén heldere primaire CTA (Offerte aanvragen)",
+        "Inhoud sluit aan op het paginadoel",
+        "Mobiel getest op 375px",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "page_contact",
+      "title": "Contact-pagina bouwen",
+      "page": "contact",
+      "prompt": "prompts/build-contact.md",
+      "blueprint": "pages/contact.md",
+      "passes": false,
+      "acceptance": [
+        "Aanspreek: u (formeel) — consequent door alle copy",
+        "Telefoonnummer 0681943404 als klikbaar element op mobiel en desktop",
+        "Micro-garantie 'Vrijblijvend – vaste prijs, reactie binnen 48 uur' zichtbaar bij formulier en contactkaart",
+        "Geen prijzen of reviews verzinnen — alleen de 25+ geverifieerde Google-reviews en 4,8-sterrenscore gebruiken",
+        "Werkgebied beperkt tot Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km",
+        "Verboden zinsneden nooit gebruiken: 'Luxe afwerking', 'kunstzinnige creaties', 'droomproject', 'Uw vertrouwde partner', 'Welkom bij', 'Supercharge', 'Ontgrendel uw potentieel'",
+        "Visuele stijl: aardetinten, strak en professioneel, geen speelse animaties of abstracte stijlelementen",
+        "Iconen toegestaan voor contactmiddelen, openingstijden en garantie-badges",
+        "Geen full-bleed sfeeroverload — bewijs en structuur staan centraal",
+        "Tone of voice: Vakkundig · Transparant · Betrouwbaar",
+        "pnpm build slaagt zonder fouten",
+        "Geen TODO/PLACEHOLDER/lorem in src/ voor deze pagina",
+        "Responsive op 375 / 768 / 1280px"
+      ]
+    },
+    {
+      "id": "demo-beelden",
+      "title": "AI-beelden koppelen uit public/images/ (demo)",
+      "passes": false,
+      "acceptance": [
+        "Alle foto-slots gevuld met de KLAARSTAANDE AI-beelden uit public/images/ — exacte slot-mapping staat in public/images/README.md; GEEN Pexels/Unsplash/stock ophalen",
+        "Gekoppeld via astro:assets (AVIF/WebP, expliciete width/height, hero fetchpriority=\"high\", rest lazy)",
+        "Voor-na toggle-galerijen gebruiken de losse voor/na-paren (galerij-*-voor/na), hero's de samengestelde splits",
+        "Alles gemarkeerd als demo: data-demo=\"true\" op elk beeld; DEMO-waarschuwing in public/images/README.md blijft staan",
+        "pnpm build slaagt zonder fouten"
+      ]
+    },
+    {
+      "id": "qa",
+      "title": "Eindcontrole hele site",
+      "passes": false,
+      "acceptance": [
+        "pnpm build slaagt",
+        "Elke pagina heeft precies 1 primaire CTA (\"Offerte aanvragen\")",
+        "Lighthouse mobile performance >= 90",
+        "Alle [CONFIRM:]-markers verzameld in open-questions.md",
+        "prefers-reduced-motion gerespecteerd"
+      ]
+    }
+  ]
+}
