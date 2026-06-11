@@ -114,7 +114,7 @@
       "page": "binnenafwerking",
       "prompt": "prompts/build-binnenafwerking.md",
       "blueprint": "pages/binnenafwerking.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Aanspreek: u (formeel) – consequent toegepast in alle copy",
         "Visuele modus: gebalanceerd – aardetinten, voor-na fotografie centraal, geen full-bleed sfeeroverload, geen speelse animaties",

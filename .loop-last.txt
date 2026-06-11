@@ -1,13 +1,10 @@
-De git-schrijfcommando's (`git add`/`git commit`) worden in deze sessie door de permission-instellingen geblokkeerd — alle wijzigingen staan wel klaar in de working tree. De taak zelf is volledig afgerond en geverifieerd.
+Git-commando's vereisen in deze sessie goedkeuring (alleen pnpm/npm/npx/node staan op de allowlist). De eerdere commits in de log heten allemaal "beurt N (auto)" — de lus-runner commit dus zelf na elke beurt, zoals ook bij beurt 2–6 gebeurde. Alle bestandswijzigingen staan klaar in de working tree.
 
-**Beurt 6 — page_gevelwerk afgerond:**
+**Beurt 7 afgerond: page_binnenafwerking gebouwd en op `passes: true` gezet.**
 
-- **Gebouwd:** `site/src/pages/gevelwerk.astro` volgens de blueprint (hero → kern-inhoud → bewijs → CTA):
-  1. Compacte full-bleed beeld-hero met de voor-na split `hero-gevelwerk.jpg`, sweep-signature, H1 "Gevelwerk in Haarlem – vaste prijs, op tijd opgeleverd", primaire CTA + micro-garantie boven de vouw op 375px.
-  2. Kern-inhoud: genummerde werklijst (gevelstuc, herstel/renovatie, buitenafwerking) naast het steiger-beeld, plus een 3-stappenrij "Vóór de start op papier" met iconen.
-  3. Bewijs: voor-na toggle van het gevelproject, feitenlijst (4,8 sterren / 25+ reviews / 50+ projecten / KvK & verzekerd), secundaire link naar /projecten/ en de drone-still met chip.
-  4. CTA-band met sfeerbeeld, scrim, primaire knop, belnummer en micro-garantie.
-- **Geverifieerd:** `pnpm build` slaagt (5 pagina's), geen TODO/PLACEHOLDER/lorem, geen verboden zinsneden, consequent u-vorm, geen uitroeptekens, 2× primaire CTA in gescheiden viewports (zelfde patroon als home), alle beelden via astro:assets met `data-demo="true"`, hero gepreload als AVIF.
-- **Administratie:** `page_gevelwerk` staat op `passes: true` in prd.json; progress.md heeft een beurt-6-notitie met aandachtspunten voor de volgende beurt (binnenafwerking: 9 secties vereist, hero-beeld nog kopiëren).
-
-**Actie nodig:** de commit kon niet uitgevoerd worden omdat git-commando's nu goedkeuring vragen. Commit handmatig met `git add -A && git commit -m "beurt 6 (auto): gevelwerk-pagina"`, of geef git-permissies vrij voor de volgende lus-beurt — dan neemt die beurt deze wijzigingen mee.
+Wat er is gedaan:
+- **`site/src/pages/binnenafwerking.astro`** aangemaakt met alle 9 blueprint-secties: split-hero (beeld links op desktop, content eerst op mobiel zodat de primaire CTA boven de vouw staat) met micro-garantiebadge en sweep-signature, probleem/oplossing-band, dienstaanbod als 6 icoonkaarten (plafond, muur, gladstrijken, spuitwerk, herstel, decoratief), voor-na toggle-galerij plus "tijdens"-werkfoto met secundaire link naar /projecten/, review-scoreblok (4,8 ★ / 25+ reviews, geen verzonnen citaten), 4-stappen werkwijze, werkgebied-band (Haarlem/Bloemendaal/Zandvoort/15 km + klikbare telefoon en e-mail), garantiebalk met keurmerk-noot zonder nep-logo's, en CTA-band met herhaalde micro-garantie.
+- `hero-binnenafwerking.jpg` gekopieerd naar `site/src/assets/images/hero/`; alle 5 beelden via astro:assets met `data-demo="true"`, hero met `fetchpriority="high"` + AVIF-preload.
+- **Verificatie**: `pnpm build` slaagt (6 pagina's). Greps schoon: geen TODO/lorem, geen verboden zinsneden, geen jij-vorm, geen uitroeptekens in copy, 1× h1, 2× `btn--primary` in gescheiden viewports.
+- Bewuste afwijking van de blueprint: locatielabels generiek gehouden ("Haarlem", "regio Haarlem") in plaats van het voorbeeld "Haarlem-Noord, 2024" — de demo-beelden-README verbiedt verzonnen wijken en opleverdata.
+- `prd.json` → `page_binnenafwerking: passes: true`; `progress.md` aangevuld met instructies voor de volgende beurt (page_microcement).
