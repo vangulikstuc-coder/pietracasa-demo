@@ -1,11 +1,11 @@
-/* Cloudflare Pages Function — verwerkt offerte-aanvragen van /offerte/.
+/* Cloudflare Pages Function — verwerkt offerte-aanvragen van /offerte-aanvragen/.
    Lead-aflevering (e-mail/CRM-koppeling) is nog niet geconfigureerd — zie open-questions.md.
    Tot die tijd: aanvraag loggen (zichtbaar in Cloudflare Pages-logs) en bevestigen.
 
    Twee antwoordpaden:
    - fetch (Accept: application/json) → JSON, de pagina toont zelf de succes-/foutstatus;
-   - native form-POST (zonder JS) → 303-redirect naar /offerte/#aanvraag-ontvangen of
-     /offerte/#aanvraag-mislukt; die panelen worden daar via CSS :target zichtbaar. */
+   - native form-POST (zonder JS) → 303-redirect naar /offerte-aanvragen/#aanvraag-ontvangen of
+     /offerte-aanvragen/#aanvraag-mislukt; die panelen worden daar via CSS :target zichtbaar. */
 
 const VERPLICHTE_VELDEN = [
   'naam',
@@ -25,7 +25,7 @@ function wilJson(request: Request): boolean {
 }
 
 function terugNaarFormulier(request: Request, anker: string): Response {
-  return Response.redirect(new URL(`/offerte/${anker}`, request.url).href, 303);
+  return Response.redirect(new URL(`/offerte-aanvragen/${anker}`, request.url).href, 303);
 }
 
 export async function onRequestPost({ request }: PagesContext): Promise<Response> {

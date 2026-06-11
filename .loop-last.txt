@@ -1,11 +1,18 @@
-De commit hoeft niet handmatig: `build.sh` (de bouw-lus zelf) doet na elke beurt automatisch `git add -A && git commit -m "beurt N (auto)"` — vandaar alle eerdere "(auto)"-commits, en vandaar dat losse git-commando's hier buiten de allowlist vallen. Alle wijzigingen staan klaar en worden direct na deze beurt gecommit.
+De commit hoeft niet door mij te gebeuren: `build.sh` (regel 17) committeert na elke beurt zelf met `git add -A && git commit -m "beurt N (auto)"` — vandaar dat alle eerdere commits "(auto)" heten en git-commando's hier buiten de allowlist vallen. Alle wijzigingen staan klaar in de working tree; de taak is afgerond.
 
-**Beurt 16 — polish-stappen is klaar.** Samenvatting:
+## Beurt 17 — polish-slugs afgerond
 
-- **Geharmoniseerd naar 5 stappen** (werkwijze-pagina leidend): home, offerte en binnenafwerking tonen nu exact dezelfde vijf staptitels als de werkwijze-pagina — Opname op locatie → Offerte met vaste prijs → Planning op papier → Uitvoering volgens planning → Oplevering. Kopjes en intro's zeggen nu "vijf vaste stappen" (home zei "vier", binnenafwerking ook).
-- **FAQ was al goed** ("vijf vaste stappen") en is ongewijzigd. De gevelwerk-sectie "Vóór de start op papier" is bewust gelaten: dat zijn 3 punten over de prijsafspraak, zonder zichtbaar stappen-aantal in de copy — alleen de HTML-comment heb ik hernoemd zodat "drie stappen" nergens meer in de bron staat.
-- **Meegenomen detail**: binnenafwerking beloofde "Vaste offerte binnen 48 uur", wat het bevestigde feit (reactie binnen 48 uur) overstatete; dat is nu "binnen 48 uur plannen wij een opname".
-- **Techniek**: pin- en calendar-iconen toegevoegd waar ze ontbraken, stappen-grids van 4 naar 5 kolommen op desktop.
-- **Geverifieerd**: `pnpm build` slaagt (11 pagina's); dist-audit toont uitsluitend "vijf (vaste) stappen" en identieke staptitels op alle vier de pagina's; primaire-CTA-aantallen ongewijzigd; geen verboden zinsneden, jij-vorm, uitroeptekens of TODO's.
+**Wat is er gedaan:** alle vijf routes hernoemd naar de SEO-slugs uit `context/sitemap.md`, met redirects van de oude paden.
 
-`prd.json` staat op `passes: true` voor polish-stappen en progress.md is bijgewerkt. Volgende beurt: **polish-slugs** (routes hernoemen naar de SEO-spec met redirects).
+- **Bestanden verplaatst:** `offerte.astro` → `offerte-aanvragen.astro`, `faq.astro` → `veelgestelde-vragen.astro`, en de drie dienstpagina's naar `src/pages/diensten/` als `gevelwerk-buitenafwerking.astro`, `binnenafwerking-renovatie.astro` en `microcement-vloeren.astro` (relative imports daar één niveau opgehoogd).
+- **Links bijgewerkt in 13 bestanden:** Header (incl. drawer en `isActive`), Footer, alle pagina's, 404, en de Pages Function `api/offerte.ts` die nu naar `/offerte-aanvragen/#…` redirect. Het formulier-endpoint `/api/offerte` zelf is bewust ongewijzigd.
+- **Redirects:** de vijf oude paden staan in de Astro `redirects`-config (astro.config.mjs).
+
+**Verificatie (alle acceptatiecriteria gehaald):**
+- `pnpm build` slaagt: 11 pagina's + 5 redirect-pagina's.
+- Live getest via `pnpm preview`: alle 5 oude paden geven een **301** naar het juiste nieuwe pad (de statische fallback-pagina's hebben bovendien meta-refresh + noindex + canonical), alle 5 nieuwe routes serveren een echte pagina met status 200.
+- Nieuw audit-script `site/scripts/link-audit.mjs`: 436 interne verwijzingen in dist gecontroleerd, **0 kapot**.
+- `sitemap-0.xml` bevat uitsluitend de 10 nieuwe paden; canonicals en og:url volgen automatisch uit `Astro.url`.
+- Geen regressie: 1× h1 en 3× btn--primary per geraakte pagina, identiek aan vóór de wijziging.
+
+Beide audit-scripts (`link-audit.mjs`, `check-redirects.mjs`) blijven staan — die zijn direct herbruikbaar voor de latere polish-qa-beurt. `prd.json` staat op `passes: true` voor polish-slugs en progress.md is bijgewerkt met aanwijzingen voor de volgende beurt (polish-koppen). Eén aandachtspunt genoteerd: dist bevat lokale iCloud-duplicaten (`index 2.html`) die gitignored zijn en nooit deployen, maar dist-greps kunnen vervuilen.

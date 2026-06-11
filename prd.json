@@ -280,7 +280,7 @@
       "title": "Polish: routes naar SEO-spec (sitemap.md)",
       "prompt": "Hernoem de routes naar de slugs uit context/sitemap.md: /offerte -> /offerte-aanvragen, /faq -> /veelgestelde-vragen, /gevelwerk -> /diensten/gevelwerk-buitenafwerking, /binnenafwerking -> /diensten/binnenafwerking-renovatie, /microcement -> /diensten/microcement-vloeren. Werk ALLE interne links, sitemap, canonicals en de Pages Function-verwijzingen bij. Zet redirects van de oude paden naar de nieuwe (Astro redirects-config).",
       "blueprint": "",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Alle 5 routes matchen de sitemap-spec; oude paden geven een redirect, geen 404",
         "Nul kapotte interne links (controleer programmatisch in dist/)",

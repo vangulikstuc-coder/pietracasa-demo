@@ -7,4 +7,12 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://stucq.pages.dev',
   integrations: [sitemap()],
+  // Oude slugs -> SEO-routes uit context/sitemap.md (polish-slugs).
+  redirects: {
+    '/offerte': '/offerte-aanvragen',
+    '/faq': '/veelgestelde-vragen',
+    '/gevelwerk': '/diensten/gevelwerk-buitenafwerking',
+    '/binnenafwerking': '/diensten/binnenafwerking-renovatie',
+    '/microcement': '/diensten/microcement-vloeren',
+  },
 });

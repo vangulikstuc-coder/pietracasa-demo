@@ -1,8 +1,8 @@
 ---
 const diensten = [
-  { href: '/gevelwerk/', label: 'Gevelwerk' },
-  { href: '/binnenafwerking/', label: 'Binnenafwerking' },
-  { href: '/microcement/', label: 'Microcement vloeren' },
+  { href: '/diensten/gevelwerk-buitenafwerking/', label: 'Gevelwerk' },
+  { href: '/diensten/binnenafwerking-renovatie/', label: 'Binnenafwerking' },
+  { href: '/diensten/microcement-vloeren/', label: 'Microcement vloeren' },
 ];
 
 const navItems = [
@@ -68,7 +68,7 @@ const dienstActive = diensten.some((d) => isActive(d.href));
       </ul>
     </nav>
 
-    <a href="/offerte/" class="btn btn--secondary site-header__cta">Offerte aanvragen</a>
+    <a href="/offerte-aanvragen/" class="btn btn--secondary site-header__cta">Offerte aanvragen</a>
 
     <button
       type="button"
@@ -136,14 +136,14 @@ const dienstActive = diensten.some((d) => isActive(d.href));
         ))
       }
       <li>
-        <a href="/faq/" class:list={['drawer__link', { 'is-active': isActive('/faq/') }]}>
+        <a href="/veelgestelde-vragen/" class:list={['drawer__link', { 'is-active': isActive('/veelgestelde-vragen/') }]}>
           Veelgestelde vragen
         </a>
       </li>
     </ul>
   </nav>
   <div class="drawer__footer">
-    <a href="/offerte/" class="btn btn--primary">Offerte aanvragen</a>
+    <a href="/offerte-aanvragen/" class="btn btn--primary">Offerte aanvragen</a>
     <a href="tel:0681943404" class="drawer__phone">Bel voor advies: 06 81 94 34 04</a>
   </div>
 </div>
