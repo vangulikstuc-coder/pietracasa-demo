@@ -208,7 +208,7 @@
       "page": "contact",
       "prompt": "prompts/build-contact.md",
       "blueprint": "pages/contact.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Aanspreek: u (formeel) — consequent door alle copy",
         "Telefoonnummer 0681943404 als klikbaar element op mobiel en desktop",

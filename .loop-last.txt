@@ -1,16 +1,17 @@
-Commit-rechten zijn in deze sessie geblokkeerd — en dat verklaart ook de git-historie: elke eerdere commit heet "beurt N (auto)", dus de loop-wrapper commit zelf na afloop van de beurt (vandaar ook de `.loop-last.txt`-mutatie). Het werk staat klaar in de working tree; de auto-commit pakt het op.
+De commit hoef ik niet zelf te doen: `build.sh` regel 17 commit na elke beurt automatisch (`git add -A && git commit -qm "beurt N (auto)"`) — vandaar de bestaande "(auto)"-commits. De git-schrijfacties zijn in deze sandbox geblokkeerd, dus ik laat de wrapper dat afronden. De taak zelf is klaar en geverifieerd.
 
-**Beurt 11 afgerond: taak `page_faq` is gebouwd en op `passes: true` gezet.**
+## Beurt 12 — page_contact afgerond
 
-Wat er staat:
+**Gebouwd:** `site/src/pages/contact.astro` met alle 7 blueprint-secties, plus een nieuwe Cloudflare Pages Function `site/functions/api/contact.ts` voor het formulier.
 
-- **`site/src/pages/faq.astro`** — drie blueprint-secties:
-  1. **Tekst-hero** (werkwijze-patroon met rustige primary-gloed): H1 "Antwoord op uw vragen over kosten, planning en werkwijze", primaire CTA + telefoonlink + micro-garantie boven de vouw.
-  2. **FAQ gegroepeerd, bezwaren eerst** — 4 thema's (kosten en vaste prijs → planning en doorlooptijd → werkgebied en diensten → garantie en afspraken) met in totaal 14 vragen als native `<details name="…">`-accordion: exclusief-open per groep, 44px touch targets, focus-visible outline, roterend plus-icoon. Sticky intro-kolom met thema-ankerlinks op desktop.
-  3. **CTA-band "Nog een vraag?"** met cta-sfeerbeeld + scrim, primaire CTA, klikbare telefoon- en maillink. Bewust géén link naar `/contact/` — die pagina bestaat nog niet (volgende taak).
-- **FAQPage JSON-LD** (14 Questions) in de `<head>` via de head-slot, naast de bestaande LocalBusiness-data.
-- **Feiten-discipline**: alleen bevestigde feiten in de antwoorden (vaste prijs, 48u reactie, 50+ projecten sinds 2020, 4,8★/25+ reviews, werkgebied tot 15 km, KvK-geregistreerd en verzekerd). Geen doorlooptijden of tarieven verzonnen — "verschilt per type werk; standaardtermijnen noemen wij niet".
-- **Verificatie**: `pnpm build` slaagt (10 pagina's). Checks schoon: geen verboden zinsneden, geen jij-vorm, geen uitroeptekens in copy, geen TODO/lorem, geen hardcoded hex, 1× h1, 2× micro-garantie, 3× `btn--primary` in dist (gelijk aan alle andere pagina's). Screenshots blijven in deze sandbox niet mogelijk (genoteerd voor de qa-beurt); responsive geverifieerd via statische CSS-review van de hergebruikte, eerder geteste patronen.
-- **Administratie**: `prd.json` → `page_faq: passes: true`; beurt-log + aanwijzingen voor de volgende beurt (page_contact) in `progress.md`.
+- **Paginaheader** (aardetint): titel + dominant klikbaar telefoonnummer 06 81 94 34 04 in display-formaat.
+- **Twee paden**: bel-kaart en mail-kaart met iconen, micro-garantie direct eronder (AC: zichtbaar bij contactkaart).
+- **Contactformulier**: naam, telefoon, e-mail, omschrijving — zelfde validatie/honeypot/no-JS-fallback-patroon als /offerte/, micro-garantie onder de verzendknop. De function logt en bevestigt; lead-aflevering staat nog open in open-questions.md.
+- **Werkgebied**: schematische SVG-radiuskaart (15 km, Haarlem/Bloemendaal/Zandvoort) met disclaimer, hergebruikt van de over-pagina.
+- **Openingstijden**: tabel per dag (ma–vr 7:00–17:00, weekend gesloten — afgeleid uit contact.json) met gemarkeerde spoed-noot.
+- **Vertrouwensband** (donker): 4,8★ Google · 50+ projecten sinds 2020 · vaste prijs op schrift.
+- **CTA-band** (vlak aardetint, bewust geen sfeerbeeld i.v.m. "geen full-bleed sfeeroverload"): primair "Offerte aanvragen", secundair "Bekijk afgeronde projecten".
 
-Volgende beurt: **page_contact** — formulier-patroon hergebruiken uit `offerte.astro` + Pages Function, en daarna de faq-CTA-band eventueel naar `/contact/` laten linken.
+**Geverifieerd:** `pnpm build` slaagt (11 pagina's). Geen TODO/lorem, geen verboden zinsneden, geen jij-vorm, geen hardcoded hex, 1× h1, 7× klikbare tel-link, 3× micro-garantie. Het enige uitroepteken is "Bedankt!" uit de verplichte microcopy. 3× `btn--primary` in dist (submit, CTA-band, drawer) — gelijk aan alle andere pagina's, in gescheiden viewports. De bestaande header/footer-links naar /contact/ werken nu.
+
+**Administratie:** `page_contact` staat op `passes: true` in prd.json, beurtverslag staat in progress.md. Resterende taken: **demo-beelden** en **qa**.
