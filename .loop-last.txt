@@ -1,10 +1,14 @@
-Git-commando's vereisen in deze sessie goedkeuring (alleen pnpm/npm/npx/node staan op de allowlist). De eerdere commits in de log heten allemaal "beurt N (auto)" — de lus-runner commit dus zelf na elke beurt, zoals ook bij beurt 2–6 gebeurde. Alle bestandswijzigingen staan klaar in de working tree.
+Bevestigd: `build.sh` (regel 17) commit zelf na elke beurt met `git add -A && git commit -qm "beurt N (auto)"` — daarom vereisen mijn git-commando's hier goedkeuring en is zelf committen niet nodig. De lus-administratie is verder compleet.
 
-**Beurt 7 afgerond: page_binnenafwerking gebouwd en op `passes: true` gezet.**
+## Beurt 8 afgerond — Microcement-pagina
 
-Wat er is gedaan:
-- **`site/src/pages/binnenafwerking.astro`** aangemaakt met alle 9 blueprint-secties: split-hero (beeld links op desktop, content eerst op mobiel zodat de primaire CTA boven de vouw staat) met micro-garantiebadge en sweep-signature, probleem/oplossing-band, dienstaanbod als 6 icoonkaarten (plafond, muur, gladstrijken, spuitwerk, herstel, decoratief), voor-na toggle-galerij plus "tijdens"-werkfoto met secundaire link naar /projecten/, review-scoreblok (4,8 ★ / 25+ reviews, geen verzonnen citaten), 4-stappen werkwijze, werkgebied-band (Haarlem/Bloemendaal/Zandvoort/15 km + klikbare telefoon en e-mail), garantiebalk met keurmerk-noot zonder nep-logo's, en CTA-band met herhaalde micro-garantie.
-- `hero-binnenafwerking.jpg` gekopieerd naar `site/src/assets/images/hero/`; alle 5 beelden via astro:assets met `data-demo="true"`, hero met `fetchpriority="high"` + AVIF-preload.
-- **Verificatie**: `pnpm build` slaagt (6 pagina's). Greps schoon: geen TODO/lorem, geen verboden zinsneden, geen jij-vorm, geen uitroeptekens in copy, 1× h1, 2× `btn--primary` in gescheiden viewports.
-- Bewuste afwijking van de blueprint: locatielabels generiek gehouden ("Haarlem", "regio Haarlem") in plaats van het voorbeeld "Haarlem-Noord, 2024" — de demo-beelden-README verbiedt verzonnen wijken en opleverdata.
-- `prd.json` → `page_binnenafwerking: passes: true`; `progress.md` aangevuld met instructies voor de volgende beurt (page_microcement).
+**Wat is gebouwd:** `site/src/pages/microcement.astro` volgens het 4-secties-blueprint:
+
+1. **Pagina-hero** — full-bleed resultaat-shot (`hero-microcement.jpg`, preload + fetchpriority high), sweep-signature, primaire CTA "Offerte aanvragen" + belnummer + micro-garantie boven de vouw.
+2. **Kern-inhoud** — genummerde toepassingen-lijst (naadloze vloeren, badkamers, renovatie over bestaande ondergrond) naast `dienst-microcement.jpg`.
+3. **Kosten & doorlooptijd** — vier Q&A-icoonkaarten, omdat het blueprint expliciet vroeg om veelgestelde vragen over kosten en doorlooptijd. Géén bedragen of doorlooptijden verzonnen: vaste prijs na inspectie op locatie is het enige prijspad, planning staat in de offerte.
+4. **Bewijs + CTA** — voor-na toggle met het vloer-paar, feitenlijst (4,8 sterren, 50+ projecten, KvK & verzekerd), secundaire link naar /projecten/, en de CTA-band met sfeerbeeld.
+
+**Verificatie:** `pnpm build` slaagt (7 pagina's). Checks schoon: geen TODO/lorem, geen verboden zinsneden, consequent u-vorm, geen uitroeptekens, 1× h1, alle 5 beelden via astro:assets met `data-demo="true"`. Het aantal primaire CTA's in de dist-HTML (3, incl. mobiele drawer) is identiek aan alle bestaande pagina's.
+
+**Administratie:** `page_microcement` staat op `passes: true` in prd.json; progress.md heeft notities voor de volgende beurt (page_werkwijze — geen eigen hero-beeld beschikbaar, tekstkop aanbevolen). De commit volgt automatisch via build.sh zodra deze beurt eindigt.

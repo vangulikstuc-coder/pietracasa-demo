@@ -135,7 +135,7 @@
       "page": "microcement",
       "prompt": "prompts/build-microcement.md",
       "blueprint": "pages/microcement.md",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Eén heldere primaire CTA (Offerte aanvragen)",
         "Inhoud sluit aan op het paginadoel",
