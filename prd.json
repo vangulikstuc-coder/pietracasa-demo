@@ -294,7 +294,7 @@
       "title": "Polish: heading-afbreking",
       "prompt": "Koppen breken lelijk af ('Haar-lem', 'vas-te prijs', 'opge-leverd'). Zet hyphenation uit op alle headings (hyphens: manual + geen overflow-wrap die woorden splitst) en gebruik text-wrap: balance. Controleer alle paginakoppen op 375px en 1280px.",
       "blueprint": "",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Geen enkel afgebroken woord meer in h1/h2/h3 op 375px en 1280px",
         "Geen overflow of horizontale scroll ontstaan door de fix",

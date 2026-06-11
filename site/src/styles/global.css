@@ -48,8 +48,11 @@ h4 {
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   letter-spacing: -0.02em;
-  overflow-wrap: break-word;
-  hyphens: auto;
+  /* Geen auto-afbreking in koppen ("Haar-lem", "vas-te"): woorden wrappen heel.
+     scripts/heading-audit.mjs bewijst dat elk kopwoord op één regel past
+     op 320–1280px, dus break-word is hier niet nodig als vangnet. */
+  overflow-wrap: normal;
+  hyphens: manual;
   text-wrap: balance;
 }
 
