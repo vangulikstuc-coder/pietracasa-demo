@@ -1,1 +1,23 @@
-Error: Reached max turns (50)
+De polish-qa-taak is afgerond en alle administratie is bijgewerkt. Eén opmerking over de commit: `git add/commit` wordt in deze sandbox-sessie geweigerd, maar dat is geen probleem — de bouw-lus zelf (`build.sh`, regel 17) doet na elke beurt automatisch `git add -A && git commit -m "beurt N (auto)"`, precies zoals bij alle vorige beurten. Alle wijzigingen staan op schijf en worden direct na deze beurt gecommit.
+
+## Resultaat beurt 22 — polish-qa (eindcontrole polish-ronde)
+
+Alle acceptatiecriteria gehaald, op een verse build geverifieerd:
+
+**Build & audits**
+- `pnpm build` slaagt: 11 pagina's + 5 redirect-fallbacks, 0 fouten.
+- Link-audit: 444 interne verwijzingen, 0 kapot.
+- Heading-audit: alle koppen passen per woord op één regel op 320/375/1280px — geen afbrekingen, geen overflow.
+- Contrast-audit: alle tekst-op-beeld-zones AA, inclusief de nieuwe achtergrond-textures (donkere band minimaal 11,3:1).
+- Card-crop-audit: 21/21 — geen afgesneden hoofden op de dienstkaarten.
+
+**Redirects (in `pnpm preview` getest)**
+Alle 5 oude slugs (`/offerte/`, `/faq/`, `/gevelwerk/`, `/binnenafwerking/`, `/microcement/`) geven een 301 naar het juiste nieuwe pad; alle 5 nieuwe routes serveren een echte pagina (200).
+
+**Regressie-checks**
+Per pagina exact 1× h1 en 3× `btn--primary` (projecten 2×, incl. verborgen drawer-CTA — conform max 1 per viewport). Nul verboden zinsneden, nul jij/jouw-vormen, nul TODO/PLACEHOLDER/lorem (de 2 grep-hits zijn CSS `::placeholder`-selectors). Het enige zichtbare uitroepteken is de voorgeschreven succes-microcopy "Bedankt! We nemen contact op.". Stappen-consistentie: overal "vijf (vaste) stappen". 69/69 afbeeldingen dragen `data-demo="true"`. Horizontale-scroll-check 375px: geen `100vw`, geen vaste breedtes ≥376px.
+
+**Administratie**
+- `open-questions.md`: nieuwe sectie "Uit de polish-ronde" met samenvatting van beurt 15–21 plus drie nieuwe beslispunten (secundaire-tekst-token `#8C7B6E` haalt site-breed ~3,5:1; bewuste hyphens-afwijking van tech-constraints.md; redirects na eerste Cloudflare-deploy live verifiëren).
+- `progress.md`: eindrapport beurt 22 toegevoegd.
+- `prd.json`: polish-qa op `passes: true` — **alle taken staan nu op true**; de volgende lus-beurt sluit af met BUILD-COMPLEET.

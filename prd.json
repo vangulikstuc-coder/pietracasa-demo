@@ -347,7 +347,7 @@
       "title": "Polish-eindcontrole",
       "prompt": "Eindcontrole van de polish-ronde: draai pnpm build, controleer programmatisch op kapotte links in dist/, afgebroken koppen, contrast-issues en horizontale scroll op 375px. Werk open-questions.md en progress.md bij met wat de polish-ronde veranderde.",
       "blueprint": "",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Alle polish-taken aantoonbaar geverifieerd (rapport in progress.md)",
         "Redirects van oude slugs werken in pnpm preview",
