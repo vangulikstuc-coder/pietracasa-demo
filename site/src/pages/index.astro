@@ -76,26 +76,33 @@ const galerij = [
 const stappen = [
   {
     nr: '01',
-    titel: 'Aanvraag',
-    tekst: 'U vraagt een offerte aan via het formulier of telefonisch. Wij reageren binnen 48 uur.',
-    icon: 'phone',
+    titel: 'Opname op locatie',
+    tekst:
+      'U vraagt een offerte aan via het formulier of telefonisch. Binnen 48 uur plannen wij een opname op locatie.',
+    icon: 'pin',
   },
   {
     nr: '02',
-    titel: 'Offerte',
-    tekst: 'Wij bekijken het werk op locatie. U ontvangt een vaste prijs op schrift.',
+    titel: 'Offerte met vaste prijs',
+    tekst: 'Na de opname ontvangt u een schriftelijke offerte: vaste prijs en heldere werkomschrijving.',
     icon: 'document',
   },
   {
     nr: '03',
-    titel: 'Uitvoering',
-    tekst: 'Wij voeren het werk uit volgens de afgesproken planning. Eén vakman als aanspreekpunt.',
-    icon: 'roller',
+    titel: 'Planning op papier',
+    tekst: 'Start- en opleverdatum staan vóór de start zwart op wit. U weet wanneer het werk klaar is.',
+    icon: 'calendar',
   },
   {
     nr: '04',
+    titel: 'Uitvoering volgens planning',
+    tekst: 'Eén vakman is uw aanspreekpunt. Meerwerk gebeurt alleen na uw schriftelijk akkoord.',
+    icon: 'roller',
+  },
+  {
+    nr: '05',
     titel: 'Oplevering',
-    tekst: 'U controleert het resultaat samen met de vakman. De opleveringsafspraak staat op papier.',
+    tekst: 'U loopt het werk samen met de vakman na. Oplevering op de afgesproken datum, binnen de vaste prijs.',
     icon: 'badge',
   },
 ];
@@ -146,6 +153,9 @@ const icons: Record<string, string> = {
   x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
   phone:
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+  calendar:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/><path d="m9.5 15.5 2 2 3.5-4"/></svg>',
   document:
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>',
   roller:
@@ -398,9 +408,9 @@ const icons: Record<string, string> = {
     <div class="container">
       <header class="section-head" data-reveal>
         <p class="eyebrow">Werkwijze</p>
-        <h2 id="werkwijze-title">Zo werkt het: vier vaste stappen</h2>
+        <h2 id="werkwijze-title">Zo werkt het: vijf vaste stappen</h2>
         <p class="section-head__intro">
-          Van eerste contact tot oplevering verloopt elk project via vier vaste stappen – zonder
+          Van eerste contact tot oplevering verloopt elk project via vijf vaste stappen – zonder
           verrassingen in planning of prijs. U ontvangt per stap een schriftelijke bevestiging.
         </p>
       </header>
@@ -1082,7 +1092,7 @@ const icons: Record<string, string> = {
 
   @media (min-width: 1024px) {
     .steps {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: var(--spacing-lg);
     }
   }

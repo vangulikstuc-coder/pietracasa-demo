@@ -267,7 +267,7 @@
       "title": "Polish: stappen-aantal harmoniseren",
       "prompt": "Home zegt 'vier vaste stappen' (Aanvraag-Offerte-Uitvoering-Oplevering), de werkwijze-pagina 'vijf vaste stappen'. De werkwijze-pagina is leidend (5 stappen incl. opname/afspraak op locatie). Maak home consistent: voeg de vijfde stap toe of formuleer zonder getal, en check alle overige verwijzingen (offerte-pagina traject, FAQ).",
       "blueprint": "",
-      "passes": false,
+      "passes": true,
       "acceptance": [
         "Nergens op de site staan tegenstrijdige stappen-aantallen",
         "Werkwijze-pagina en home vertellen exact hetzelfde proces",
