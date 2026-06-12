@@ -1,0 +1,14 @@
+# Netlify build-config — de site staat in submap ./site
+[build]
+  base = "site"
+  command = "pnpm build"
+  publish = "dist"
+
+[functions]
+  directory = "netlify/functions"
+
+# Formulier-endpoint: zelfde pad als lokaal/Cloudflare, afgehandeld door de Netlify Function
+[[redirects]]
+  from = "/api/offerte"
+  to = "/.netlify/functions/offerte"
+  status = 200
