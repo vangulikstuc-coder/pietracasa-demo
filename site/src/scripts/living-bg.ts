@@ -41,7 +41,7 @@ export function initLivingBg(animate: boolean): void {
   let aders: Ader[] = [];
 
   const maakAders = (): void => {
-    const n = w < 768 ? 7 : 11;
+    const n = w < 768 ? 8 : 13;
     aders = Array.from({ length: n }, (_, i) => ({
       x0: Math.random(),
       y0: (i + 0.5) / n,
@@ -51,8 +51,8 @@ export function initLivingBg(animate: boolean): void {
       meander: 18 + Math.random() * 36,
       fase: Math.random() * Math.PI * 2,
       snel: 0.03 + Math.random() * 0.04,
-      breed: 0.7 + Math.random() * 1.4,
-      alpha: 0.1 + Math.random() * 0.12,
+      breed: 1.2 + Math.random() * 1.8,
+      alpha: 0.2 + Math.random() * 0.16,
       goud: i === 3, // één signatuur-ader
       d: 0.35 + Math.random() * 0.75,
     }));
@@ -75,7 +75,7 @@ export function initLivingBg(animate: boolean): void {
 
     // warme steen-wash als ondergrond
     const wash = ctx.createRadialGradient(w * 0.75, h * 0.15, 0, w * 0.75, h * 0.15, Math.max(w, h));
-    wash.addColorStop(0, 'rgba(193,141,96,.06)');
+    wash.addColorStop(0, 'rgba(193,141,96,.11)');
     wash.addColorStop(1, 'rgba(193,141,96,0)');
     ctx.fillStyle = wash;
     ctx.fillRect(0, 0, w, h);
@@ -99,12 +99,12 @@ export function initLivingBg(animate: boolean): void {
         else ctx.lineTo(x, y);
       }
       if (a.goud) {
-        ctx.strokeStyle = `rgba(201,163,106,${a.alpha + 0.12})`;
+        ctx.strokeStyle = `rgba(201,163,106,${a.alpha + 0.2})`;
         ctx.lineWidth = a.breed + 0.6;
         ctx.shadowColor = 'rgba(201,163,106,.5)';
-        ctx.shadowBlur = 7;
+        ctx.shadowBlur = 10;
       } else {
-        ctx.strokeStyle = `rgba(140,123,110,${a.alpha})`;
+        ctx.strokeStyle = `rgba(125,108,95,${a.alpha})`;
         ctx.lineWidth = a.breed;
         ctx.shadowBlur = 0;
       }
