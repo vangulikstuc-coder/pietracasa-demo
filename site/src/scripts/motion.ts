@@ -22,11 +22,11 @@ function initReveals(): void {
   gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
     gsap.fromTo(
       el,
-      { opacity: 0, y: 28 },
+      { opacity: 0, y: 38 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.6,
+        duration: 0.75,
         ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 85%', once: true },
       }
@@ -39,11 +39,11 @@ function initReveals(): void {
     if (children.length === 0) return;
     gsap.fromTo(
       children,
-      { opacity: 0, y: 24 },
+      { opacity: 0, y: 34 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.65,
         ease: 'power3.out',
         stagger: 0.08,
         scrollTrigger: { trigger: group, start: 'top 85%', once: true },
@@ -145,6 +145,92 @@ function initBaSliders(): void {
   });
 }
 
+
+function initHeroEntrance(): void {
+  // Entrance-animatie bij load: hero-elementen komen één voor één binnen
+  // (titel -> subtitel -> knoppen), alleen voor de eerste hero op de pagina.
+  const hero = document.querySelector<HTMLElement>('[data-hero-entrance]');
+  if (!hero) return;
+  const kinderen = Array.from(hero.children) as HTMLElement[];
+  if (kinderen.length === 0) return;
+  gsap.from(kinderen, {
+    opacity: 0,
+    y: 26,
+    duration: 0.65,
+    ease: 'power3.out',
+    stagger: 0.09,
+    delay: 0.15,
+    clearProps: 'all',
+  });
+}
+
+
+function initAutoReveals(): void {
+  // Alles-beweegt-laag: elk inhoudsblok in elke sectie komt met stagger binnen
+  // tijdens het scrollen — ook blokken zonder handmatige data-reveal markering.
+  const uitzondering = '[data-reveal], [data-reveal-group], [data-hero-entrance], .motes-canvas, .sheen';
+  const blokken: HTMLElement[] = [];
+
+  document.querySelectorAll<HTMLElement>('main section').forEach((sectie) => {
+    sectie.querySelectorAll<HTMLElement>(':scope > .container > *').forEach((el) => {
+      if (el.matches(uitzondering) || el.closest('[data-hero-entrance]')) return;
+      // Lijsten met meerdere items: de items zelf staggeren i.p.v. de lijst als blok
+      if ((el.tagName === 'UL' || el.tagName === 'OL' || el.tagName === 'DL') && el.children.length > 1) {
+        Array.from(el.children).forEach((kind) => blokken.push(kind as HTMLElement));
+      } else {
+        blokken.push(el);
+      }
+    });
+  });
+
+  if (blokken.length === 0) return;
+  gsap.set(blokken, { opacity: 0, y: 38 });
+  ScrollTrigger.batch(blokken, {
+    start: 'top 90%',
+    once: true,
+    onEnter: (els) =>
+      gsap.to(els, {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        ease: 'power3.out',
+        stagger: 0.09,
+        overwrite: true,
+        clearProps: 'transform',
+      }),
+  });
+  // Vangnet: alles wat na 6s nog verborgen is (bv. al in beeld bij load) tonen
+  window.setTimeout(() => {
+    blokken.forEach((el) => {
+      if (Number(gsap.getProperty(el, 'opacity')) < 1) gsap.to(el, { opacity: 1, y: 0, duration: 0.4 });
+    });
+  }, 6000);
+}
+
+function initMediaDrift(): void {
+  // Continue beweging tijdens het scrollen: losse beelden zweven subtiel mee
+  // (scrub), ook nadat ze verschenen zijn. Niet op de voor-na sliders.
+  const doelen = document.querySelectorAll<HTMLElement>(
+    '.dienst__media img, .b2b-hero__media img, .b2b-werk__media img, .drone__media img, .stats__fotos, .tl-stap__medaillon, .step__medaillon'
+  );
+  doelen.forEach((el) => {
+    gsap.fromTo(
+      el,
+      { y: 14 },
+      {
+        y: -14,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: el.closest('section') ?? el,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.6,
+        },
+      }
+    );
+  });
+}
+
 export function initMotion(): void {
   if (reducedMotion.matches) {
     showEverything();
@@ -152,9 +238,12 @@ export function initMotion(): void {
     return;
   }
   initLivingBg(true);
+  initHeroEntrance();
   gsap.registerPlugin(ScrollTrigger);
   initLenis();
   initReveals();
+  initAutoReveals();
+  initMediaDrift();
   initCountUp();
   initParallax();
   initMotes();

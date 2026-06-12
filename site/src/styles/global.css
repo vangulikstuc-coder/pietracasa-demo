@@ -228,6 +228,18 @@ strong {
 }
 
 /* Pijl-shift micro-interactie */
+.btn {
+  transition-property: background-color, border-color, color, transform, box-shadow;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .btn .btn__arrow {
   transition: transform 180ms ease;
 }

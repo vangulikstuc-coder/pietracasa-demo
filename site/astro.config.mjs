@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 // [CONFIRM: definitieve domeinnaam] — zie open-questions.md.
 // Tot die tijd: Cloudflare Pages preview-domein.
 export default defineConfig({
-  site: 'https://pietracasa.pages.dev',
+  site: 'https://pietracasa.netlify.app',
   integrations: [sitemap()],
   // Oude slugs -> SEO-routes uit context/sitemap.md (polish-slugs).
   redirects: {

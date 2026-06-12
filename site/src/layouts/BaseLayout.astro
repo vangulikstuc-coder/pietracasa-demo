@@ -20,7 +20,7 @@ interface Props {
 
 const { title, description, ogImage, noindex = false } = Astro.props;
 
-const site = Astro.site ?? new URL('https://pietracasa.pages.dev');
+const site = Astro.site ?? new URL('https://pietracasa.netlify.app');
 const canonical = new URL(Astro.url.pathname, site);
 const toonActiebalk = !Astro.url.pathname.startsWith('/offerte-aanvragen');
 const ogImageUrl = ogImage
