@@ -2,6 +2,12 @@
 import { Picture, getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import heroProjecten from '../assets/images/hero/hero-projecten.jpg';
+import projectBadkamerVoor from '../assets/images/sections/project-badkamer-voor.jpg';
+import projectBadkamerNa from '../assets/images/sections/project-badkamer-na.jpg';
+import projectWoonkamerVoor from '../assets/images/sections/project-woonkamer-voor.jpg';
+import projectWoonkamerNa from '../assets/images/sections/project-woonkamer-na.jpg';
+import projectHerenhuisVoor from '../assets/images/sections/project-herenhuis-voor.jpg';
+import projectHerenhuisNa from '../assets/images/sections/project-herenhuis-na.jpg';
 import droneGevelwerk from '../assets/images/sections/drone-gevelwerk.jpg';
 import dienstGevelwerk from '../assets/images/sections/dienst-gevelwerk.jpg';
 import dienstBinnenafwerking from '../assets/images/sections/dienst-binnenafwerking.jpg';
@@ -40,27 +46,71 @@ const filters = [
   { id: 'alle', label: 'Alle projecten' },
   { id: 'gevel', label: 'Gevelwerk' },
   { id: 'binnen', label: 'Binnenafwerking' },
-  { id: 'vloer', label: 'Microcement vloeren' },
+  { id: 'vloer', label: 'Naadloze vloeren' },
+  { id: 'betoncire', label: 'Beton ciré' },
+  { id: 'spuitwerk', label: 'Spuitwerk' },
 ];
 
 const galerij = [
   {
     cat: 'gevel',
+    titel: 'Gevelrenovatie rijwoning',
     label: 'Gevelwerk · Haarlem',
+    meta: ['Gevelwerk', '± 95 m²', '2 weken'],
+    verhaal:
+      'Gescheurd en deels losgekomen stucwerk, tot op het metselwerk verweerd. De gevel is volledig kaal gehaald, hersteld en opnieuw opgebouwd in een lichte zandtint. Opgeleverd op de afgesproken datum, binnen de vaste prijs.',
     voor: { src: galerijGevelVoor, alt: 'Voor: gevel met gescheurd en verweerd stucwerk' },
     na: { src: galerijGevelNa, alt: 'Na: strak gestuukte, egaal afgewerkte gevel' },
   },
   {
     cat: 'binnen',
-    label: 'Binnenafwerking · regio Haarlem',
+    titel: 'Woonkamer casco naar sausklaar',
+    label: 'Binnenafwerking · Haarlem-Noord',
+    meta: ['Binnenafwerking', '± 60 m² wand', '4 werkdagen'],
+    verhaal:
+      'Na een verbouwing stonden de wanden er kaal en beschadigd bij. Alle wanden zijn uitgevlakt en glad gepleisterd, klaar voor verf. De bewoners konden exact volgens planning de schilder inplannen.',
     voor: { src: galerijBinnenVoor, alt: 'Voor: woonkamer met beschadigde wanden' },
     na: { src: galerijBinnenNa, alt: 'Na: woonkamer met strak gepleisterde wanden' },
   },
   {
     cat: 'vloer',
+    titel: 'Naadloze vloer over bestaande tegels',
     label: 'Microcement vloer · Haarlem',
-    voor: { src: galerijVloerVoor, alt: 'Voor: verouderde vloer voor de renovatie' },
+    meta: ['Microcement', '± 48 m²', '5 werkdagen'],
+    verhaal:
+      'De oude tegelvloer met voegen maakte de begane grond onrustig. Zonder sloopwerk is er een naadloze microcementvloer overheen aangebracht, doorlopend van hal tot keuken. Eén vlak, één kleur, geen overgangen.',
+    voor: { src: galerijVloerVoor, alt: 'Voor: verouderde tegelvloer voor de renovatie' },
     na: { src: galerijVloerNa, alt: 'Na: naadloze microcement vloer' },
+  },
+  {
+    cat: 'betoncire',
+    titel: 'Badkamer zonder voegen',
+    label: 'Beton ciré · Heemstede',
+    meta: ['Beton ciré', '± 14 m² wand & vloer', '6 werkdagen'],
+    verhaal:
+      'De jaren-90 badkamer met beige tegels was op. Wanden en vloer zijn over het bestaande tegelwerk afgewerkt in warmgrijs beton ciré – waterbestendig, naadloos en zonder voegen die aanslaan. Inclusief sealer en onderhoudsadvies bij oplevering.',
+    voor: { src: projectBadkamerVoor, alt: 'Voor: gedateerde badkamer met beige tegels' },
+    na: { src: projectBadkamerNa, alt: 'Na: badkamer volledig in warmgrijs beton ciré' },
+  },
+  {
+    cat: 'spuitwerk',
+    titel: 'Jaren-30 kamer in ere hersteld',
+    label: 'Herstel + spuitwerk · Bloemendaal',
+    meta: ['Herstel + latex spuiten', '± 72 m² wand & plafond', '5 werkdagen'],
+    verhaal:
+      'Vergeeld pleisterwerk, krimpscheuren en een waterschade naast het origineel ornament. Het plafond is hersteld met behoud van het ornament, daarna zijn wanden en plafond strak gespoten in mat wit. Het karakter bleef, de schade verdween.',
+    voor: { src: projectWoonkamerVoor, alt: 'Voor: vergeelde kamer met scheuren en waterschade' },
+    na: { src: projectWoonkamerNa, alt: 'Na: strak wit gespoten kamer met origineel ornament' },
+  },
+  {
+    cat: 'gevel',
+    titel: 'Herenhuis bovenverdieping',
+    label: 'Gevelwerk · Aerdenhout',
+    meta: ['Gevelwerk', '± 80 m²', '3 weken incl. steiger'],
+    verhaal:
+      'Het stucwerk op de verdieping liet los en er kwam metselwerk bloot te liggen. Na herstel van de ondergrond is de gevel opnieuw gestuukt en zijn de kozijnranden strak afgewerkt. De steigerplanning is met de buren afgestemd en exact nagekomen.',
+    voor: { src: projectHerenhuisVoor, alt: 'Voor: herenhuis met gescheurd en afgebrokkeld stucwerk' },
+    na: { src: projectHerenhuisNa, alt: 'Na: herenhuis met strak gestuukte verdieping' },
   },
 ];
 
@@ -278,6 +328,13 @@ const feiten = [
                   <button type="button" data-ba-show="voor" aria-pressed="false">Voor</button>
                   <button type="button" data-ba-show="na" aria-pressed="true">Na</button>
                 </div>
+              </div>
+              <div class="ba-card__case">
+                <h3>{project.titel}</h3>
+                <ul class="case-meta" role="list">
+                  {project.meta.map((m) => <li>{m}</li>)}
+                </ul>
+                <p>{project.verhaal}</p>
               </div>
             </figure>
           ))
@@ -1298,6 +1355,42 @@ const feiten = [
     font-size: var(--font-size-sm);
     color: var(--color-neutral-100);
   }
+
+  /* --- Case-info onder de voor-na kaart --- */
+  .ba-card__case {
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--color-border-default);
+  }
+
+  .ba-card__case h3 {
+    font-size: var(--font-size-lg);
+  }
+
+  .case-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-sm) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case-meta li {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-default);
+    background: color-mix(in srgb, var(--color-primary-default) 10%, transparent);
+    border-radius: var(--radius-pill);
+    padding: 3px 12px;
+  }
+
+  .ba-card__case p {
+    margin-block-start: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.65;
+  }
+
 </style>
 
 <script>

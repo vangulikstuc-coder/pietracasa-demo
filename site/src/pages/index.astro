@@ -16,6 +16,12 @@ import bgTroffelSweep from '../assets/images/backgrounds/bg-troffel-sweep.jpg';
 import dienstBetonCire from '../assets/images/sections/dienst-beton-cire.jpg';
 import dienstSpuitwerk from '../assets/images/sections/dienst-spuitwerk.jpg';
 import detailGevel from '../assets/images/sections/detail-gevel.jpg';
+import projectBadkamerVoor from '../assets/images/sections/project-badkamer-voor.jpg';
+import projectBadkamerNa from '../assets/images/sections/project-badkamer-na.jpg';
+import projectWoonkamerVoor from '../assets/images/sections/project-woonkamer-voor.jpg';
+import projectWoonkamerNa from '../assets/images/sections/project-woonkamer-na.jpg';
+import projectHerenhuisVoor from '../assets/images/sections/project-herenhuis-voor.jpg';
+import projectHerenhuisNa from '../assets/images/sections/project-herenhuis-na.jpg';
 import reviewFoto1 from '../assets/images/sections/review-1.jpg';
 import reviewFoto2 from '../assets/images/sections/review-2.jpg';
 import reviewFoto3 from '../assets/images/sections/review-3.jpg';
@@ -121,22 +127,28 @@ const diensten = [
 
 const galerij = [
   {
-    id: 'gevel',
-    label: 'Gevelwerk · Haarlem',
-    voor: { src: galerijGevelVoor, alt: 'Voor: gevel met gescheurd en verweerd stucwerk' },
-    na: { src: galerijGevelNa, alt: 'Na: strak gestuukte, egaal afgewerkte gevel' },
+    id: 'herenhuis',
+    titel: 'Herenhuis bovenverdieping',
+    label: 'Gevelwerk · Aerdenhout',
+    meta: ['± 80 m²', '3 weken'],
+    voor: { src: projectHerenhuisVoor, alt: 'Voor: herenhuis met gescheurd en afgebrokkeld stucwerk' },
+    na: { src: projectHerenhuisNa, alt: 'Na: herenhuis met strak gestuukte verdieping' },
   },
   {
-    id: 'binnen',
-    label: 'Binnenafwerking · regio Haarlem',
-    voor: { src: galerijBinnenVoor, alt: 'Voor: woonkamer met beschadigde wanden' },
-    na: { src: galerijBinnenNa, alt: 'Na: woonkamer met strak gepleisterde wanden' },
+    id: 'jaren30',
+    titel: 'Jaren-30 kamer in ere hersteld',
+    label: 'Herstel + spuitwerk · Bloemendaal',
+    meta: ['± 72 m²', '5 werkdagen'],
+    voor: { src: projectWoonkamerVoor, alt: 'Voor: vergeelde kamer met scheuren en waterschade' },
+    na: { src: projectWoonkamerNa, alt: 'Na: strak wit gespoten kamer met origineel ornament' },
   },
   {
-    id: 'vloer',
-    label: 'Microcement vloer · Haarlem',
-    voor: { src: galerijVloerVoor, alt: 'Voor: verouderde vloer voor de renovatie' },
-    na: { src: galerijVloerNa, alt: 'Na: naadloze microcement vloer' },
+    id: 'badkamer',
+    titel: 'Badkamer zonder voegen',
+    label: 'Beton ciré · Heemstede',
+    meta: ['± 14 m²', '6 werkdagen'],
+    voor: { src: projectBadkamerVoor, alt: 'Voor: gedateerde badkamer met beige tegels' },
+    na: { src: projectBadkamerNa, alt: 'Na: badkamer volledig in warmgrijs beton ciré' },
   },
 ];
 
@@ -458,12 +470,18 @@ const icons: Record<string, string> = {
                   <button type="button" data-ba-show="na" aria-pressed="true">Na</button>
                 </div>
               </div>
+              <div class="ba-card__case">
+                <h3>{project.titel}</h3>
+                <ul class="case-meta" role="list">
+                  {project.meta.map((m) => <li>{m}</li>)}
+                </ul>
+              </div>
             </figure>
           ))
         }
       </div>
       <div class="galerij__footer" data-reveal>
-        <a href="/projecten/" class="btn btn--secondary">Bekijk alle afgeronde projecten</a>
+        <a href="/projecten/" class="btn btn--secondary">Bekijk alle zes uitgelichte projecten</a>
       </div>
     </div>
   </section>
@@ -1695,6 +1713,35 @@ const icons: Record<string, string> = {
     .review-kaarten {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+
+  /* --- Case-kop onder de home-galerijkaarten --- */
+  .ba-card__case {
+    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+    border-top: 1px solid var(--color-border-default);
+  }
+
+  .ba-card__case h3 {
+    font-size: var(--font-size-md);
+  }
+
+  .case-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-sm) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case-meta li {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-default);
+    background: color-mix(in srgb, var(--color-primary-default) 10%, transparent);
+    border-radius: var(--radius-pill);
+    padding: 2px 10px;
   }
 
 </style>
