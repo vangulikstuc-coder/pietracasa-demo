@@ -3,7 +3,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { initMotes } from './motes';
 import { initLivingBg } from './living-bg';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -246,6 +245,5 @@ export function initMotion(): void {
   initMediaDrift();
   initCountUp();
   initParallax();
-  initMotes();
   initBaSliders();
 }
