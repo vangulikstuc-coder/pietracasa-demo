@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Voorbeeld 5 — Vloeiende zijde</title>
+<style>
+  :root { --bg:#f4efe9; --ink:#211b15; --muted:#6f6358; --accent:#a6623e; }
+  * { margin:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,sans-serif; line-height:1.6; }
+  #bg { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; filter:blur(34px) saturate(1.06); }
+  main { position:relative; z-index:1; }
+  section { min-height:92vh; display:grid; place-content:center; padding:8vh 8vw; text-align:center; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:13px; font-weight:600; color:var(--accent); }
+  h1 { font-size:clamp(34px,6vw,64px); letter-spacing:-.02em; max-width:18ch; }
+  h2 { font-size:clamp(26px,4vw,40px); letter-spacing:-.02em; }
+  p { color:var(--muted); max-width:52ch; margin-inline:auto; margin-top:14px; }
+  .hint { position:fixed; bottom:18px; left:0; right:0; text-align:center; font-size:13px; color:var(--muted); z-index:1; }
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<main>
+  <section>
+    <div>
+      <p class="eyebrow">Voorbeeld 5 · Vloeiende zijde</p>
+      <h1>Banen van zijde die traag golven</h1>
+      <p>Gevulde golfbanen in champagne en terracotta die als zijde door elkaar stromen. Rijker dan nevel, rustiger dan lijnen. Scroll: de banen kantelen mee.</p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2>Diepte door overlap</h2>
+      <p>De banen overlappen met lage dekking — waar ze elkaar raken, ontstaan warme tussentinten. Geen twee momenten zijn gelijk.</p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2>Premium en kalm</h2>
+      <p>Het effect van een ruimte met karakter: beweging die je voelt, niet die schreeuwt.</p>
+    </div>
+  </section>
+</main>
+<p class="hint">Scroll ↓</p>
+<script>
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let w, h, raf = 0, eased = scrollY;
+
+  // 5 zijden banen: elk een gevuld vlak tussen twee golvende randen
+  const banen = [
+    { c1:'214,178,140', c2:'166,98,62',  a:.20, y:.18, dikte:.16, amp:.05, len:1.1, snel:.045, fase:0.0, d:.9 },
+    { c1:'193,141,96',  c2:'214,178,140',a:.16, y:.36, dikte:.20, amp:.07, len:0.8, snel:.034, fase:1.7, d:.6 },
+    { c1:'166,98,62',   c2:'140,123,110',a:.14, y:.55, dikte:.15, amp:.06, len:1.4, snel:.052, fase:3.1, d:1.1 },
+    { c1:'214,178,140', c2:'193,141,96', a:.17, y:.72, dikte:.18, amp:.05, len:0.9, snel:.039, fase:4.6, d:.75 },
+    { c1:'140,123,110', c2:'166,98,62',  a:.12, y:.9,  dikte:.16, amp:.07, len:1.2, snel:.047, fase:5.9, d:.5 },
+  ];
+
+  const resize = () => {
+    const dpr = Math.min(devicePixelRatio || 1, 1.5);
+    w = innerWidth; h = innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+
+  const golf = (x, baan, s, rand) => {
+    const k = (x / w) * Math.PI * 2 * baan.len;
+    return Math.sin(k + baan.fase + s * baan.snel * Math.PI * 2 + rand) * baan.amp * h
+      + Math.sin(k * 1.9 + baan.fase * 2 + s * baan.snel * 1.4) * baan.amp * h * .4;
+  };
+
+  const draw = (t) => {
+    eased += (scrollY - eased) * .08;
+    const s = t / 1000;
+    ctx.clearRect(0, 0, w, h);
+    for (const b of banen) {
+      // verticale basis met scroll-parallax, wrap zodat banen blijven komen
+      const baanH = h * 1.5;
+      const ruwY = b.y * h - eased * b.d * .12;
+      const y0 = ((ruwY % baanH) + baanH) % baanH - h * .25;
+      ctx.beginPath();
+      const stap = 28;
+      for (let x = -40; x <= w + 40; x += stap) {
+        const y = y0 + golf(x, b, s, 0);
+        x <= -40 + stap ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      for (let x = w + 40; x >= -40; x -= stap) {
+        const y = y0 + b.dikte * h + golf(x, b, s, 2.2);
+        ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      const g = ctx.createLinearGradient(0, y0, 0, y0 + b.dikte * h);
+      g.addColorStop(0, `rgba(${b.c1}, ${b.a})`);
+      g.addColorStop(1, `rgba(${b.c2}, 0)`);
+      ctx.fillStyle = g;
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(draw);
+  };
+
+  resize();
+  addEventListener('resize', resize);
+  if (reduced) { draw(performance.now()); cancelAnimationFrame(raf); }
+  else {
+    raf = requestAnimationFrame(draw);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else raf = requestAnimationFrame(draw);
+    });
+  }
+})();
+</script>
+</body>
+</html>

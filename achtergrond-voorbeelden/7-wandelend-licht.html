@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Voorbeeld 7 — Wandelend daglicht</title>
+<style>
+  :root { --bg:#f4efe9; --ink:#211b15; --muted:#6f6358; --accent:#a6623e; }
+  * { margin:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,sans-serif; line-height:1.6; }
+  #bg { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; filter:blur(26px); }
+  main { position:relative; z-index:1; }
+  section { min-height:92vh; display:grid; place-content:center; padding:8vh 8vw; text-align:center; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:13px; font-weight:600; color:var(--accent); }
+  h1 { font-size:clamp(34px,6vw,64px); letter-spacing:-.02em; max-width:18ch; }
+  h2 { font-size:clamp(26px,4vw,40px); letter-spacing:-.02em; }
+  p { color:var(--muted); max-width:52ch; margin-inline:auto; margin-top:14px; }
+  .hint { position:fixed; bottom:18px; left:0; right:0; text-align:center; font-size:13px; color:var(--muted); z-index:1; }
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<main>
+  <section>
+    <div>
+      <p class="eyebrow">Voorbeeld 7 · Wandelend daglicht</p>
+      <h1>Zonlicht dat door de ruimte trekt</h1>
+      <p>Brede, warme lichtbanen die heel traag over de pagina wandelen — zoals laagstaande zon over een vers gestuukte wand. De kleurtemperatuur ademt mee van ochtend naar avond.</p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2>Architectuur van licht</h2>
+      <p>Scroll: de banen kantelen subtiel mee, alsof u zelf langs het raam beweegt. Geen vormen of figuren — alleen licht.</p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2>Het meest ingetogen luxe</h2>
+      <p>Dit is de stilste van de drie — maar wie kijkt, ziet de kamer leven.</p>
+    </div>
+  </section>
+</main>
+<p class="hint">Scroll ↓</p>
+<script>
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let w, h, raf = 0, eased = scrollY;
+
+  // 3 lichtbanen + globale warmte-adem
+  const banen = [
+    { breed:.34, snel:1/75, fase:0.00, a:.16, hoekBasis:-.42 },
+    { breed:.22, snel:1/95, fase:0.45, a:.12, hoekBasis:-.36 },
+    { breed:.13, snel:1/60, fase:0.80, a:.10, hoekBasis:-.50 },
+  ];
+
+  const resize = () => {
+    const dpr = Math.min(devicePixelRatio || 1, 1.5);
+    w = innerWidth; h = innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+
+  const draw = (t) => {
+    eased += (scrollY - eased) * .06;
+    const s = t / 1000;
+    ctx.clearRect(0, 0, w, h);
+
+    // dag-adem: kleurtemperatuur verschuift heel traag (goud <-> zacht roze-taupe)
+    const dag = .5 + .5 * Math.sin(s / 47);
+    const warm = `rgba(${Math.round(214 - 20 * dag)}, ${Math.round(170 - 26 * dag)}, ${Math.round(120 + 6 * dag)}, `;
+
+    const diag = Math.hypot(w, h);
+    for (const b of banen) {
+      // positie van de baan wandelt traag van links naar rechts en terug
+      const p = .5 + .5 * Math.sin((s * b.snel + b.fase) * Math.PI * 2);
+      const cx = p * (w * 1.4) - w * .2;
+      // scroll kantelt de hoek subtiel
+      const hoek = b.hoekBasis + Math.sin(eased / 2400) * .06;
+      ctx.save();
+      ctx.translate(cx, h * .5);
+      ctx.rotate(hoek);
+      const half = b.breed * diag * .5;
+      const g = ctx.createLinearGradient(-half, 0, half, 0);
+      g.addColorStop(0, warm + '0)');
+      g.addColorStop(.5, warm + b.a + ')');
+      g.addColorStop(1, warm + '0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(-half, -diag, half * 2, diag * 2);
+      ctx.restore();
+    }
+    raf = requestAnimationFrame(draw);
+  };
+
+  resize();
+  addEventListener('resize', resize);
+  if (reduced) { draw(performance.now()); cancelAnimationFrame(raf); }
+  else {
+    raf = requestAnimationFrame(draw);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else raf = requestAnimationFrame(draw);
+    });
+  }
+})();
+</script>
+</body>
+</html>

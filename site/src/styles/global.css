@@ -426,7 +426,7 @@ html.js [data-reveal] {
   pointer-events: none;
 }
 
-/* Doorlopende levende achtergrond (warme nevel + stucstof, zie living-bg.ts).
+/* Doorlopende levende achtergrond ("levend marmer", zie living-bg.ts).
    z-index -1: vóór de body-achtergrond, achter alle content; secties met eigen
    achtergrondkleur (.section--alt, banden) dekken hem af als rustpunt. */
 #living-bg {
@@ -443,8 +443,8 @@ html.js [data-reveal] {
   height: 100%;
 }
 
-.living-bg__nevel {
-  filter: blur(60px) saturate(1.05);
+.living-bg__marmer {
+  filter: blur(2px);
 }
 
 

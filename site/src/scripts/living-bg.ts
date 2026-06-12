@@ -1,75 +1,116 @@
-/* Levende achtergrond — doorlopende laag achter de hele site:
-   warme nevel: traag ademende gloedwolken in merk-tinten (geen deeltjes).
-   Conform house/motion.md atmosfeerlaag: één levende achtergrond achter de
-   transparante secties; secties met eigen kleur dekken hem af als rustpunt.
-   - Scroll-na-ijling: eased += (scrollY - eased) * 0.09
-   - DPR gecapt (nevel 1.5 — blur maakt meer onnodig; stof 2)
-   - Mobiel lichter gedoseerd; pauzeert bij verborgen tab
+/* Levende achtergrond — "Levend marmer" (Pietra): fijne steenaders die
+   onmerkbaar verschuiven, met één goudkoperen signatuur-ader. Doorlopende
+   laag achter de transparante secties; secties met eigen kleur dekken hem
+   af als rustpunt (conform house/motion.md atmosfeerlaag).
+   - Scroll-na-ijling: eased += (scrollY - eased) * 0.08, parallax per diepte
+   - Aders wrappen verticaal zodat er bij elke scrollpositie marmer leeft
+   - DPR gecapt op 2; pauzeert bij verborgen tab
    - Reduced motion: één statisch frame, geen animatie */
 
-interface Blob {
-  c: string; a: number; r: number; cx: number; cy: number;
-  sx: number; sy: number; t1: number; t2: number; d: number;
+interface Ader {
+  x0: number;
+  y0: number;
+  hoek: number;
+  lengte: number;
+  segmenten: number;
+  meander: number;
+  fase: number;
+  snel: number;
+  breed: number;
+  alpha: number;
+  goud: boolean;
+  d: number;
 }
-
-const BLOBS: Blob[] = [
-  { c: '166,98,62', a: 0.2, r: 0.52, cx: 0.18, cy: 0.22, sx: 0.12, sy: 0.09, t1: 33, t2: 43, d: 0.9 },
-  { c: '193,141,96', a: 0.17, r: 0.46, cx: 0.82, cy: 0.18, sx: 0.1, sy: 0.11, t1: 47, t2: 37, d: 0.6 },
-  { c: '140,123,110', a: 0.13, r: 0.55, cx: 0.7, cy: 0.78, sx: 0.13, sy: 0.08, t1: 53, t2: 57, d: 1.1 },
-  { c: '166,98,62', a: 0.12, r: 0.4, cx: 0.3, cy: 0.85, sx: 0.09, sy: 0.1, t1: 39, t2: 49, d: 0.75 },
-  { c: '214,178,140', a: 0.16, r: 0.38, cx: 0.5, cy: 0.45, sx: 0.11, sy: 0.12, t1: 59, t2: 31, d: 0.5 },
-];
 
 export function initLivingBg(animate: boolean): void {
   const host = document.createElement('div');
   host.id = 'living-bg';
   host.setAttribute('aria-hidden', 'true');
-  const cNevel = document.createElement('canvas');
-  cNevel.className = 'living-bg__nevel';
-  host.append(cNevel);
+  const canvas = document.createElement('canvas');
+  canvas.className = 'living-bg__marmer';
+  host.append(canvas);
   document.body.prepend(host);
 
-  const xN = cNevel.getContext('2d');
-  if (!xN) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
 
   let w = 0;
   let h = 0;
-  let dprN = 1;
   let raf = 0;
   let eased = window.scrollY;
-  let last = performance.now();
+  let aders: Ader[] = [];
+
+  const maakAders = (): void => {
+    const n = w < 768 ? 7 : 11;
+    aders = Array.from({ length: n }, (_, i) => ({
+      x0: Math.random(),
+      y0: (i + 0.5) / n,
+      hoek: -0.55 + Math.random() * 0.25, // diagonaal, zoals echt marmer
+      lengte: 0.8 + Math.random() * 0.9,
+      segmenten: 7 + Math.floor(Math.random() * 4),
+      meander: 18 + Math.random() * 36,
+      fase: Math.random() * Math.PI * 2,
+      snel: 0.03 + Math.random() * 0.04,
+      breed: 0.7 + Math.random() * 1.4,
+      alpha: 0.1 + Math.random() * 0.12,
+      goud: i === 3, // één signatuur-ader
+      d: 0.35 + Math.random() * 0.75,
+    }));
+  };
 
   const resize = (): void => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     w = window.innerWidth;
     h = window.innerHeight;
-    dprN = Math.min(window.devicePixelRatio || 1, 1.5);
-    cNevel.width = w * dprN;
-    cNevel.height = h * dprN;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    maakAders();
   };
 
   const frame = (t: number): void => {
-    const dt = Math.min((t - last) / 1000, 0.05);
-    last = t;
-    eased += (window.scrollY - eased) * 0.09;
+    eased += (window.scrollY - eased) * 0.08;
     const s = t / 1000;
+    ctx.clearRect(0, 0, w, h);
 
-    // Onderlaag: warme nevel die traag ademt en meekantelt met de scroll.
-    xN.setTransform(dprN, 0, 0, dprN, 0, 0);
-    xN.clearRect(0, 0, w, h);
-    for (const b of BLOBS) {
-      const x = (b.cx + Math.sin((s / b.t1) * Math.PI * 2) * b.sx) * w;
-      // wrap: wolken recyclen verticaal zodat er bij elke scrollpositie nevel is
-      const ruwY = (b.cy + Math.cos((s / b.t2) * Math.PI * 2) * b.sy) * h - eased * b.d * 0.1;
-      const baan = h * 1.6;
-      const y = ((ruwY % baan) + baan) % baan - h * 0.3;
-      const r = b.r * Math.min(w, h) * (1 + 0.06 * Math.sin(s / 29 + b.t1));
-      const g = xN.createRadialGradient(x, y, 0, x, y, r);
-      g.addColorStop(0, `rgba(${b.c}, ${b.a})`);
-      g.addColorStop(1, `rgba(${b.c}, 0)`);
-      xN.fillStyle = g;
-      xN.fillRect(0, 0, w, h);
+    // warme steen-wash als ondergrond
+    const wash = ctx.createRadialGradient(w * 0.75, h * 0.15, 0, w * 0.75, h * 0.15, Math.max(w, h));
+    wash.addColorStop(0, 'rgba(193,141,96,.06)');
+    wash.addColorStop(1, 'rgba(193,141,96,0)');
+    ctx.fillStyle = wash;
+    ctx.fillRect(0, 0, w, h);
+
+    for (const a of aders) {
+      const baanH = h * 1.6;
+      const ruwY = a.y0 * h - eased * a.d * 0.14;
+      const yBasis = (((ruwY % baanH) + baanH) % baanH) - h * 0.3;
+      const xBasis = a.x0 * w;
+      ctx.beginPath();
+      const L = a.lengte * Math.max(w, h);
+      for (let i = 0; i <= a.segmenten; i++) {
+        const p = i / a.segmenten;
+        const langs = p * L;
+        const mx =
+          Math.sin(p * Math.PI * 3 + a.fase + s * a.snel * Math.PI * 2) * a.meander +
+          Math.sin(p * Math.PI * 7 + a.fase * 2 + s * a.snel * 1.3) * a.meander * 0.35;
+        const x = xBasis + Math.cos(a.hoek) * langs + Math.cos(a.hoek + Math.PI / 2) * mx - L * 0.4;
+        const y = yBasis + Math.sin(a.hoek) * langs + Math.sin(a.hoek + Math.PI / 2) * mx + L * 0.25;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      if (a.goud) {
+        ctx.strokeStyle = `rgba(201,163,106,${a.alpha + 0.12})`;
+        ctx.lineWidth = a.breed + 0.6;
+        ctx.shadowColor = 'rgba(201,163,106,.5)';
+        ctx.shadowBlur = 7;
+      } else {
+        ctx.strokeStyle = `rgba(140,123,110,${a.alpha})`;
+        ctx.lineWidth = a.breed;
+        ctx.shadowBlur = 0;
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
     }
-
     if (animate) raf = requestAnimationFrame(frame);
   };
 
@@ -79,10 +120,7 @@ export function initLivingBg(animate: boolean): void {
     raf = requestAnimationFrame(frame);
     document.addEventListener('visibilitychange', () => {
       cancelAnimationFrame(raf);
-      if (!document.hidden) {
-        last = performance.now();
-        raf = requestAnimationFrame(frame);
-      }
+      if (!document.hidden) raf = requestAnimationFrame(frame);
     });
   } else {
     frame(performance.now()); // één statisch frame (reduced motion)
