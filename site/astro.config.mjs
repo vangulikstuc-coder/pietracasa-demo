@@ -5,10 +5,11 @@ import sitemap from '@astrojs/sitemap';
 // [CONFIRM: definitieve domeinnaam] — zie open-questions.md.
 // Tot die tijd: Cloudflare Pages preview-domein.
 export default defineConfig({
-  site: 'https://stucq.pages.dev',
+  site: 'https://pietracasa.pages.dev',
   integrations: [sitemap()],
   // Oude slugs -> SEO-routes uit context/sitemap.md (polish-slugs).
   redirects: {
+    '/over-stucq/': '/over-pietracasa/',
     '/offerte': '/offerte-aanvragen',
     '/faq': '/veelgestelde-vragen',
     '/gevelwerk': '/diensten/gevelwerk-buitenafwerking',

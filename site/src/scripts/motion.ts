@@ -1,4 +1,4 @@
-/* Motion-basislaag — Stucq (tier: ingetogen, intensiteit 1/3)
+/* Motion-basislaag — Pietracasa (tier: ingetogen, intensiteit 1/3)
    Lenis smooth scroll + GSAP scroll-reveals. Respecteert prefers-reduced-motion. */
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

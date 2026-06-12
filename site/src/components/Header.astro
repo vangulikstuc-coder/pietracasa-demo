@@ -11,7 +11,7 @@ const navItems = [
   { href: '/projecten/', label: 'Projecten' },
   { href: '/werkwijze/', label: 'Werkwijze' },
   { href: '/voor-bouwbedrijven/', label: 'Voor bouwbedrijven' },
-  { href: '/over-stucq/', label: 'Over Stucq' },
+  { href: '/over-pietracasa/', label: 'Over Pietracasa' },
   { href: '/contact/', label: 'Contact' },
 ];
 
@@ -22,7 +22,10 @@ const dienstActive = diensten.some((d) => isActive(d.href));
 
 <header class="site-header" data-header>
   <div class="container site-header__inner">
-    <a href="/" class="site-header__brand" aria-label="Stucq – naar homepagina">Stucq</a>
+    <a href="/" class="site-header__brand" aria-label="Pietracasa – naar homepagina">
+      <img src="/logo-pietracasa.png" alt="" width="40" height="40" class="site-header__logo" />
+      Pietracasa
+    </a>
 
     <nav class="site-nav" aria-label="Hoofdnavigatie">
       <ul class="site-nav__list">
@@ -99,7 +102,7 @@ const dienstActive = diensten.some((d) => isActive(d.href));
   hidden
 >
   <div class="drawer__head">
-    <span class="drawer__brand">Stucq</span>
+    <span class="drawer__brand">Pietracasa</span>
     <button type="button" class="drawer__close" data-drawer-close>
       <span class="visually-hidden">Menu sluiten</span>
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -180,7 +183,16 @@ const dienstActive = diensten.some((d) => isActive(d.href));
     min-height: 64px;
   }
 
+  .site-header__logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
   .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-family: var(--font-display);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-bold);

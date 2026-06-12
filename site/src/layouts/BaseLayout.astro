@@ -20,21 +20,23 @@ interface Props {
 
 const { title, description, ogImage, noindex = false } = Astro.props;
 
-const site = Astro.site ?? new URL('https://stucq.pages.dev');
+const site = Astro.site ?? new URL('https://pietracasa.pages.dev');
 const canonical = new URL(Astro.url.pathname, site);
 const toonActiebalk = !Astro.url.pathname.startsWith('/offerte-aanvragen');
-const ogImageUrl = ogImage ? new URL(ogImage, site).href : undefined;
+const ogImageUrl = ogImage
+  ? new URL(ogImage, site).href
+  : new URL('/og-pietracasa.jpg', site).href;
 const plausibleDomain = site.hostname;
 
 const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'Stucq',
+  name: 'Pietracasa',
   description:
     'Stucadoor in Haarlem en omgeving. Gevelwerk, binnenafwerking en microcement vloeren op vaste prijs.',
   url: site.href,
   telephone: '+31681943404',
-  email: 'info@stucqafbouw.nl',
+  email: 'info@pietracasa.nl',
   address: {
     '@type': 'PostalAddress',
     addressRegion: 'Noord-Holland',
@@ -61,6 +63,7 @@ const localBusiness = {
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical.href} />
+    <link rel="icon" type="image/png" href="/favicon-pietracasa.png" />
 
     <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={groteskWoff2} crossorigin />

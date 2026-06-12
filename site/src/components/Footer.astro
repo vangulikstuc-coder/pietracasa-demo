@@ -13,7 +13,7 @@ const siteLinks = [
   { href: '/projecten/', label: 'Projecten' },
   { href: '/werkwijze/', label: 'Werkwijze' },
   { href: '/voor-bouwbedrijven/', label: 'Voor bouwbedrijven' },
-  { href: '/over-stucq/', label: 'Over Stucq' },
+  { href: '/over-pietracasa/', label: 'Over Pietracasa' },
   { href: '/veelgestelde-vragen/', label: 'Veelgestelde vragen' },
   { href: '/contact/', label: 'Contact' },
   { href: '/offerte-aanvragen/', label: 'Offerte aanvragen' },
@@ -21,11 +21,14 @@ const siteLinks = [
 ---
 
 <footer class="site-footer">
-  <div class="site-footer__ghost" aria-hidden="true">Stucq</div>
+  <div class="site-footer__ghost" aria-hidden="true">Pietracasa</div>
   <div class="container site-footer__inner">
     <div class="site-footer__grid">
       <div class="site-footer__col site-footer__col--brand">
-        <p class="site-footer__brand">Stucq</p>
+        <p class="site-footer__brand">
+          <img src="/logo-pietracasa.png" alt="" width="36" height="36" class="site-footer__logo" />
+          Pietracasa
+        </p>
         <p class="site-footer__tagline">
           Stucadoor in Haarlem en omgeving. Vaste prijs, op tijd opgeleverd.
         </p>
@@ -41,7 +44,7 @@ const siteLinks = [
         <h2 class="site-footer__heading">Contact</h2>
         <ul class="site-footer__list">
           <li><a href="tel:0681943404">06 81 94 34 04</a></li>
-          <li><a href="mailto:info@stucqafbouw.nl">info@stucqafbouw.nl</a></li>
+          <li><a href="mailto:info@pietracasa.nl">info@pietracasa.nl</a></li>
           <li>Noord-Holland</li>
           <li>Werkgebied: Haarlem, Bloemendaal, Zandvoort en omgeving</li>
         </ul>
@@ -75,7 +78,7 @@ const siteLinks = [
     </div>
 
     <div class="site-footer__legal">
-      <p>&copy; {year} Stucq · KvK-geregistreerd en verzekerd</p>
+      <p>&copy; {year} Pietracasa · KvK-geregistreerd en verzekerd</p>
       <p>Vrijblijvende offerte · Vaste prijs · Reactie binnen 48 uur</p>
     </div>
   </div>
@@ -202,6 +205,14 @@ const siteLinks = [
     .site-footer__grid {
       grid-template-columns: 1.4fr 1fr 1fr 1fr;
     }
+  }
+  .site-footer__logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    vertical-align: -7px;
+    margin-inline-end: 8px;
+    filter: brightness(1.5);
   }
 </style>
 

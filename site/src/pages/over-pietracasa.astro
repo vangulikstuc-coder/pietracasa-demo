@@ -1,7 +1,7 @@
 ---
 import { Picture, getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import heroOverStucq from '../assets/images/hero/hero-over-stucq.jpg';
+import heroOverPietracasa from '../assets/images/hero/hero-over-stucq.jpg';
 import overWerkomgeving from '../assets/images/sections/over-werkomgeving.jpg';
 import galerijGevelVoor from '../assets/images/sections/galerij-gevel-voor.jpg';
 import galerijGevelNa from '../assets/images/sections/galerij-gevel-na.jpg';
@@ -14,18 +14,18 @@ const heroSizes = '(min-width: 1024px) 50vw, 100vw';
 const heroAvif = await Promise.all(
   heroWidths.map(async (width) => ({
     width,
-    image: await getImage({ src: heroOverStucq, width, format: 'avif' }),
+    image: await getImage({ src: heroOverPietracasa, width, format: 'avif' }),
   }))
 );
 const heroPreloadSrcset = heroAvif.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
 
-const ogImage = await getImage({ src: heroOverStucq, width: 1200, format: 'jpg' });
+const ogImage = await getImage({ src: heroOverPietracasa, width: 1200, format: 'jpg' });
 
 const cardWidths = [420, 840];
 const cardSizes = '(min-width: 768px) 45vw, 100vw';
 
 const kerngegevens = [
-  { label: 'Bedrijf', waarde: 'Stucq, stucadoorsbedrijf' },
+  { label: 'Bedrijf', waarde: 'Pietracasa, stucadoorsbedrijf' },
   { label: 'Gevestigd', waarde: 'Noord-Holland' },
   { label: 'Actief sinds', waarde: '2020' },
   { label: 'Werkgebied', waarde: 'Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km' },
@@ -44,7 +44,7 @@ const waarborgen = [
   },
   {
     titel: 'Garantie op het werk',
-    tekst: 'Stucq levert op met garantie, vastgelegd in de opleveringsafspraak.',
+    tekst: 'Pietracasa levert op met garantie, vastgelegd in de opleveringsafspraak.',
     icon: 'shield',
   },
 ];
@@ -74,8 +74,8 @@ const icons: Record<string, string> = {
 ---
 
 <BaseLayout
-  title="Over Stucq – stucadoor in Haarlem | Stucq"
-  description="Stucq is een stucadoorsbedrijf in Noord-Holland, sinds 2020 actief in Haarlem en omgeving. 50+ projecten, 4,8 sterren op Google. Vraag een offerte aan."
+  title="Over Pietracasa – stucadoor in Haarlem | Pietracasa"
+  description="Pietracasa is een stucadoorsbedrijf in Noord-Holland, sinds 2020 actief in Haarlem en omgeving. 50+ projecten, 4,8 sterren op Google. Vraag een offerte aan."
   ogImage={ogImage.src}
 >
   <link
@@ -87,14 +87,14 @@ const icons: Record<string, string> = {
     imagesizes={heroSizes}
   />
 
-  <!-- 1. Pagina-hero: Wie is Stucq -->
+  <!-- 1. Pagina-hero: Wie is Pietracasa -->
   <section class="hero" aria-labelledby="over-title">
     <div class="container hero__grid">
       <div class="hero__content" data-reveal>
-        <p class="eyebrow">Over Stucq</p>
+        <p class="eyebrow">Over Pietracasa</p>
         <h1 id="over-title">Stucadoorsbedrijf in Haarlem – sinds 2020 op vaste prijs</h1>
         <p class="hero__sub">
-          Stucq is gevestigd in Noord-Holland en werkt in Haarlem, Bloemendaal, Zandvoort en
+          Pietracasa is gevestigd in Noord-Holland en werkt in Haarlem, Bloemendaal, Zandvoort en
           omgeving. Sinds 2020 zijn 50+ projecten afgerond – allemaal op tijd en in budget.
         </p>
         <dl class="hero__feiten">
@@ -118,16 +118,16 @@ const icons: Record<string, string> = {
       </div>
       <div class="hero__media">
         <Picture
-          src={heroOverStucq}
+          src={heroOverPietracasa}
           widths={heroWidths}
           sizes={heroSizes}
           formats={['avif', 'webp']}
-          alt="Vakman van Stucq bij een strak afgewerkte wand"
+          alt="Vakman van Pietracasa bij een strak afgewerkte wand"
           fetchpriority="high"
           loading="eager"
           data-demo="true"
         />
-        <p class="hero__chip">Vakman van Stucq · regio Haarlem</p>
+        <p class="hero__chip">Vakman van Pietracasa · regio Haarlem</p>
       </div>
     </div>
   </section>
@@ -191,7 +191,7 @@ const icons: Record<string, string> = {
           widths={cardWidths}
           sizes={cardSizes}
           formats={['avif', 'webp']}
-          alt="Werkomgeving van Stucq: gereedschap en stucwerk in uitvoering"
+          alt="Werkomgeving van Pietracasa: gereedschap en stucwerk in uitvoering"
           loading="lazy"
           decoding="async"
           data-demo="true"
@@ -208,7 +208,7 @@ const icons: Record<string, string> = {
         <p class="eyebrow">Werkgebied</p>
         <h2 id="werkgebied-title">Haarlem, Bloemendaal, Zandvoort en omgeving tot 15 km</h2>
         <p>
-          Stucq voert werk uit in Haarlem, Bloemendaal, Zandvoort en de directe omgeving tot 15
+          Pietracasa voert werk uit in Haarlem, Bloemendaal, Zandvoort en de directe omgeving tot 15
           kilometer. Buiten dit werkgebied worden geen opdrachten aangenomen.
         </p>
         <p>
@@ -268,13 +268,13 @@ const icons: Record<string, string> = {
       </div>
       <div class="reviews__text">
         <p class="eyebrow">Reviews</p>
-        <h2 id="reviews-title">25+ opdrachtgevers beoordeelden Stucq met 4,8 sterren</h2>
+        <h2 id="reviews-title">25+ opdrachtgevers beoordeelden Pietracasa met 4,8 sterren</h2>
         <p>
           De reviews komen van bouwbedrijven en huiseigenaren in Haarlem en omgeving. Ze gaan over
           planning, prijs en afwerking.
         </p>
         <p>
-          U leest alle beoordelingen op het Google-profiel van Stucq. Wij schrijven hier geen
+          U leest alle beoordelingen op het Google-profiel van Pietracasa. Wij schrijven hier geen
           citaten over – het bewijs staat bij Google.
         </p>
       </div>
@@ -288,7 +288,7 @@ const icons: Record<string, string> = {
         <p class="eyebrow">Waarborg</p>
         <h2 id="waarborg-title">Vastgelegd vóór de start, gecontroleerd bij oplevering</h2>
         <p class="section-head__intro">
-          Stucq werkt volgens de normen van de branche en levert werk op met garantie. Elke
+          Pietracasa werkt volgens de normen van de branche en levert werk op met garantie. Elke
           afspraak staat op papier.
         </p>
       </header>
@@ -406,7 +406,7 @@ const icons: Record<string, string> = {
         <p class="eyebrow">Bereikbaarheid</p>
         <h2 id="contact-title">Direct contact, zonder tussenstap</h2>
         <p>
-          Stucq is op werkdagen telefonisch en per e-mail bereikbaar. Spoed is mogelijk – u
+          Pietracasa is op werkdagen telefonisch en per e-mail bereikbaar. Spoed is mogelijk – u
           ontvangt binnen 48 uur een reactie.
         </p>
       </div>
@@ -422,7 +422,7 @@ const icons: Record<string, string> = {
           <span class="contact__icon" set:html={icons.mail} aria-hidden="true" />
           <div>
             <h3>E-mail</h3>
-            <a href="mailto:info@stucqafbouw.nl">info@stucqafbouw.nl</a>
+            <a href="mailto:info@pietracasa.nl">info@pietracasa.nl</a>
           </div>
         </li>
         <li>

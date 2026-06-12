@@ -42,7 +42,7 @@ const demoReviews = [
     naam: 'Ruben Visser',
     plaats: 'Projectleider bouwbedrijf · regio Haarlem',
     quote:
-      'Stucq draait inmiddels meerdere projecten met ons mee. Planning staat, kwaliteit constant – zeldzaam in de afbouw.',
+      'Pietracasa draait inmiddels meerdere projecten met ons mee. Planning staat, kwaliteit constant – zeldzaam in de afbouw.',
   },
 ];
 import fotoStap1 from '../assets/images/sections/stap-1-opname.jpg';
@@ -240,7 +240,7 @@ const icons: Record<string, string> = {
 ---
 
 <BaseLayout
-  title="Stucadoor in Haarlem | Stucq"
+  title="Stucadoor in Haarlem | Pietracasa"
   description="Stucadoor in Haarlem voor gevelwerk, binnenafwerking en microcement. Vaste prijs, 50+ projecten op tijd opgeleverd. Vraag vrijblijvend een offerte aan."
   ogImage={ogImage.src}
 >
@@ -299,7 +299,7 @@ const icons: Record<string, string> = {
         <p class="eyebrow">Gevelwerk · Binnenafwerking · Microcement vloeren</p>
         <h1 id="hero-title">Stucadoor in Haarlem – <br class="br-mobiel" />vaste&nbsp;prijs, aantoonbaar op&nbsp;tijd</h1>
         <p class="hero__sub">
-          U weet vooraf wat het kost – en Stucq houdt zich daaraan. 50+ projecten in Haarlem en
+          U weet vooraf wat het kost – en Pietracasa houdt zich daaraan. 50+ projecten in Haarlem en
           omgeving sinds 2020, allemaal binnen budget en planning opgeleverd.
         </p>
         <ul class="hero__proof" role="list">
@@ -322,51 +322,14 @@ const icons: Record<string, string> = {
     </div>
   </section>
 
-  <!-- 2. Bewijs-band -->
-  <section class="stats-band" aria-labelledby="stats-title">
-    <div class="container">
-      <h2 class="visually-hidden" id="stats-title">Bewijs in cijfers</h2>
-      <dl class="stats" data-reveal-group>
-        <div class="stats__item">
-          <dt>Sterren op Google</dt>
-          <dd>
-            <span class="stats__num tabular" data-count-to="4.8" data-count-decimals="1">4,8</span>
-            <span class="stats__star" set:html={icons.star} aria-hidden="true" />
-          </dd>
-        </div>
-        <div class="stats__item">
-          <dt>Geverifieerde reviews</dt>
-          <dd><span class="stats__num tabular" data-count-to="25" data-count-suffix="+">25+</span></dd>
-        </div>
-        <div class="stats__item">
-          <dt>Projecten sinds 2020</dt>
-          <dd><span class="stats__num tabular" data-count-to="50" data-count-suffix="+">50+</span></dd>
-        </div>
-      </dl>
-      <div class="stats__proof" data-reveal>
-        <ul class="stats__fotos" role="list" aria-hidden="true">
-          {[detailGevel, detailWand, detailVloer].map((foto) => (
-            <li>
-              <Image src={foto} alt="" width={144} height={144} loading="lazy" decoding="async" data-demo="true" />
-            </li>
-          ))}
-        </ul>
-        <p class="stats__caption">
-          Beoordeeld door bouwbedrijven en huiseigenaren in de regio Haarlem. Alle projecten op
-          tijd en in budget afgeleverd.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Probleem naar oplossing -->
+<!-- 3. Probleem naar oplossing -->
   <section class="section section--alt" aria-labelledby="contrast-title">
     <div class="container">
       <header class="section-head" data-reveal>
         <p class="eyebrow">Probleem en oplossing</p>
         <h2 id="contrast-title">Geen onduidelijke kosten. Geen uitloop.</h2>
         <p class="section-head__intro">
-          Onduidelijke kosten en uitloop zijn de twee redenen waarom opdrachtgevers afhaken. Stucq
+          Onduidelijke kosten en uitloop zijn de twee redenen waarom opdrachtgevers afhaken. Pietracasa
           werkt daarom uitsluitend op vaste prijs en legt elke afspraak schriftelijk vast.
         </p>
       </header>
@@ -385,7 +348,7 @@ const icons: Record<string, string> = {
           </ul>
         </div>
         <div class="contrast__col contrast__col--oplossing">
-          <h3>Zo lost Stucq dat op</h3>
+          <h3>Zo lost Pietracasa dat op</h3>
           <ul role="list">
             {
               oplossingen.map((tekst) => (
@@ -451,7 +414,7 @@ const icons: Record<string, string> = {
         <h2 id="galerij-title">Het werk, voor en na</h2>
         <p class="section-head__intro">
           Bekijk afgeronde projecten in Haarlem, Bloemendaal en Zandvoort. Voor-na foto's van elk
-          type werk dat Stucq uitvoert.
+          type werk dat Pietracasa uitvoert.
         </p>
       </header>
       <div class="galerij" data-reveal-group>
@@ -565,7 +528,7 @@ const icons: Record<string, string> = {
         <p class="eyebrow">Garanties</p>
         <h2 id="garanties-title">Afspraken die op papier staan</h2>
         <p class="section-head__intro">
-          Stucq levert met vaste prijsgarantie en een schriftelijke opleveringsafspraak.
+          Pietracasa levert met vaste prijsgarantie en een schriftelijke opleveringsafspraak.
         </p>
       </header>
       <ul class="garanties" role="list" data-reveal-group>
@@ -608,6 +571,19 @@ const icons: Record<string, string> = {
           </p>
         </div>
       </header>
+      <div class="stats__proof" data-reveal>
+        <ul class="stats__fotos" role="list" aria-hidden="true">
+          {[detailGevel, detailWand, detailVloer].map((foto) => (
+            <li>
+              <Image src={foto} alt="" width={144} height={144} loading="lazy" decoding="async" data-demo="true" />
+            </li>
+          ))}
+        </ul>
+        <p class="stats__caption">
+          Beoordeeld door bouwbedrijven en huiseigenaren in de regio Haarlem. Alle projecten op
+          tijd en in budget afgeleverd.
+        </p>
+      </div>
       <ul class="review-kaarten" role="list" data-reveal-group>
         {
           demoReviews.map((review) => (
@@ -961,6 +937,7 @@ const icons: Record<string, string> = {
 
   /* Werk-detail trio (demo-beelden) als visueel bewijs naast de caption */
   .stats__proof {
+    margin-block-end: var(--spacing-xl);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -1183,7 +1160,20 @@ const icons: Record<string, string> = {
 
   @media (min-width: 768px) {
     .diensten {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    /* 5 kaarten: rij van 3, rij van 2 gecentreerd */
+    .dienst-card {
+      grid-column: span 2;
+    }
+
+    .dienst-card:nth-child(4) {
+      grid-column: 2 / span 2;
+    }
+
+    .dienst-card:nth-child(5) {
+      grid-column: 4 / span 2;
     }
   }
 
