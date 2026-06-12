@@ -317,10 +317,17 @@ const icons: Record<string, string> = {
         <ul class="hero__proof" role="list">
           <li>
             <span class="hero__proof-star" set:html={icons.star} aria-hidden="true" />
-            4,8 op Google
+            <span class="tabular" data-count-to="4.8" data-count-decimals="1">4,8</span>
+            &nbsp;op Google
           </li>
-          <li>25+ geverifieerde reviews</li>
-          <li>50+ projecten sinds 2020</li>
+          <li>
+            <span class="tabular" data-count-to="25" data-count-suffix="+">25+</span>
+            &nbsp;geverifieerde reviews
+          </li>
+          <li>
+            <span class="tabular" data-count-to="50" data-count-suffix="+">50+</span>
+            &nbsp;projecten sinds 2020
+          </li>
         </ul>
         <div class="hero__actions">
           <a href="/offerte-aanvragen/" class="btn btn--primary">
