@@ -28,7 +28,7 @@ const groepen: Groep[] = [
     vragen: [
       {
         v: 'Wat kost stucwerk bij Stucq?',
-        a: 'Elk project is maatwerk; vaste tarieven publiceren wij niet. Na een vrijblijvende opname op locatie ontvangt u een schriftelijke offerte met vaste prijs. U weet vóór de start exact wat het kost.',
+        a: 'Op de offertepagina vindt u prijsindicaties per dienst (bijv. glad stucwerk €18–22 per m², latex spuiten €4–9 per m²). De definitieve prijs is altijd een vaste prijs op schrift, na een vrijblijvende opname op locatie.',
         link: { href: '/offerte-aanvragen/', label: 'Vraag een vrijblijvende offerte aan' },
       },
       {
@@ -110,6 +110,37 @@ const groepen: Groep[] = [
       },
     ],
   },
+  {
+    id: 'technieken',
+    titel: 'Technieken en ondergronden',
+    icon: 'plus',
+    vragen: [
+      {
+        v: 'Kan stucwerk direct over tegels?',
+        a: 'In veel gevallen wel: na een hechtcontrole en de juiste voorbehandeling kan over vast zittend tegelwerk gestuukt of een naadloze afwerking (microcement, beton ciré) aangebracht worden. Wij beoordelen dit tijdens de opname.',
+      },
+      {
+        v: 'Hoe lang moet stucwerk drogen voor ik kan schilderen?',
+        a: 'Als vuistregel: ongeveer één week droogtijd per millimeter laagdikte, afhankelijk van temperatuur en ventilatie. In de offerte staat wanneer uw wanden klaar zijn om te schilderen of te laten spuiten.',
+      },
+      {
+        v: 'Kan er in de winter gestukadoord worden?',
+        a: 'Binnen vrijwel altijd, mits de ruimte vorstvrij is en geventileerd kan worden. Buitenstucwerk is afhankelijk van temperatuur en neerslag – dat plannen we in een geschikte periode en leggen we vast in de planning.',
+      },
+      {
+        v: 'Is beton ciré geschikt voor de douche?',
+        a: 'Ja, voor douchewanden is beton ciré met de juiste primer en sealer uitstekend geschikt. Voor de douchevloer adviseren wij terughoudendheid vanwege kalk- en zeepresten; dat bespreken we eerlijk tijdens de opname.',
+      },
+      {
+        v: 'Kan latex gespoten worden over behang of oude verf?',
+        a: 'Op vrijwel elke vaste, schone ondergrond waar u eerder muurverf zou rollen – ook glad behang en bestaande verflagen. Loszittende delen verwijderen we eerst; dat zit in de vaste prijs.',
+      },
+      {
+        v: 'Werken jullie ook met vloerverwarming?',
+        a: 'Ja. Naadloze vloeren zoals microcement en beton ciré werken goed samen met vloerverwarming. We stemmen de opbouw en het opstookprotocol af op uw situatie.',
+      },
+    ],
+  },
 ];
 
 const faqJsonLd = {
@@ -148,8 +179,11 @@ const icons: Record<string, string> = {
 
   <!-- 1. Pagina-hero (tekstkop: geen eigen faq-beeld beschikbaar) -->
   <section class="page-hero" aria-labelledby="faq-title">
+    <div class="bg-drift" aria-hidden="true"></div>
     <div class="page-hero__texture" aria-hidden="true">
       <Picture
+        data-parallax
+        data-parallax-speed="7"
         src={bgStucLicht}
         widths={[768, 1280, 1536]}
         sizes="100vw"
@@ -257,6 +291,7 @@ const icons: Record<string, string> = {
         data-demo="true"
       />
     </div>
+    <div class="sheen" aria-hidden="true"></div>
     <div class="container cta-band__inner" data-reveal>
       <h2 id="cta-title">Nog een vraag?</h2>
       <p class="cta-band__sub">

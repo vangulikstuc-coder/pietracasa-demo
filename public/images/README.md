@@ -26,6 +26,10 @@ Markeer elk beeld in de site met `data-demo="true"`.
 - `over-werkomgeving.jpg` — werkomgevingsfoto (over-pagina, tekst-beeld-blok)
 - `cta-sfeer.jpg` — CTA-band achtergrond (opgeleverd interieur)
 
+### sections/ — stap-medaillons & details (beeldronde 2)
+- `stap-1-opname.jpg` t/m `stap-5-oplevering.jpg` — ronde foto-medaillons bij de vijf stappen op /werkwijze/ (zelfde vakman door alle stappen)
+- `detail-gevel.jpg` / `detail-wand.jpg` / `detail-vloer.jpg` — overlappend rond trio bij de bewijs-cijfers op home
+
 ### backgrounds/ (polish-ronde)
 - `bg-stuc-licht.jpg` — subtiele lichte stucwerk-textuur: achtergrond-accent voor de werkwijze- en FAQ-hero
 - `bg-stuc-donker.jpg` — donkere stucwerk-textuur: voor donkere CTA-banden / footer / trackrecord-band (witte tekst, AA-contrast)

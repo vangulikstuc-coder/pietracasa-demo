@@ -3,6 +3,8 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { initMotes } from './motes';
+import { initLivingBg } from './living-bg';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -80,13 +82,81 @@ function showEverything(): void {
     });
 }
 
+
+function initParallax(): void {
+  // Scroll-parallax op achtergrondlagen: [data-parallax], snelheid in % via
+  // data-parallax-speed (default 8, max ~10-15% conform house/motion.md).
+  // Lichte scale voorkomt zichtbare randen bij het verschuiven.
+  gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {
+    const speed = Math.min(Number(el.dataset.parallaxSpeed ?? '8'), 15);
+    if (!Number.isFinite(speed) || speed <= 0) return;
+    const scope = el.closest('section') ?? el.parentElement ?? el;
+    gsap.fromTo(
+      el,
+      { yPercent: -speed, scale: 1 + (speed * 2.2) / 100 },
+      {
+        yPercent: speed,
+        scale: 1 + (speed * 2.2) / 100,
+        ease: 'none',
+        scrollTrigger: { trigger: scope, start: 'top bottom', end: 'bottom top', scrub: true },
+      }
+    );
+  });
+}
+
+
+function initBaSliders(): void {
+  // Voor-na sleep-slider: progressive enhancement op de bestaande toggle-kaarten.
+  // De Voor/Na-knoppen blijven werken en springen naar de uitersten.
+  document.querySelectorAll<HTMLElement>('[data-ba]').forEach((card) => {
+    const media = card.querySelector<HTMLElement>('.ba-card__media');
+    const voor = card.querySelector<HTMLElement>('[data-ba-panel="voor"]');
+    const na = card.querySelector<HTMLElement>('[data-ba-panel="na"]');
+    if (!media || !voor || !na) return;
+
+    card.classList.add('ba-card--slider');
+    voor.removeAttribute('aria-hidden');
+    card.style.setProperty('--ba-pos', '50%');
+
+    const handle = document.createElement('div');
+    handle.className = 'ba-handle';
+    handle.setAttribute('aria-hidden', 'true');
+
+    const range = document.createElement('input');
+    range.type = 'range';
+    range.className = 'ba-range';
+    range.min = '0';
+    range.max = '100';
+    range.value = '50';
+    range.setAttribute('aria-label', 'Vergelijk voor en na (sleep de schuif)');
+    range.addEventListener('input', () => {
+      card.style.setProperty('--ba-pos', `${range.value}%`);
+    });
+
+    media.append(handle, range);
+
+    card.querySelectorAll<HTMLButtonElement>('[data-ba-show]').forEach((knop) => {
+      knop.addEventListener('click', () => {
+        const doel = knop.dataset.baShow === 'voor' ? '100' : '0';
+        range.value = doel;
+        card.style.setProperty('--ba-pos', `${doel}%`);
+      });
+    });
+  });
+}
+
 export function initMotion(): void {
   if (reducedMotion.matches) {
     showEverything();
+    initLivingBg(false); // statisch frame, geen beweging
     return;
   }
+  initLivingBg(true);
   gsap.registerPlugin(ScrollTrigger);
   initLenis();
   initReveals();
   initCountUp();
+  initParallax();
+  initMotes();
+  initBaSliders();
 }

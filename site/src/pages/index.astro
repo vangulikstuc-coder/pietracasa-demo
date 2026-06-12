@@ -1,5 +1,5 @@
 ---
-import { Picture, getImage } from 'astro:assets';
+import { Picture, Image, getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import heroHome from '../assets/images/hero/hero-home.jpg';
 import dienstGevelwerk from '../assets/images/sections/dienst-gevelwerk.jpg';
@@ -13,6 +13,47 @@ import galerijVloerVoor from '../assets/images/sections/galerij-vloer-voor.jpg';
 import galerijVloerNa from '../assets/images/sections/galerij-vloer-na.jpg';
 import ctaSfeer from '../assets/images/sections/cta-sfeer.jpg';
 import bgTroffelSweep from '../assets/images/backgrounds/bg-troffel-sweep.jpg';
+import dienstBetonCire from '../assets/images/sections/dienst-beton-cire.jpg';
+import dienstSpuitwerk from '../assets/images/sections/dienst-spuitwerk.jpg';
+import detailGevel from '../assets/images/sections/detail-gevel.jpg';
+import reviewFoto1 from '../assets/images/sections/review-1.jpg';
+import reviewFoto2 from '../assets/images/sections/review-2.jpg';
+import reviewFoto3 from '../assets/images/sections/review-3.jpg';
+
+/* DEMO-reviews: verzonnen voorbeelden met AI-portretten (data-demo).
+   Vóór livegang vervangen door echte Google-reviews — zie content-truth.md. */
+const demoReviews = [
+  {
+    foto: reviewFoto1,
+    naam: 'Marije van den Berg',
+    plaats: 'Haarlem · binnenafwerking',
+    quote:
+      'Vooraf een vaste prijs op papier, en die klopte tot op de euro. De wanden zijn strakker dan we durfden hopen.',
+  },
+  {
+    foto: reviewFoto2,
+    naam: 'Henk de Wit',
+    plaats: 'Heemstede · gevelwerk',
+    quote:
+      'Op de afgesproken maandag stond de steiger er, twee weken later was de gevel klaar. Precies zoals afgesproken.',
+  },
+  {
+    foto: reviewFoto3,
+    naam: 'Ruben Visser',
+    plaats: 'Projectleider bouwbedrijf · regio Haarlem',
+    quote:
+      'Stucq draait inmiddels meerdere projecten met ons mee. Planning staat, kwaliteit constant – zeldzaam in de afbouw.',
+  },
+];
+import fotoStap1 from '../assets/images/sections/stap-1-opname.jpg';
+import fotoStap2 from '../assets/images/sections/stap-2-offerte.jpg';
+import fotoStap3 from '../assets/images/sections/stap-3-planning.jpg';
+import fotoStap4 from '../assets/images/sections/stap-4-uitvoering.jpg';
+import fotoStap5 from '../assets/images/sections/stap-5-oplevering.jpg';
+
+const stapFotos = [fotoStap1, fotoStap2, fotoStap3, fotoStap4, fotoStap5];
+import detailWand from '../assets/images/sections/detail-wand.jpg';
+import detailVloer from '../assets/images/sections/detail-vloer.jpg';
 
 /* Hero als 50/50-split uit de losse voor/na-helften: de deellijn ligt daardoor
    op elk breakpoint exact op het midden (composiet hero-home.jpg is alleen nog OG-beeld) */
@@ -59,6 +100,22 @@ const diensten = [
     src: dienstMicrocement,
     alt: 'Vakman brengt microcement aan op een vloer',
     foto: 'vloer',
+  },
+  {
+    href: '/diensten/beton-cire/',
+    titel: 'Beton ciré',
+    belofte: 'Waterbestendig en naadloos – badkamer, vloer en wand in één geheel.',
+    src: dienstBetonCire,
+    alt: 'Vakman brengt beton ciré aan op een badkamerwand',
+    foto: 'betoncire',
+  },
+  {
+    href: '/diensten/spuitwerk-latex/',
+    titel: 'Spuitwerk · latex',
+    belofte: 'Wanden en plafonds streeploos gespoten – sneller en strakker dan rollen.',
+    src: dienstSpuitwerk,
+    alt: 'Strak wit gespoten wanden en plafond in een lege woonkamer',
+    foto: 'spuitwerk',
   },
 ];
 
@@ -208,33 +265,39 @@ const icons: Record<string, string> = {
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero__grid">
       <div class="hero__media">
-        <div class="hero__split">
-          <Picture
-            src={galerijGevelVoor}
-            widths={heroHalfWidths}
-            sizes={heroHalfSizes}
-            formats={['avif', 'webp']}
-            alt="Vóór: gevel met gescheurd en afgebladderd stucwerk in Haarlem"
-            fetchpriority="high"
-            loading="eager"
-            data-demo="true"
-          />
-          <Picture
-            src={galerijGevelNa}
-            widths={heroHalfWidths}
-            sizes={heroHalfSizes}
-            formats={['avif', 'webp']}
-            alt="Na: dezelfde gevel strak gestuukt en geschilderd"
-            fetchpriority="high"
-            loading="eager"
-            data-demo="true"
-          />
+        <div class="hero__ba" data-ba>
+          <div class="ba-card__media hero__ba-media">
+            <div class="ba-card__panel is-active" data-ba-panel="na">
+              <Picture
+                src={galerijGevelNa}
+                widths={heroHalfWidths}
+                sizes={heroHalfSizes}
+                formats={['avif', 'webp']}
+                alt="Na: dezelfde gevel strak gestuukt en geschilderd"
+                fetchpriority="high"
+                loading="eager"
+                data-demo="true"
+              />
+            </div>
+            <div class="ba-card__panel" data-ba-panel="voor" aria-hidden="true">
+              <Picture
+                src={galerijGevelVoor}
+                widths={heroHalfWidths}
+                sizes={heroHalfSizes}
+                formats={['avif', 'webp']}
+                alt="Vóór: gevel met gescheurd en afgebladderd stucwerk in Haarlem"
+                fetchpriority="high"
+                loading="eager"
+                data-demo="true"
+              />
+            </div>
+          </div>
         </div>
         <p class="hero__chip">Voor en na · gevelproject Haarlem</p>
       </div>
       <div class="hero__content" data-reveal>
         <p class="eyebrow">Gevelwerk · Binnenafwerking · Microcement vloeren</p>
-        <h1 id="hero-title">Stucadoor in Haarlem – vaste prijs, aantoonbaar op tijd</h1>
+        <h1 id="hero-title">Stucadoor in Haarlem – <br class="br-mobiel" />vaste&nbsp;prijs, aantoonbaar op&nbsp;tijd</h1>
         <p class="hero__sub">
           U weet vooraf wat het kost – en Stucq houdt zich daaraan. 50+ projecten in Haarlem en
           omgeving sinds 2020, allemaal binnen budget en planning opgeleverd.
@@ -280,10 +343,19 @@ const icons: Record<string, string> = {
           <dd><span class="stats__num tabular" data-count-to="50" data-count-suffix="+">50+</span></dd>
         </div>
       </dl>
-      <p class="stats__caption" data-reveal>
-        Beoordeeld door bouwbedrijven en huiseigenaren in de regio Haarlem. Alle projecten op tijd
-        en in budget afgeleverd.
-      </p>
+      <div class="stats__proof" data-reveal>
+        <ul class="stats__fotos" role="list" aria-hidden="true">
+          {[detailGevel, detailWand, detailVloer].map((foto) => (
+            <li>
+              <Image src={foto} alt="" width={144} height={144} loading="lazy" decoding="async" data-demo="true" />
+            </li>
+          ))}
+        </ul>
+        <p class="stats__caption">
+          Beoordeeld door bouwbedrijven en huiseigenaren in de regio Haarlem. Alle projecten op
+          tijd en in budget afgeleverd.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -446,8 +518,19 @@ const icons: Record<string, string> = {
       </header>
       <ol class="steps" role="list" data-reveal-group>
         {
-          stappen.map((stap) => (
+          stappen.map((stap, i) => (
             <li class="step">
+              <span class="step__medaillon" aria-hidden="true">
+                <Image
+                  src={stapFotos[i]}
+                  alt=""
+                  width={192}
+                  height={192}
+                  loading="lazy"
+                  decoding="async"
+                  data-demo="true"
+                />
+              </span>
               <div class="step__top">
                 <span class="step__nr tabular" aria-hidden="true">{stap.nr}</span>
                 <span class="step__icon" set:html={icons[stap.icon]} aria-hidden="true" />
@@ -465,6 +548,8 @@ const icons: Record<string, string> = {
   <section class="section section--alt garanties-sectie" aria-labelledby="garanties-title">
     <div class="garanties-sectie__bg" aria-hidden="true">
       <Picture
+          data-parallax
+          data-parallax-speed="6"
         src={bgTroffelSweep}
         widths={[768, 1280, 1536]}
         sizes="100vw"
@@ -500,39 +585,69 @@ const icons: Record<string, string> = {
     </div>
   </section>
 
-  <!-- 8. Reviews -->
+  <!-- 8. Reviews (kaarten = DEMO met AI-portretten; vervang door echte reviews) -->
   <section class="section" aria-labelledby="reviews-title">
-    <div class="container reviews" data-reveal-group>
-      <div class="review-score">
-        <p class="review-score__num tabular">4,8</p>
-        <p class="review-score__stars" aria-hidden="true">
-          <span set:html={icons.star} />
-          <span set:html={icons.star} />
-          <span set:html={icons.star} />
-          <span set:html={icons.star} />
-          <span set:html={icons.starPartial} />
-        </p>
-        <p class="visually-hidden">4,8 van 5 sterren</p>
-        <p class="review-score__sub">
-          Gemiddelde score op Google, op basis van 25+ geverifieerde reviews.
-        </p>
-      </div>
-      <div class="reviews__text">
-        <p class="eyebrow">Reviews</p>
-        <h2 id="reviews-title">Beoordeeld met 4,8 sterren op Google</h2>
-        <p>
-          25+ geverifieerde reviews van particulieren en bouwbedrijven uit Haarlem en omgeving.
-        </p>
-        <p>
-          De beoordelingen gaan over planning, prijs en afwerking – bij gevelwerk, binnenafwerking
-          en microcement vloeren.
-        </p>
-      </div>
+    <div class="container">
+      <header class="section-head reviews-head" data-reveal>
+        <div>
+          <p class="eyebrow">Reviews</p>
+          <h2 id="reviews-title">Beoordeeld met 4,8 sterren op Google</h2>
+          <p class="section-head__intro">
+            25+ geverifieerde reviews van particulieren en bouwbedrijven uit Haarlem en omgeving
+            – over planning, prijs en afwerking.
+          </p>
+        </div>
+        <div class="review-score" aria-hidden="true">
+          <p class="review-score__num tabular">4,8</p>
+          <p class="review-score__stars">
+            <span set:html={icons.star} />
+            <span set:html={icons.star} />
+            <span set:html={icons.star} />
+            <span set:html={icons.star} />
+            <span set:html={icons.starPartial} />
+          </p>
+        </div>
+      </header>
+      <ul class="review-kaarten" role="list" data-reveal-group>
+        {
+          demoReviews.map((review) => (
+            <li class="review-kaart" data-demo="true">
+              <p class="review-kaart__stars" aria-hidden="true">
+                <span set:html={icons.star} />
+                <span set:html={icons.star} />
+                <span set:html={icons.star} />
+                <span set:html={icons.star} />
+                <span set:html={icons.star} />
+              </p>
+              <blockquote>
+                <p>&ldquo;{review.quote}&rdquo;</p>
+              </blockquote>
+              <footer class="review-kaart__wie">
+                <span class="review-kaart__foto">
+                  <Image
+                    src={review.foto}
+                    alt=""
+                    width={96}
+                    height={96}
+                    loading="lazy"
+                    decoding="async"
+                    data-demo="true"
+                  />
+                </span>
+                <span>
+                  <strong>{review.naam}</strong>
+                  <small>{review.plaats}</small>
+                </span>
+              </footer>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
   <!-- 9. CTA-band -->
-  <section class="cta-band" aria-labelledby="cta-title">
+  <section class="cta-band" aria-labelledby="cta-title" data-motes="dark">
     <div class="cta-band__bg" aria-hidden="true">
       <Picture
         src={ctaSfeer}
@@ -545,6 +660,7 @@ const icons: Record<string, string> = {
         data-demo="true"
       />
     </div>
+    <div class="sheen" aria-hidden="true"></div>
     <div class="container cta-band__inner" data-reveal>
       <h2 id="cta-title">Vraag vrijblijvend een offerte aan</h2>
       <p class="cta-band__sub">
@@ -615,20 +731,22 @@ const icons: Record<string, string> = {
     box-shadow: var(--shadow-lg);
   }
 
-  /* 50/50-grid van losse voor/na-helften: deellijn (gap op witte ondergrond)
-     ligt altijd visueel op het midden, ongeacht crop of breakpoint */
-  .hero__split {
+  /* Voor-na sleep-slider in de hero (zelfde mechaniek als de galerij-kaarten) */
+  .hero__ba {
     position: absolute;
     inset: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xs);
-    background: var(--color-surface-default);
   }
 
-  .hero__split :global(picture) {
+  .hero__ba-media {
+    position: absolute !important;
+    inset: 0;
+    aspect-ratio: auto !important;
+  }
+
+  .hero__ba :global(picture) {
+    position: absolute;
+    inset: 0;
     display: block;
-    overflow: hidden;
   }
 
   .hero__media :global(img) {
@@ -680,7 +798,14 @@ const icons: Record<string, string> = {
     font-weight: var(--font-weight-medium);
   }
 
+  @media (min-width: 768px) {
+    .br-mobiel {
+      display: none;
+    }
+  }
+
   .hero__sub {
+    text-wrap: pretty;
     margin-block-start: var(--spacing-lg);
     font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-md));
     color: var(--color-text-secondary);
@@ -691,25 +816,42 @@ const icons: Record<string, string> = {
     margin-block-start: var(--spacing-md);
   }
 
-  .hero__proof {
+      .hero__proof {
     list-style: none;
     padding: 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: var(--spacing-sm);
     margin-block-start: var(--spacing-lg);
   }
 
   .hero__proof li {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-sm);
-    padding: var(--spacing-xs) var(--spacing-md);
-    border: 1px solid var(--color-border-default);
-    border-radius: var(--radius-pill);
+    width: min(100%, 320px);
+    padding: 12px var(--spacing-lg);
     background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 10px rgb(33 27 21 / 0.05);
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    .hero__proof {
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    .hero__proof li {
+      width: auto;
+    }
   }
 
   .hero__proof-star {
@@ -772,8 +914,11 @@ const icons: Record<string, string> = {
     display: flex;
     flex-direction: column-reverse;
     gap: var(--spacing-xs);
-    padding-block-start: var(--spacing-md);
-    border-top: 1px solid var(--color-border-default);
+    padding: var(--spacing-lg);
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
   }
 
   .stats__item:first-child {
@@ -814,11 +959,48 @@ const icons: Record<string, string> = {
     height: 22px;
   }
 
-  .stats__caption {
+  /* Werk-detail trio (demo-beelden) als visueel bewijs naast de caption */
+  .stats__proof {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-sm) var(--spacing-md);
     margin-block-start: var(--spacing-lg);
+  }
+
+  .stats__fotos {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stats__fotos li {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--color-background-default);
+    box-shadow: 0 4px 12px rgb(33 27 21 / 0.12);
+  }
+
+  .stats__fotos li + li {
+    margin-inline-start: -14px;
+  }
+
+  .stats__fotos :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .stats__caption {
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
-    max-width: 60ch;
+    max-width: 56ch;
+    margin: 0;
+    flex: 1;
+    min-width: 28ch;
   }
 
   @media (min-width: 768px) {
@@ -861,6 +1043,13 @@ const icons: Record<string, string> = {
     gap: var(--spacing-md);
     padding-block: var(--spacing-md);
     border-top: 1px solid var(--color-border-default);
+  }
+
+  .contrast__col {
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
   }
 
   .contrast__col--oplossing {
@@ -1112,8 +1301,29 @@ const icons: Record<string, string> = {
   }
 
   .step {
-    border-top: 1px solid var(--color-border-strong);
-    padding-block-start: var(--spacing-lg);
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+  }
+
+  /* Foto-medaillon per stap (demo-beeld) */
+  .step__medaillon {
+    display: block;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--color-surface-default);
+    box-shadow: 0 6px 18px rgb(33 27 21 / 0.14);
+    margin-block-end: var(--spacing-sm);
+  }
+
+  .step__medaillon :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .step__top {
@@ -1414,6 +1624,89 @@ const icons: Record<string, string> = {
     font-size: var(--font-size-sm);
     color: var(--color-neutral-100);
   }
+
+  /* --- Review-kaarten (DEMO) --- */
+  .reviews-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    max-width: none;
+  }
+
+  .review-kaarten {
+    display: grid;
+    gap: var(--spacing-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .review-kaart {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    background: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--spacing-lg), 3vw, var(--spacing-xl));
+  }
+
+  .review-kaart__stars {
+    display: flex;
+    gap: 2px;
+    color: var(--color-primary-default);
+  }
+
+  .review-kaart__stars :global(svg) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .review-kaart blockquote {
+    margin: 0;
+    flex: 1;
+  }
+
+  .review-kaart blockquote p {
+    color: var(--color-text-default);
+  }
+
+  .review-kaart__wie {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .review-kaart__foto {
+    flex: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .review-kaart__foto :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .review-kaart__wie strong {
+    display: block;
+  }
+
+  .review-kaart__wie small {
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 900px) {
+    .review-kaarten {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
 </style>
 
 <script>

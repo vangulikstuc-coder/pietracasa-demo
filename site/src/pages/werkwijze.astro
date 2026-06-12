@@ -1,8 +1,15 @@
 ---
-import { Picture, getImage } from 'astro:assets';
+import { Picture, Image, getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ctaSfeer from '../assets/images/sections/cta-sfeer.jpg';
 import bgStucLicht from '../assets/images/backgrounds/bg-stuc-licht.jpg';
+import fotoStap1 from '../assets/images/sections/stap-1-opname.jpg';
+import fotoStap2 from '../assets/images/sections/stap-2-offerte.jpg';
+import fotoStap3 from '../assets/images/sections/stap-3-planning.jpg';
+import fotoStap4 from '../assets/images/sections/stap-4-uitvoering.jpg';
+import fotoStap5 from '../assets/images/sections/stap-5-oplevering.jpg';
+
+const stapFotos = [fotoStap1, fotoStap2, fotoStap3, fotoStap4, fotoStap5];
 
 const ogImage = await getImage({ src: ctaSfeer, width: 1200, format: 'jpg' });
 
@@ -94,8 +101,11 @@ const icons: Record<string, string> = {
 >
   <!-- 1. Pagina-hero (tekstkop: geen eigen werkwijze-beeld beschikbaar) -->
   <section class="page-hero" aria-labelledby="werkwijze-title">
+    <div class="bg-drift" aria-hidden="true"></div>
     <div class="page-hero__texture" aria-hidden="true">
       <Picture
+        data-parallax
+        data-parallax-speed="7"
         src={bgStucLicht}
         widths={[768, 1280, 1536]}
         sizes="100vw"
@@ -137,9 +147,20 @@ const icons: Record<string, string> = {
       </header>
       <ol class="tijdlijn" role="list" data-reveal-group>
         {
-          stappen.map((stap) => (
+          stappen.map((stap, i) => (
             <li class="tl-stap">
               <div class="tl-stap__rail" aria-hidden="true">
+                <span class="tl-stap__medaillon">
+                  <Image
+                    src={stapFotos[i]}
+                    alt=""
+                    width={192}
+                    height={192}
+                    loading="lazy"
+                    decoding="async"
+                    data-demo="true"
+                  />
+                </span>
                 <span class="tl-stap__icon" set:html={icons[stap.icon]} />
               </div>
               <div class="tl-stap__body">
@@ -221,6 +242,7 @@ const icons: Record<string, string> = {
         data-demo="true"
       />
     </div>
+    <div class="sheen" aria-hidden="true"></div>
     <div class="container cta-band__inner" data-reveal>
       <h2 id="cta-title">Weten waar u aan toe bent?</h2>
       <p class="cta-band__sub">
@@ -410,7 +432,7 @@ const icons: Record<string, string> = {
   .tl-stap {
     position: relative;
     display: grid;
-    grid-template-columns: 44px 1fr;
+    grid-template-columns: 76px 1fr;
     gap: var(--spacing-lg);
   }
 
@@ -424,28 +446,62 @@ const icons: Record<string, string> = {
     justify-content: center;
   }
 
+  /* Foto-medaillon per stap (demo-beeld), icoon als klein badge eroverheen */
+  .tl-stap__medaillon {
+    position: relative;
+    display: block;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--color-surface-default);
+    box-shadow: 0 6px 18px rgb(33 27 21 / 0.14);
+    background: var(--color-surface-alt);
+  }
+
+  .tl-stap__medaillon :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1024px) {
+    .tl-stap {
+      grid-template-columns: 96px 1fr;
+    }
+
+    .tl-stap__medaillon {
+      width: 96px;
+      height: 96px;
+    }
+  }
+
   /* Verbindingslijn tussen de stappen */
   .tl-stap:not(:last-child) .tl-stap__rail::after {
     content: '';
     position: absolute;
-    inset-block: 52px 0;
+    inset-block: 84px 0;
     inline-size: 1px;
     background: var(--color-border-strong);
   }
 
   .tl-stap__icon {
+    position: absolute;
+    inset-block-end: -6px;
+    inset-inline-end: -6px;
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-md);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--color-surface-default);
     background: color-mix(in srgb, var(--color-primary-default) 10%, transparent);
     color: var(--color-primary-default);
   }
 
   .tl-stap__icon :global(svg) {
-    width: 22px;
-    height: 22px;
+    width: 16px;
+    height: 16px;
   }
 
   .tl-stap__nr {

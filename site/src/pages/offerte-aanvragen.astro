@@ -108,6 +108,18 @@ const typeWerkOpties = [
   'Meerdere diensten of iets anders',
 ];
 
+/* Prijsindicaties: marktconforme bandbreedtes (NL, 2025/2026) — geen offerte.
+   Bronnen genoteerd in open-questions.md; definitieve prijs altijd vast op schrift. */
+const prijsindicaties = [
+  { dienst: 'Glad stucwerk (sausklaar)', prijs: '€18 – €22 / m²' },
+  { dienst: 'Spachtelputz / sierpleister', prijs: '€18 – €22 / m²' },
+  { dienst: 'Latex spuiten (incl. verf)', prijs: '€4 – €9 / m²' },
+  { dienst: 'Spackspuitwerk', prijs: '€10 – €14 / m²' },
+  { dienst: 'Beton ciré (vloer)', prijs: '€90 – €130 / m²' },
+  { dienst: 'Microcement vloeren', prijs: 'vergelijkbaar met beton ciré' },
+  { dienst: 'Gevelwerk & buitenafwerking', prijs: 'vaste prijs na opname' },
+];
+
 const starPath =
   'M12 2.8l2.85 5.78 6.38.93-4.62 4.5 1.09 6.36L12 17.37l-5.7 3 1.09-6.36-4.62-4.5 6.38-.93L12 2.8z';
 
@@ -206,6 +218,7 @@ const icons: Record<string, string> = {
             id="offerte-formulier"
             method="post"
             action="/api/offerte"
+            enctype="multipart/form-data"
             novalidate
             data-offerte-form
           >
@@ -216,96 +229,137 @@ const icons: Record<string, string> = {
               <input type="text" id="faxnummer" name="faxnummer" tabindex="-1" autocomplete="off" />
             </div>
 
-            <div class="form-grid">
-              <div class="form-field">
-                <label for="naam">Naam <span class="req" aria-hidden="true">*</span></label>
-                <input
-                  type="text"
-                  id="naam"
-                  name="naam"
-                  required
-                  minlength="2"
-                  autocomplete="name"
-                  aria-describedby="naam-fout"
-                />
-                <p class="form-error" id="naam-fout" hidden></p>
+            <p class="form-progress" data-progress aria-live="polite" hidden>
+              Stap <strong data-progress-nr>1</strong> van 2 &middot; <span data-progress-label>Uw klus</span>
+            </p>
+
+            <div class="form-step" data-step="1">
+              <div class="form-grid">
+                <div class="form-field form-field--vol">
+                  <label for="type-werk">
+                    Type werk <span class="req" aria-hidden="true">*</span>
+                  </label>
+                  <select id="type-werk" name="type-werk" required aria-describedby="type-werk-fout">
+                    <option value="" selected>Maak een keuze</option>
+                    {typeWerkOpties.map((optie) => <option value={optie}>{optie}</option>)}
+                  </select>
+                  <p class="form-error" id="type-werk-fout" hidden></p>
+                </div>
+
+                <div class="form-field form-field--vol">
+                  <label for="postcode">Postcode <span class="req" aria-hidden="true">*</span></label>
+                  <input
+                    type="text"
+                    id="postcode"
+                    name="postcode"
+                    required
+                    autocomplete="postal-code"
+                    aria-describedby="postcode-fout postcode-status"
+                  />
+                  <p class="form-error" id="postcode-fout" hidden></p>
+                  <p class="postcode-status" id="postcode-status" data-postcode-status hidden></p>
+                </div>
+
+                <div class="form-field form-field--vol">
+                  <label for="omschrijving">
+                    Omschrijving van het werk <span class="req" aria-hidden="true">*</span>
+                  </label>
+                  <textarea
+                    id="omschrijving"
+                    name="omschrijving"
+                    required
+                    minlength="10"
+                    rows="5"
+                    aria-describedby="omschrijving-fout"></textarea>
+                  <p class="form-error" id="omschrijving-fout" hidden></p>
+                </div>
+
+                <div class="form-field form-field--vol">
+                  <label for="fotos">Foto&rsquo;s van de situatie <span class="optioneel">(optioneel)</span></label>
+                  <label class="upload" for="fotos" data-upload>
+                    <input
+                      type="file"
+                      id="fotos"
+                      name="fotos"
+                      accept="image/*"
+                      multiple
+                      aria-describedby="fotos-hint fotos-fout"
+                    />
+                    <span class="upload__tekst">Sleep foto&rsquo;s hierheen of <u>kies bestanden</u></span>
+                  </label>
+                  <p class="form-hint" id="fotos-hint">Max. 5 foto&rsquo;s, samen tot 10 MB. Foto&rsquo;s helpen ons de vaste prijs nauwkeurig te bepalen.</p>
+                  <p class="form-error" id="fotos-fout" hidden></p>
+                  <ul class="upload-previews" data-previews role="list" hidden></ul>
+                </div>
               </div>
 
-              <div class="form-field">
-                <label for="telefoon">
-                  Telefoonnummer <span class="req" aria-hidden="true">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="telefoon"
-                  name="telefoon"
-                  required
-                  autocomplete="tel"
-                  aria-describedby="telefoon-fout"
-                />
-                <p class="form-error" id="telefoon-fout" hidden></p>
-              </div>
-
-              <div class="form-field">
-                <label for="email">E-mailadres <span class="req" aria-hidden="true">*</span></label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  autocomplete="email"
-                  aria-describedby="email-fout"
-                />
-                <p class="form-error" id="email-fout" hidden></p>
-              </div>
-
-              <div class="form-field">
-                <label for="postcode">Postcode <span class="req" aria-hidden="true">*</span></label>
-                <input
-                  type="text"
-                  id="postcode"
-                  name="postcode"
-                  required
-                  autocomplete="postal-code"
-                  aria-describedby="postcode-fout"
-                />
-                <p class="form-error" id="postcode-fout" hidden></p>
-              </div>
-
-              <div class="form-field form-field--vol">
-                <label for="type-werk">
-                  Type werk <span class="req" aria-hidden="true">*</span>
-                </label>
-                <select id="type-werk" name="type-werk" required aria-describedby="type-werk-fout">
-                  <option value="" selected>Maak een keuze</option>
-                  {typeWerkOpties.map((optie) => <option value={optie}>{optie}</option>)}
-                </select>
-                <p class="form-error" id="type-werk-fout" hidden></p>
-              </div>
-
-              <div class="form-field form-field--vol">
-                <label for="omschrijving">
-                  Omschrijving van het werk <span class="req" aria-hidden="true">*</span>
-                </label>
-                <textarea
-                  id="omschrijving"
-                  name="omschrijving"
-                  required
-                  minlength="10"
-                  rows="5"
-                  aria-describedby="omschrijving-fout"></textarea>
-                <p class="form-error" id="omschrijving-fout" hidden></p>
+              <div class="form-footer">
+                <button type="button" class="btn btn--primary" data-next hidden>
+                  Volgende stap
+                  <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                </button>
+                <p class="micro">Vrijblijvend &ndash; vaste prijs, reactie binnen 48 uur.</p>
               </div>
             </div>
 
-            <p class="form-alert" data-form-alert role="alert" hidden></p>
+            <div class="form-step" data-step="2">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="naam">Naam <span class="req" aria-hidden="true">*</span></label>
+                  <input
+                    type="text"
+                    id="naam"
+                    name="naam"
+                    required
+                    minlength="2"
+                    autocomplete="name"
+                    aria-describedby="naam-fout"
+                  />
+                  <p class="form-error" id="naam-fout" hidden></p>
+                </div>
 
-            <div class="form-footer">
-              <button type="submit" class="btn btn--primary" data-submit>
-                <span data-submit-label>Offerte aanvragen</span>
-                <span class="btn__arrow" aria-hidden="true">&rarr;</span>
-              </button>
-              <p class="micro">Vrijblijvend – vaste prijs, reactie binnen 48 uur.</p>
+                <div class="form-field">
+                  <label for="telefoon">
+                    Telefoonnummer <span class="req" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="telefoon"
+                    name="telefoon"
+                    required
+                    autocomplete="tel"
+                    aria-describedby="telefoon-fout"
+                  />
+                  <p class="form-error" id="telefoon-fout" hidden></p>
+                </div>
+
+                <div class="form-field form-field--vol">
+                  <label for="email">E-mailadres <span class="req" aria-hidden="true">*</span></label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    autocomplete="email"
+                    aria-describedby="email-fout"
+                  />
+                  <p class="form-error" id="email-fout" hidden></p>
+                </div>
+              </div>
+
+              <p class="form-alert" data-form-alert role="alert" hidden></p>
+
+              <div class="form-footer form-footer--split">
+                <button type="button" class="btn btn--secondary" data-prev hidden>
+                  <span class="btn__arrow btn__arrow--terug" aria-hidden="true">&larr;</span>
+                  Terug
+                </button>
+                <button type="submit" class="btn btn--primary" data-submit>
+                  <span data-submit-label>Offerte aanvragen</span>
+                  <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                </button>
+                <p class="micro">Vrijblijvend &ndash; vaste prijs, reactie binnen 48 uur.</p>
+              </div>
             </div>
           </form>
         </div>
@@ -369,6 +423,35 @@ const icons: Record<string, string> = {
           ))
         }
       </ul>
+    </div>
+  </section>
+
+  <!-- 5b. Prijsindicaties -->
+  <section class="section section--alt" aria-labelledby="prijzen-title" id="prijzen">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <p class="eyebrow">Prijsindicatie</p>
+        <h2 id="prijzen-title">Wat kost het ongeveer?</h2>
+        <p class="section-head__intro">
+          Bandbreedtes zoals ze in de markt gelden, zodat u weet waar u aan toe bent. Uw
+          definitieve prijs is altijd een vaste prijs op schrift – na de opname op locatie.
+        </p>
+      </header>
+      <dl class="prijslijst" data-reveal-group>
+        {
+          prijsindicaties.map((rij) => (
+            <div class="prijslijst__rij">
+              <dt>{rij.dienst}</dt>
+              <dd class="tabular">{rij.prijs}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="prijslijst__disclaimer" data-reveal>
+        Indicaties inclusief materiaal en arbeid, afhankelijk van ondergrond, oppervlakte en
+        afwerkingsniveau. Aan deze indicaties kunnen geen rechten worden ontleend – de vaste
+        prijs in uw offerte is bindend.
+      </p>
     </div>
   </section>
 
@@ -1142,6 +1225,161 @@ const icons: Record<string, string> = {
     font-size: var(--font-size-sm);
     color: var(--color-neutral-300);
   }
+
+  /* --- Tweestaps-wizard --- */
+  .form-progress {
+    margin-block-end: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .form-progress strong {
+    color: var(--color-primary-default);
+  }
+
+  .form-step[hidden] {
+    display: none;
+  }
+
+  .form-footer--split {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .btn__arrow--terug {
+    order: -1;
+  }
+
+  .optioneel {
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-secondary);
+  }
+
+  /* --- Werkgebied-status --- */
+  .postcode-status {
+    margin-block-start: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+  }
+
+  .postcode-status--ok {
+    background: color-mix(in srgb, #3a7d44 12%, transparent);
+    color: #2c5e34;
+  }
+
+  .postcode-status--warn {
+    background: color-mix(in srgb, var(--color-primary-default) 12%, transparent);
+    color: var(--color-primary-strong, #8a4a26);
+  }
+
+  /* --- Foto-upload --- */
+  .upload {
+    display: grid;
+    place-items: center;
+    padding: clamp(var(--spacing-lg), 4vw, var(--spacing-xl));
+    border: 2px dashed var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-alt);
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+
+  .upload:hover,
+  .upload:focus-within {
+    border-color: var(--color-primary-default);
+    background: color-mix(in srgb, var(--color-primary-default) 6%, var(--color-surface-alt));
+  }
+
+  .upload input[type='file'] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .upload__tekst {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .upload-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-sm) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .upload-previews li {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border-default);
+  }
+
+  .upload-previews img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .upload-previews__weg {
+    position: absolute;
+    inset-block-start: 2px;
+    inset-inline-end: 2px;
+    width: 22px;
+    height: 22px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(24 19 14 / 0.72);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+
+  /* --- Prijsindicaties --- */
+  .prijslijst {
+    margin: 0;
+    max-width: 720px;
+  }
+
+  .prijslijst__rij {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--spacing-lg);
+    padding-block: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .prijslijst__rij dt {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .prijslijst__rij dd {
+    margin: 0;
+    color: var(--color-primary-default);
+    font-weight: var(--font-weight-semibold);
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  .prijslijst__disclaimer {
+    margin-block-start: var(--spacing-lg);
+    max-width: 66ch;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
 </style>
 
 <script>
@@ -1206,6 +1444,121 @@ const icons: Record<string, string> = {
         if (el.value.trim() !== '') toonFout(el, foutVoor(el));
       });
     });
+
+    /* --- Tweestaps-wizard (zonder JS: één lang formulier, native POST) --- */
+    const stap1 = form.querySelector<HTMLElement>('[data-step="1"]');
+    const stap2 = form.querySelector<HTMLElement>('[data-step="2"]');
+    const nextBtn = form.querySelector<HTMLButtonElement>('[data-next]');
+    const prevBtn = form.querySelector<HTMLButtonElement>('[data-prev]');
+    const progress = form.querySelector<HTMLElement>('[data-progress]');
+    const progressNr = form.querySelector<HTMLElement>('[data-progress-nr]');
+    const progressLabel = form.querySelector<HTMLElement>('[data-progress-label]');
+
+    function toonStap(nr: 1 | 2): void {
+      if (!stap1 || !stap2) return;
+      stap1.hidden = nr !== 1;
+      stap2.hidden = nr !== 2;
+      if (progressNr) progressNr.textContent = String(nr);
+      if (progressLabel) progressLabel.textContent = nr === 1 ? 'Uw klus' : 'Uw gegevens';
+      const focusDoel = nr === 1 ? stap1.querySelector<Veld>('select, input') : stap2.querySelector<Veld>('input');
+      focusDoel?.focus();
+    }
+
+    if (stap1 && stap2 && nextBtn && prevBtn && progress) {
+      stap2.hidden = true;
+      nextBtn.hidden = false;
+      prevBtn.hidden = false;
+      progress.hidden = false;
+
+      nextBtn.addEventListener('click', () => {
+        let eersteFout: Veld | null = null;
+        velden
+          .filter((el) => stap1.contains(el))
+          .forEach((el) => {
+            const fout = foutVoor(el);
+            toonFout(el, fout);
+            if (fout !== '' && eersteFout === null) eersteFout = el;
+          });
+        if (eersteFout !== null) {
+          (eersteFout as Veld).focus();
+          return;
+        }
+        toonStap(2);
+      });
+      prevBtn.addEventListener('click', () => toonStap(1));
+    }
+
+    /* --- Werkgebied-check op postcode (4 cijfers volstaan) --- */
+    const postcodeVeld = form.querySelector<HTMLInputElement>('#postcode');
+    const postcodeStatus = form.querySelector<HTMLElement>('[data-postcode-status]');
+
+    function checkWerkgebied(): void {
+      if (!postcodeVeld || !postcodeStatus) return;
+      const m = postcodeVeld.value.trim().match(/^(\d{4})/);
+      if (!m) {
+        postcodeStatus.hidden = true;
+        return;
+      }
+      const cijfers = Number(m[1]);
+      const binnen = cijfers >= 2000 && cijfers <= 2129;
+      postcodeStatus.textContent = binnen
+        ? 'Binnen ons werkgebied — wij plannen binnen 48 uur een opname.'
+        : 'Buiten ons standaard werkgebied (15 km rond Haarlem). Vraag gerust aan — wij reageren altijd, maar kunnen niet alles aannemen.';
+      postcodeStatus.classList.toggle('postcode-status--ok', binnen);
+      postcodeStatus.classList.toggle('postcode-status--warn', !binnen);
+      postcodeStatus.hidden = false;
+    }
+    postcodeVeld?.addEventListener('input', checkWerkgebied);
+    postcodeVeld?.addEventListener('blur', checkWerkgebied);
+
+    /* --- Foto-upload: previews + limieten (max 5, samen 10 MB) --- */
+    const fotoVeld = form.querySelector<HTMLInputElement>('#fotos');
+    const previews = form.querySelector<HTMLUListElement>('[data-previews]');
+    const fotoFout = document.getElementById('fotos-fout');
+
+    function toonFotos(): void {
+      if (!fotoVeld || !previews) return;
+      const bestanden = Array.from(fotoVeld.files ?? []);
+      const totaal = bestanden.reduce((som, f) => som + f.size, 0);
+      let fout = '';
+      if (bestanden.length > 5) fout = 'Maximaal 5 foto\u2019s.';
+      else if (totaal > 10 * 1024 * 1024) fout = 'Samen maximaal 10 MB.';
+      if (fotoFout) {
+        fotoFout.textContent = fout;
+        fotoFout.hidden = fout === '';
+      }
+      if (fout !== '') {
+        fotoVeld.value = '';
+        previews.hidden = true;
+        previews.innerHTML = '';
+        return;
+      }
+      previews.innerHTML = '';
+      bestanden.forEach((bestand, idx) => {
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.alt = '';
+        img.src = URL.createObjectURL(bestand);
+        img.addEventListener('load', () => URL.revokeObjectURL(img.src));
+        const weg = document.createElement('button');
+        weg.type = 'button';
+        weg.className = 'upload-previews__weg';
+        weg.setAttribute('aria-label', `Verwijder foto ${idx + 1}`);
+        weg.textContent = '\u00d7';
+        weg.addEventListener('click', () => {
+          const dt = new DataTransfer();
+          Array.from(fotoVeld.files ?? [])
+            .filter((_, i) => i !== idx)
+            .forEach((f) => dt.items.add(f));
+          fotoVeld.files = dt.files;
+          toonFotos();
+        });
+        li.append(img, weg);
+        previews.append(li);
+      });
+      previews.hidden = bestanden.length === 0;
+    }
+    fotoVeld?.addEventListener('change', toonFotos);
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();

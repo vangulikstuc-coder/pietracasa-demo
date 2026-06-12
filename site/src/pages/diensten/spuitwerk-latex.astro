@@ -1,67 +1,69 @@
 ---
 import { Picture, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import heroGevelwerk from '../../assets/images/hero/hero-gevelwerk.jpg';
-import dienstGevelwerk from '../../assets/images/sections/dienst-gevelwerk.jpg';
-import galerijGevelVoor from '../../assets/images/sections/galerij-gevel-voor.jpg';
-import galerijGevelNa from '../../assets/images/sections/galerij-gevel-na.jpg';
-import droneGevelwerk from '../../assets/images/sections/drone-gevelwerk.jpg';
+import heroSpuitwerk from '../../assets/images/hero/hero-spuitwerk.jpg';
+import dienstSpuitwerk from '../../assets/images/sections/dienst-spuitwerk.jpg';
+import galerijBinnenVoor from '../../assets/images/sections/galerij-binnen-voor.jpg';
+import galerijBinnenNa from '../../assets/images/sections/galerij-binnen-na.jpg';
 import ctaSfeer from '../../assets/images/sections/cta-sfeer.jpg';
 
-/* Hero-achtergrond als 50/50-split uit de losse voor/na-helften: de deellijn ligt daardoor
-   op elk breakpoint exact op het midden (composiet hero-gevelwerk.jpg is alleen nog OG-beeld) */
-const heroHalfWidths = [480, 800, 1248];
-const heroHalfSizes = '50vw';
-const heroPreloadSrcsets = await Promise.all(
-  [galerijGevelVoor, galerijGevelNa].map(async (src) => {
-    const images = await Promise.all(
-      heroHalfWidths.map(async (width) => ({
-        width,
-        image: await getImage({ src, width, format: 'avif' }),
-      }))
-    );
-    return images.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
-  })
+const heroWidths = [768, 1280, 1920];
+const heroSizes = '100vw';
+const heroAvif = await Promise.all(
+  heroWidths.map(async (width) => ({
+    width,
+    image: await getImage({ src: heroSpuitwerk, width, format: 'avif' }),
+  }))
 );
+const heroPreloadSrcset = heroAvif.map(({ width, image }) => `${image.src} ${width}w`).join(', ');
 
-const ogImage = await getImage({ src: heroGevelwerk, width: 1200, format: 'jpg' });
+const ogImage = await getImage({ src: heroSpuitwerk, width: 1200, format: 'jpg' });
 
 const cardWidths = [420, 840];
 const cardSizes = '(min-width: 900px) 45vw, 100vw';
 
-const werkzaamheden = [
+const toepassingen = [
   {
-    titel: 'Gevelstuc aanbrengen',
-    tekst: 'Nieuw buitenstucwerk op de gevel, egaal en strak afgewerkt.',
+    titel: 'Plafonds',
+    tekst:
+      'Airless gespoten in een gelijkmatige, streeploze laag – geen aanzetten of banen zoals bij rollen. Juist op een glad plafond is dat verschil zichtbaar.',
   },
   {
-    titel: 'Herstel en gevelrenovatie',
-    tekst: 'Scheuren, gaten en verweerd stucwerk hersteld vóór de nieuwe afwerklaag.',
+    titel: 'Wanden',
+    tekst:
+      'Eén egale kleurlaag over grote oppervlakken, in elke gewenste kleur. Ideaal in combinatie met nieuw stucwerk: sausklaar opgeleverd en direct strak gespoten.',
   },
   {
-    titel: 'Buitenafwerking',
-    tekst: 'Strakke detaillering rond kozijnen en plinten – schilderklaar opgeleverd.',
+    titel: 'Nieuwbouw en renovatie',
+    tekst:
+      'Complete woningen of losse ruimtes. Alles wordt zorgvuldig afgeplakt en schoon opgeleverd – sneller én strakker dan handmatig schilderwerk.',
   },
 ];
 
-const stappen = [
+const vragen = [
   {
-    nr: '01',
-    titel: 'Inspectie op locatie',
-    tekst: 'Wij bekijken de gevel ter plaatse en bespreken de gewenste afwerking.',
-    icon: 'pin',
+    icon: 'euro',
+    vraag: 'Wat kost latex spuiten?',
+    antwoord:
+      'Reken indicatief op €4 tot €9 per m², inclusief verf en afplakken – afhankelijk van oppervlak, ondergrond en kleurkeuze. Na de opname ontvangt u een vaste prijs op schrift.',
   },
   {
-    nr: '02',
-    titel: 'Vaste prijs op schrift',
-    tekst: 'Na de inspectie ontvangt u een offerte met vaste prijs en planning.',
-    icon: 'document',
+    icon: 'clock',
+    vraag: 'Hoe lang duurt het spuiten?',
+    antwoord:
+      'Het spuiten zelf gaat snel – het meeste werk zit in zorgvuldig afplakken en voorbereiden. De exacte planning staat in uw offerte en wordt nagekomen.',
   },
   {
-    nr: '03',
-    titel: 'Uitvoering volgens planning',
-    tekst: 'Meerwerk alleen na uw schriftelijk akkoord. De opleveringsafspraak staat op papier.',
-    icon: 'roller',
+    icon: 'layers',
+    vraag: 'Op welke ondergronden kan spuitwerk?',
+    antwoord:
+      'Op vrijwel elke ondergrond waar u eerder muurverf zou rollen: stucwerk, beton, gipsplaat en zelfs glad behang. Wij beoordelen de ondergrond tijdens de opname.',
+  },
+  {
+    icon: 'shield',
+    vraag: 'Kan ik elke kleur kiezen?',
+    antwoord:
+      'Ja. De latex wordt op kleur gemengd (RAL of een kleur naar wens) en dekkend gespoten. U ziet het resultaat als één gelijkmatige, matte laag – zonder strepen of overlappen.',
   },
 ];
 
@@ -72,13 +74,14 @@ const icons: Record<string, string> = {
   star: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${starPath}"/></svg>`,
   check:
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11"/></svg>',
-  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
-  document:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>',
-  roller:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="13" height="6" rx="2"/><path d="M16 6h4v4h-8v4"/><path d="M12 14v6"/></svg>',
   shield:
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="m9 11.5 2 2 4-4"/></svg>',
+  euro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.5 5.8A7.5 7.5 0 0 0 6.5 12a7.5 7.5 0 0 0 12 6.2"/><path d="M4 10.2h9M4 13.8h9"/></svg>',
+  clock:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+  layers:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>',
+  heat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 14.8V5a2 2 0 1 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/></svg>',
 };
 
 const feiten = [
@@ -89,8 +92,8 @@ const feiten = [
 ---
 
 <BaseLayout
-  title="Gevelwerk in Haarlem | Stucq"
-  description="Gevelwerk en buitenafwerking in Haarlem op vaste prijs. Bekijk voor-na resultaten van afgeronde gevelprojecten en vraag vrijblijvend een offerte aan."
+  title="Latex spuiten in Haarlem | Stucq"
+  description="Latex spuiten in Haarlem op vaste prijs. Wanden en plafonds streeploos en dekkend gespoten met airless apparatuur. Vraag vrijblijvend een offerte aan."
   ogImage={ogImage.src}
 >
   <link
@@ -98,50 +101,30 @@ const feiten = [
     rel="preload"
     as="image"
     type="image/avif"
-    imagesrcset={heroPreloadSrcsets[0]}
-    imagesizes={heroHalfSizes}
-  />
-  <link
-    slot="head"
-    rel="preload"
-    as="image"
-    type="image/avif"
-    imagesrcset={heroPreloadSrcsets[1]}
-    imagesizes={heroHalfSizes}
+    imagesrcset={heroPreloadSrcset}
+    imagesizes={heroSizes}
   />
 
   <!-- 1. Pagina-hero -->
-  <section class="page-hero" aria-labelledby="gevelwerk-title">
+  <section class="page-hero" aria-labelledby="spuitwerk-title">
     <div class="page-hero__bg" aria-hidden="true">
-      <div class="page-hero__split">
-        <Picture
-          src={galerijGevelVoor}
-          widths={heroHalfWidths}
-          sizes={heroHalfSizes}
-          formats={['avif', 'webp']}
-          alt=""
-          fetchpriority="high"
-          loading="eager"
-          data-demo="true"
-        />
-        <Picture
-          src={galerijGevelNa}
-          widths={heroHalfWidths}
-          sizes={heroHalfSizes}
-          formats={['avif', 'webp']}
-          alt=""
-          fetchpriority="high"
-          loading="eager"
-          data-demo="true"
-        />
-      </div>
+      <Picture
+        src={heroSpuitwerk}
+        widths={heroWidths}
+        sizes={heroSizes}
+        formats={['avif', 'webp']}
+        alt=""
+        fetchpriority="high"
+        loading="eager"
+        data-demo="true"
+      />
     </div>
     <div class="container page-hero__inner">
-      <p class="eyebrow eyebrow--inverse">Gevelwerk &amp; buitenafwerking</p>
-      <h1 id="gevelwerk-title">Gevelwerk in Haarlem – vaste prijs, op tijd opgeleverd</h1>
+      <p class="eyebrow eyebrow--inverse">Spuitwerk · latex</p>
+      <h1 id="spuitwerk-title">Latex spuiten in Haarlem – strak en streeploos, op vaste prijs</h1>
       <p class="page-hero__sub">
-        Stucq herstelt en stuukt buitengevels in Haarlem en omgeving. U ontvangt vooraf een vaste
-        prijs op schrift – en Stucq houdt zich daaraan.
+        Stucq spuit wanden en plafonds dekkend en gelijkmatig met airless apparatuur – sneller
+        en strakker dan rollen. U weet vooraf wat het kost – vaste prijs op schrift.
       </p>
       <div class="page-hero__actions">
         <a href="/offerte-aanvragen/" class="btn btn--primary">
@@ -154,19 +137,19 @@ const feiten = [
     </div>
   </section>
 
-  <!-- 2. Kern-inhoud: wat valt onder gevelwerk -->
+  <!-- 2. Kern-inhoud: toepassingen -->
   <section class="section" aria-labelledby="dienst-title">
     <div class="container dienst" data-reveal-group>
       <div class="dienst__text">
         <p class="eyebrow">De dienst</p>
-        <h2 id="dienst-title">Wat valt onder gevelwerk</h2>
+        <h2 id="dienst-title">Waar latex spuitwerk geschikt voor is</h2>
         <p class="dienst__intro">
-          Eén vakman verzorgt het complete buitenstucwerk – van inspectie tot oplevering. Voor
-          bouwbedrijven, vastgoedprojecten en particuliere woningen.
+          Bij airless spuiten wordt latex onder hoge druk verneveld tot één gelijkmatige,
+          dekkende laag. Eén vakman plakt af, spuit en levert de ruimte schoon op.
         </p>
         <ol class="werklijst" role="list">
           {
-            werkzaamheden.map((werk, i) => (
+            toepassingen.map((werk, i) => (
               <li class="werklijst__item">
                 <span class="werklijst__nr tabular" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}
@@ -182,11 +165,11 @@ const feiten = [
       </div>
       <figure class="dienst__media">
         <Picture
-          src={dienstGevelwerk}
+          src={dienstSpuitwerk}
           widths={cardWidths}
           sizes={cardSizes}
           formats={['avif', 'webp']}
-          alt="Vakman stukadoort een gevel vanaf een steiger in Haarlem"
+          alt="Strak wit gespoten wanden en plafond in een lege woonkamer"
           loading="lazy"
           decoding="async"
           data-demo="true"
@@ -195,44 +178,40 @@ const feiten = [
     </div>
   </section>
 
-  <!-- 2b. Kern-inhoud: zo komt de vaste prijs tot stand (prijsafspraak, niet het 5-stappen-proces) -->
-  <section class="section section--alt" aria-labelledby="prijs-title">
+  <!-- 2b. Kern-inhoud: kosten en doorlooptijd -->
+  <section class="section section--alt" aria-labelledby="vragen-title">
     <div class="container">
       <header class="section-head" data-reveal>
-        <p class="eyebrow">Vaste prijs</p>
-        <h2 id="prijs-title">Vóór de start op papier</h2>
+        <p class="eyebrow">Kosten &amp; doorlooptijd</p>
+        <h2 id="vragen-title">Veelgestelde vragen over latex spuiten</h2>
         <p class="section-head__intro">
-          Geen open eindjes bij gevelwerk. U weet vooraf wat het kost en wanneer de steiger weer
-          weg is.
+          Geen open eindjes. De antwoorden hieronder gelden voor elk spuitwerk-project dat Stucq
+          aanneemt.
         </p>
       </header>
-      <ol class="stappen" role="list" data-reveal-group>
+      <ul class="vragen" role="list" data-reveal-group>
         {
-          stappen.map((stap) => (
-            <li class="stap">
-              <div class="stap__top">
-                <span class="stap__icon" set:html={icons[stap.icon]} aria-hidden="true" />
-                <span class="stap__nr tabular" aria-hidden="true">
-                  {stap.nr}
-                </span>
-              </div>
-              <h3>{stap.titel}</h3>
-              <p>{stap.tekst}</p>
+          vragen.map((item) => (
+            <li class="vraag">
+              <span class="vraag__icon" set:html={icons[item.icon]} aria-hidden="true" />
+              <h3>{item.vraag}</h3>
+              <p>{item.antwoord}</p>
             </li>
           ))
         }
-      </ol>
+      </ul>
     </div>
   </section>
 
-  <!-- 3. Bewijs: voor-na + feiten + drone-still -->
+  <!-- 3. Bewijs: voor-na + feiten -->
   <section class="section" aria-labelledby="bewijs-title">
     <div class="container">
       <header class="section-head" data-reveal>
         <p class="eyebrow">Bewijs</p>
-        <h2 id="bewijs-title">Het verschil bij gevelwerk – voor en na</h2>
+        <h2 id="bewijs-title">Strak gespoten – voor en na</h2>
         <p class="section-head__intro">
-          Bekijk een afgerond gevelproject uit Haarlem. Wissel tussen de voor- en na-foto.
+          Bekijk een afgeronde renovatie uit de regio Haarlem: van kale wanden naar strak
+          gestuukt en gespoten. Wissel tussen de voor- en na-foto.
         </p>
       </header>
       <div class="bewijs" data-reveal-group>
@@ -240,11 +219,11 @@ const feiten = [
           <div class="ba-card__media">
             <div class="ba-card__panel is-active" data-ba-panel="na">
               <Picture
-                src={galerijGevelNa}
+                src={galerijBinnenNa}
                 widths={cardWidths}
                 sizes={cardSizes}
                 formats={['avif', 'webp']}
-                alt="Na: strak gestuukte, egaal afgewerkte gevel"
+                alt="Na: strak gestuukte en gespoten wanden in een lichte woonkamer"
                 loading="lazy"
                 decoding="async"
                 data-demo="true"
@@ -252,11 +231,11 @@ const feiten = [
             </div>
             <div class="ba-card__panel" data-ba-panel="voor" aria-hidden="true">
               <Picture
-                src={galerijGevelVoor}
+                src={galerijBinnenVoor}
                 widths={cardWidths}
                 sizes={cardSizes}
                 formats={['avif', 'webp']}
-                alt="Voor: gevel met gescheurd en verweerd stucwerk"
+                alt="Voor: kale wanden met oud pleisterwerk vóór de afwerking"
                 loading="lazy"
                 decoding="async"
                 data-demo="true"
@@ -264,7 +243,7 @@ const feiten = [
             </div>
           </div>
           <div class="ba-card__bar">
-            <figcaption>Gevelwerk · Haarlem</figcaption>
+            <figcaption>Binnenafwerking + spuitwerk · regio Haarlem</figcaption>
             <div class="ba-toggle" role="group" aria-label="Voor- of na-foto tonen">
               <button type="button" data-ba-show="voor" aria-pressed="false">Voor</button>
               <button type="button" data-ba-show="na" aria-pressed="true">Na</button>
@@ -273,8 +252,8 @@ const feiten = [
         </figure>
         <div class="bewijs__text">
           <p>
-            Elk gevelproject sinds 2020 is binnen budget en op de afgesproken datum opgeleverd.
-            Niet als belofte, maar als trackrecord.
+            Elk afwerkingsproject sinds 2020 is binnen budget en op de afgesproken datum
+            opgeleverd. Niet als belofte, maar als trackrecord.
           </p>
           <ul class="bewijs__feiten" role="list">
             {
@@ -289,21 +268,6 @@ const feiten = [
           <a href="/projecten/" class="btn btn--secondary">Bekijk alle afgeronde projecten</a>
         </div>
       </div>
-      <figure class="drone" data-reveal>
-        <Picture
-          src={droneGevelwerk}
-          widths={[768, 1280, 1920]}
-          sizes="(min-width: 1280px) 1216px, 100vw"
-          formats={['avif', 'webp']}
-          alt="Drone-opname van een gevelproject in de regio Haarlem, van fundering tot nok"
-          loading="lazy"
-          decoding="async"
-          data-demo="true"
-        />
-        <figcaption class="drone__chip">
-          Still uit drone-opname · gevelwerk van fundering tot nok
-        </figcaption>
-      </figure>
     </div>
   </section>
 
@@ -323,7 +287,7 @@ const feiten = [
     </div>
     <div class="sheen" aria-hidden="true"></div>
     <div class="container cta-band__inner" data-reveal>
-      <h2 id="cta-title">Gevelwerk gepland in Haarlem of omgeving?</h2>
+      <h2 id="cta-title">Spuitwerk gepland in Haarlem of omgeving?</h2>
       <p class="cta-band__sub">
         Vraag een vrijblijvende offerte aan – vaste prijs, reactie binnen 48 uur.
       </p>
@@ -385,20 +349,10 @@ const feiten = [
     inset: 0;
   }
 
-  /* 50/50-grid van losse voor/na-helften: deellijn (gap op witte ondergrond)
-     ligt altijd visueel op het midden, ongeacht crop of breakpoint */
-  .page-hero__split {
+  .page-hero__bg :global(picture) {
     position: absolute;
     inset: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xs);
-    background: var(--color-surface-default);
-  }
-
-  .page-hero__split :global(picture) {
     display: block;
-    overflow: hidden;
   }
 
   .page-hero__bg :global(img) {
@@ -606,7 +560,7 @@ const feiten = [
     height: 100%;
     object-fit: cover;
     /* Crop-anker = gezicht van de vakman: de 4/5-crop houdt het hoofd in beeld */
-    object-position: 49% 30%;
+    object-position: 54% 21%;
   }
 
   @media (min-width: 900px) {
@@ -616,8 +570,8 @@ const feiten = [
     }
   }
 
-  /* --- 2b. Stappen --- */
-  .stappen {
+  /* --- 2b. Vragen over kosten & doorlooptijd --- */
+  .vragen {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -625,7 +579,7 @@ const feiten = [
     gap: var(--spacing-lg);
   }
 
-  .stap {
+  .vraag {
     background: var(--color-surface-default);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-lg);
@@ -633,14 +587,7 @@ const feiten = [
     padding: var(--spacing-lg);
   }
 
-  .stap__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--spacing-md);
-  }
-
-  .stap__icon {
+  .vraag__icon {
     display: grid;
     place-items: center;
     width: 44px;
@@ -650,32 +597,26 @@ const feiten = [
     color: var(--color-primary-default);
   }
 
-  .stap__icon :global(svg) {
+  .vraag__icon :global(svg) {
     width: 22px;
     height: 22px;
   }
 
-  .stap__nr {
-    font-family: var(--font-display);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-neutral-300);
-  }
-
-  .stap h3 {
+  .vraag h3 {
     margin-block-start: var(--spacing-md);
     font-size: var(--font-size-md);
   }
 
-  .stap p {
+  .vraag p {
     margin-block-start: var(--spacing-sm);
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
+    max-width: 48ch;
   }
 
   @media (min-width: 768px) {
-    .stappen {
-      grid-template-columns: repeat(3, 1fr);
+    .vragen {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -819,46 +760,6 @@ const feiten = [
     .bewijs {
       grid-template-columns: 1.1fr 0.9fr;
       gap: var(--spacing-2xl);
-    }
-  }
-
-  .drone {
-    margin: clamp(var(--spacing-xl), 6vw, var(--spacing-2xl)) 0 0;
-    position: relative;
-    aspect-ratio: 21 / 9;
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .drone :global(picture) {
-    position: absolute;
-    inset: 0;
-    display: block;
-  }
-
-  .drone :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .drone__chip {
-    position: absolute;
-    z-index: 1;
-    inset-block-end: var(--spacing-md);
-    inset-inline-start: var(--spacing-md);
-    padding: var(--spacing-xs) var(--spacing-md);
-    border-radius: var(--radius-pill);
-    background: color-mix(in srgb, var(--color-neutral-900) 70%, transparent);
-    color: var(--color-text-inverse);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-  }
-
-  @media (max-width: 639px) {
-    .drone {
-      aspect-ratio: 4 / 3;
     }
   }
 

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Voorbeeld 4 — Warme nevel + troffel-banen (mix)</title>
+<style>
+  :root {
+    --bg: #f4efe9;
+    --ink: #211b15;
+    --muted: #6f6358;
+    --accent: #a6623e;
+  }
+  * { margin: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; }
+  #nevel { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; filter: blur(60px) saturate(1.05); }
+  #banen { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  main { position: relative; z-index: 1; }
+  section { min-height: 92vh; display: grid; place-content: center; padding: 8vh 8vw; text-align: center; }
+  .eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 13px; font-weight: 600; color: var(--accent); }
+  h1 { font-size: clamp(34px, 6vw, 64px); letter-spacing: -0.02em; max-width: 18ch; }
+  h2 { font-size: clamp(26px, 4vw, 40px); letter-spacing: -0.02em; }
+  p { color: var(--muted); max-width: 52ch; margin-inline: auto; margin-top: 14px; }
+  .hint { position: fixed; bottom: 18px; left: 0; right: 0; text-align: center; font-size: 13px; color: var(--muted); z-index: 1; }
+</style>
+</head>
+<body>
+<canvas id="nevel" aria-hidden="true"></canvas>
+<canvas id="banen" aria-hidden="true"></canvas>
+<main>
+  <section>
+    <div>
+      <p class="eyebrow">Voorbeeld 4 · Nevel + banen</p>
+      <h1>Warmte onder, ambacht boven</h1>
+      <p>De ademende gloed van voorbeeld 2 als onderlaag, met daaroverheen de vloeiende troffelstreken van voorbeeld 3 — iets dunner en rustiger gedoseerd, zodat de mix niet druk wordt.</p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2>Diepte in twee lagen</h2>
+      <p>De nevel kantelt traag mee met uw scroll, de banen schuiven er in eigen tempo overheen. Samen geeft dat een gelaagde, levende wand.</p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2>Het beste van twee</h2>
+      <p>Atmosfeer van de nevel, vakmanschap van de streek. Nog steeds decor — de content blijft leidend.</p>
+    </div>
+  </section>
+</main>
+<p class="hint">Scroll ↓</p>
+<script>
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w, h, eased = scrollY, rafs = [];
+
+  /* --- Laag 1: warme nevel (gedimd t.o.v. voorbeeld 2) --- */
+  const cN = document.getElementById('nevel');
+  const xN = cN.getContext('2d');
+  let dprN;
+  const blobs = [
+    { c: '166,98,62',  a: 0.12, r: 0.42, cx: 0.18, cy: 0.22, sx: 0.10, sy: 0.07, t1: 41, t2: 53, d: 0.9 },
+    { c: '193,141,96', a: 0.10, r: 0.38, cx: 0.82, cy: 0.18, sx: 0.08, sy: 0.09, t1: 59, t2: 47, d: 0.6 },
+    { c: '140,123,110',a: 0.08, r: 0.46, cx: 0.70, cy: 0.78, sx: 0.11, sy: 0.06, t1: 67, t2: 71, d: 1.1 },
+    { c: '214,178,140',a: 0.09, r: 0.30, cx: 0.45, cy: 0.50, sx: 0.09, sy: 0.10, t1: 73, t2: 43, d: 0.5 },
+  ];
+
+  /* --- Laag 2: troffel-banen (dunner en minder dan voorbeeld 3) --- */
+  const cB = document.getElementById('banen');
+  const xB = cB.getContext('2d');
+  let dprB, lines = [];
+  const makeLines = () => {
+    const n = w < 768 ? 7 : 10;
+    lines = Array.from({ length: n }, (_, i) => ({
+      y: (i + 0.5) / n,
+      depth: 0.3 + (i / n) * 0.7,
+      amp: 12 + Math.random() * 22,
+      len: 0.55 + Math.random() * 0.5,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.05 + Math.random() * 0.07,
+      alpha: 0.04 + Math.random() * 0.05,
+      width: 0.9 + Math.random() * 1.3,
+      hue: Math.random() < 0.7 ? '150, 96, 64' : '140, 123, 110',
+    }));
+  };
+
+  const resize = () => {
+    w = innerWidth; h = innerHeight;
+    dprN = Math.min(devicePixelRatio || 1, 1.5);
+    dprB = Math.min(devicePixelRatio || 1, 2);
+    cN.width = w * dprN; cN.height = h * dprN;
+    cB.width = w * dprB; cB.height = h * dprB;
+    makeLines();
+  };
+
+  const draw = (t) => {
+    eased += (scrollY - eased) * 0.09;
+    const s = t / 1000;
+
+    xN.setTransform(dprN, 0, 0, dprN, 0, 0);
+    xN.clearRect(0, 0, w, h);
+    for (const b of blobs) {
+      const x = (b.cx + Math.sin(s / b.t1 * Math.PI * 2) * b.sx) * w;
+      const y = (b.cy + Math.cos(s / b.t2 * Math.PI * 2) * b.sy) * h - eased * b.d * 0.06;
+      const r = b.r * Math.min(w, h) * (1 + 0.06 * Math.sin(s / 29 + b.t1));
+      const g = xN.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, `rgba(${b.c}, ${b.a})`);
+      g.addColorStop(1, `rgba(${b.c}, 0)`);
+      xN.fillStyle = g;
+      xN.fillRect(0, 0, w, h);
+    }
+
+    xB.setTransform(dprB, 0, 0, dprB, 0, 0);
+    xB.clearRect(0, 0, w, h);
+    for (const L of lines) {
+      let y0 = (((L.y * h - eased * L.depth * 0.12) % (h * 1.2)) + h * 1.2) % (h * 1.2) - h * 0.1;
+      xB.beginPath();
+      const step = 24;
+      for (let x = -40; x <= w + 40; x += step) {
+        const k = (x / w) * Math.PI * 2 * L.len;
+        const y = y0
+          + Math.sin(k + L.phase + s * L.speed) * L.amp
+          + Math.sin(k * 2.7 + L.phase * 1.7 + s * L.speed * 0.6) * L.amp * 0.35;
+        x <= -40 + step ? xB.moveTo(x, y) : xB.lineTo(x, y);
+      }
+      xB.strokeStyle = `rgba(${L.hue}, ${L.alpha})`;
+      xB.lineWidth = L.width * L.depth;
+      xB.stroke();
+    }
+    rafs[0] = requestAnimationFrame(draw);
+  };
+
+  resize();
+  addEventListener('resize', resize);
+  if (reduced) { draw(performance.now()); cancelAnimationFrame(rafs[0]); }
+  else {
+    rafs[0] = requestAnimationFrame(draw);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(rafs[0]);
+      else rafs[0] = requestAnimationFrame(draw);
+    });
+  }
+})();
+</script>
+</body>
+</html>

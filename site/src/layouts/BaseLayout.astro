@@ -22,6 +22,7 @@ const { title, description, ogImage, noindex = false } = Astro.props;
 
 const site = Astro.site ?? new URL('https://stucq.pages.dev');
 const canonical = new URL(Astro.url.pathname, site);
+const toonActiebalk = !Astro.url.pathname.startsWith('/offerte-aanvragen');
 const ogImageUrl = ogImage ? new URL(ogImage, site).href : undefined;
 const plausibleDomain = site.hostname;
 
@@ -102,6 +103,20 @@ const localBusiness = {
       <slot />
     </main>
     <Footer />
+    {
+      toonActiebalk && (
+        <nav class="actiebalk" aria-label="Snel contact">
+          <a href="tel:0681943404" class="actiebalk__bel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+            Bellen
+          </a>
+          <a href="/offerte-aanvragen/" class="actiebalk__offerte">
+            Offerte aanvragen
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </nav>
+      )
+    }
     <script>
       import { initMotion } from '../scripts/motion';
       initMotion();

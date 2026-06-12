@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Voorbeeld 3 — Troffel-banen (vloeiende lijnen)</title>
+<style>
+  :root {
+    --bg: #f4efe9;
+    --ink: #211b15;
+    --muted: #6f6358;
+    --accent: #a6623e;
+  }
+  * { margin: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; }
+  #bg { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  main { position: relative; z-index: 1; }
+  section { min-height: 92vh; display: grid; place-content: center; padding: 8vh 8vw; text-align: center; }
+  .eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 13px; font-weight: 600; color: var(--accent); }
+  h1 { font-size: clamp(34px, 6vw, 64px); letter-spacing: -0.02em; max-width: 18ch; }
+  h2 { font-size: clamp(26px, 4vw, 40px); letter-spacing: -0.02em; }
+  p { color: var(--muted); max-width: 52ch; margin-inline: auto; margin-top: 14px; }
+  .hint { position: fixed; bottom: 18px; left: 0; right: 0; text-align: center; font-size: 13px; color: var(--muted); z-index: 1; }
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<main>
+  <section>
+    <div>
+      <p class="eyebrow">Voorbeeld 3 · Troffel-banen</p>
+      <h1>De streek van de troffel, in lijnen</h1>
+      <p>Vloeiende banen golven onmerkbaar, als verse pleisterstreken over een wand. Scroll: de banen schuiven in lagen mee — dichtbij sneller, veraf langzamer.</p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2>Ambachtelijk en grafisch</h2>
+      <p>Het meest eigen aan het stukadoorsvak: elke lijn is een streek. Strak genoeg voor zakelijke bezoekers, warm genoeg voor particulieren.</p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2>Subtiel aanwezig</h2>
+      <p>Lage dekking, dunne lijnen, trage golf — het blijft decor, nooit hoofdrolspeler.</p>
+    </div>
+  </section>
+</main>
+<p class="hint">Scroll ↓</p>
+<script>
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let w, h, dpr, raf = 0, eased = scrollY, lines = [];
+
+  const make = () => {
+    const n = w < 768 ? 9 : 14;
+    lines = Array.from({ length: n }, (_, i) => ({
+      y: (i + 0.5) / n,                      // basishoogte
+      depth: 0.3 + (i / n) * 0.7,            // onderste banen 'dichterbij'
+      amp: 14 + Math.random() * 26,          // golfhoogte
+      len: 0.55 + Math.random() * 0.5,       // golflengte-factor
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.05 + Math.random() * 0.08,    // heel traag
+      alpha: 0.05 + Math.random() * 0.07,
+      width: 1 + Math.random() * 1.6,
+      hue: Math.random() < 0.7 ? '150, 96, 64' : '140, 123, 110',
+    }));
+  };
+
+  const resize = () => {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    w = innerWidth; h = innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    make();
+  };
+
+  const draw = (t) => {
+    eased += (scrollY - eased) * 0.1;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    const s = t / 1000;
+    for (const L of lines) {
+      // verticale positie: basis + parallax (wrap zodat banen blijven komen)
+      let y0 = (((L.y * h - eased * L.depth * 0.12) % (h * 1.2)) + h * 1.2) % (h * 1.2) - h * 0.1;
+      ctx.beginPath();
+      const step = 24;
+      for (let x = -40; x <= w + 40; x += step) {
+        const k = (x / w) * Math.PI * 2 * L.len;
+        const y = y0
+          + Math.sin(k + L.phase + s * L.speed) * L.amp
+          + Math.sin(k * 2.7 + L.phase * 1.7 + s * L.speed * 0.6) * L.amp * 0.35;
+        x <= -40 + step ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(${L.hue}, ${L.alpha})`;
+      ctx.lineWidth = L.width * L.depth;
+      ctx.stroke();
+    }
+    raf = requestAnimationFrame(draw);
+  };
+
+  resize();
+  addEventListener('resize', resize);
+  if (reduced) { draw(performance.now()); cancelAnimationFrame(raf); }
+  else {
+    raf = requestAnimationFrame(draw);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else raf = requestAnimationFrame(draw);
+    });
+  }
+})();
+</script>
+</body>
+</html>
